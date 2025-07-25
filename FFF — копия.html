@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>БулАфто CRM с входом и сохранением CSV</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+  :root {
+    --primary: #236edf;
+    --primary-light: #eaf2fd;
+    --accent: #83e064;
+    --danger: #ff704d;
+    --bg: #f6f8fa;
+    --card-bg: #fff;
+    --border: #e2e8f0;
+    --radius: 16px;
+    --shadow: 0 4px 14px rgba(35,110,223,0.07);
+    --text: #212d42;
+    --muted: #8ca1be;
+  }
+  * { box-sizing: border-box; margin:0; padding:0; }
+  html, body {height:100%;}
+  body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .hidden { display:none; }
+
+  /* Логин */
+  #login-container {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+  }
+  #login-form {
+    background: #fff;
+    padding: 24px 28px;
+    border-radius: var(--radius);
+    width: 320px;
+    box-shadow: var(--shadow);
+  }
+  #login-form h3 {
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 1.4em;
+    color: var(--primary);
+    text-align: center;
+  }
+  #login-form input {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 9px 12px;
+    font-size: 1em;
+    border: 1.3px solid var(--border);
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.18s;
+  }
+  #login-form input:focus {
+    border-color: var(--primary);
+  }
+  #login-form button {
+    width: 100%;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 12px 10px;
+    font-size: 1.1em;
+    border-radius: var(--radius);
+    border: none;
+    box-shadow: 0 1px 12px rgba(35,110,223,0.15);
+    transition: background-color 0.2s;
+  }
+  #login-form button:hover {
+    background: #1b57bf;
+  }
+  #login-error {
+    color: var(--danger);
+    text-align: center;
+    font-weight: 600;
+    margin-top: -12px;
+    margin-bottom: 10px;
+    display: none;
+  }
+
+  /* Основной интерфейс */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    width: 245px;
+    padding-top: 40px;
+    background: var(--primary);
+    box-shadow: var(--shadow);
+    display: flex; flex-direction: column; align-items: center;
+    z-index:10;
+  }
+  .sidebar h2 {
+    color:#fff;
+    font-size: 1.7em; font-weight: 700; letter-spacing: 1.5px;
+    margin-bottom: 40px;
+    text-shadow: 0 4px 16px rgba(35,110,223,0.09);
+  }
+  .menu-item {
+    width: 80%;
+    padding: 14px 24px;
+    margin: 10px 0;
+    border-radius: var(--radius);
+    background: transparent; color: #fff;
+    font-size: 1.15em; font-weight: 600;
+    transition: background .2s, color .2s;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    outline-offset: 2px;
+  }
+  .menu-item.active, .menu-item:hover, .menu-item:focus {
+    background: var(--primary-light);
+    color: var(--primary);
+    outline: none;
+  }
+  main.content {
+    margin-left: 260px;
+    padding: 38px 38px 40px 38px;
+    min-height: 100vh;
+    background: var(--bg);
+    transition: background .18s;
+  }
+  header.page-header {
+    font-size: 2.1em;
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 9px #eaf5fd;
+    user-select: none;
+  }
+  .metrics-grid {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .metric {
+    flex: 1 1 210px;
+    min-width: 180px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px 28px 22px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1.5px solid var(--border);
+    user-select: none;
+  }
+  .metric h3 {
+    font-size: 2.15em;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 7px;
+  }
+  .metric div {
+    font-size: 1.05em;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .notification-list {
+    max-width: 760px;
+    margin-bottom: 25px;
+  }
+  .notification-item {
+    background: #fff6f0;
+    color: var(--danger);
+    border-left: 4px solid var(--danger);
+    padding: 14px 22px;
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    font-weight: 600;
+    box-shadow: 0 1.8px 12px rgba(255,112,77,0.1);
+  }
+  .card-table {
+    max-width: 100%;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    padding: 16px 10px 22px 10px;
+    margin-bottom: 30px;
+    border: 1.5px solid var(--border);
+    overflow-x: auto;
+  }
+  .card-table h3 {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 1.15em;
+    margin-bottom: 12px;
+    padding-left: 6px;
+  }
+  .card-table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 1.02em;
+    border-radius: 9px;
+    background: #f8fbff;
+  }
+  .card-table th, .card-table td {
+    padding: 11px 14px;
+    border-bottom: 1.3px solid var(--border);
+    text-align: left;
+  }
+  .card-table th {
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1em;
+    letter-spacing: .15px;
+  }
+  .card-table td {
+    background: #fff;
+    color: var(--text);
+  }
+  .status {
+    padding: 6px 14px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1em;
+    color: #fff;
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .status.done { background: #4ac971; }
+  .status.pending { background: var(--danger); }
+  .oil-cell {
+    text-align: center;
+  }
+  .oil-cell input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary);
+  }
+  form {
+    max-width: 830px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 22px 18px 20px 18px;
+    box-shadow: var(--shadow);
+    border: 1.5px solid var(--border);
+    margin-bottom: 26px;
+  }
+  form input, form select, form textarea, form button {
+    display: block;
+    width: 100%;
+    font-size: 1.04em;
+    padding: 10px 14px;
+    margin-top: 12px;
+    margin-bottom: 18px;
+    border: 1.4px solid var(--border);
+    border-radius: var(--radius);
+    background: #f6fafe;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.23s;
+  }
+  form input:focus, form select:focus, form textarea:focus {
+    border-color: var(--primary);
+    background: #e9f2ff;
+  }
+  form label {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.07em;
+    color: var(--primary);
+    cursor: pointer;
+    margin-top: 6px;
+  }
+  form input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    cursor: pointer;
+    accent-color: var(--primary);
+  }
+  form button {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 14px 26px;
+    border-radius: var(--radius);
+    border: none;
+    box-shadow: 0 1.5px 10px rgba(35,110,223,0.12);
+    margin-bottom: 0;
+    transition: background-color 0.20s;
+  }
+  form button:hover, form button:focus {
+    background: #195bc1;
+  }
+  .note {
+    margin-top: 12px;
+    color: var(--muted);
+    display: block;
+  }
+  .search-box {
+    margin-bottom: 11px;
+    font-size: 1em;
+    padding: 9px 12px;
+    width: 100%;
+    max-width: 600px;
+    border-radius: var(--radius);
+    border: 1.4px solid var(--border);
+    box-shadow: 0 2px 16px rgba(35,110,223,0.03);
+    outline: none;
+    transition: border-color 0.22s;
+  }
+  .search-box:focus {
+    border-color: var(--primary);
+  }
+  .filter-inline {
+    display: flex;
+    gap: 14px;
+    max-width: 360px;
+    margin-bottom: 24px;
+  }
+  .filter-inline select {
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1.4px solid var(--border);
+    background: #fff;
+    cursor: pointer;
+  }
+  @media(max-width:900px){
+    main.content {
+      margin-left: 0;
+      padding: 9vw 3vw 7vw 3vw;
+    }
+    .sidebar {
+      width: 100vw;
+      height: 70px;
+      flex-direction: row;
+      justify-content: space-around;
+      padding: 0;
+      align-items: center;
+    }
+    .sidebar h2 {
+      display: none;
+    }
+    .menu-item {
+      width: auto;
+      border-radius: 10px;
+      font-size: 1rem;
+      padding: 8px 20px;
+      margin: 0 4px;
+    }
+    .card-table{
+      padding: 18px 6vw 22px 6vw;
+    }
+    form{
+      padding: 18px 4vw 14px 4vw;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div id="login-container" role="dialog" aria-modal="true" aria-labelledby="login-title">
+  <form id="login-form" aria-label="Форма входа в CRM">
+    <h3 id="login-title">Вход в систему</h3>
+    <input id="login-username" type="text" placeholder="Логин" required autocomplete="username" />
+    <input id="login-password" type="password" placeholder="Пароль" required autocomplete="current-password" />
+    <button type="submit">Войти</button>
+    <div id="login-error" role="alert" style="color: #ff4d4d; display:none; margin-top: -14px; margin-bottom: 14px; font-weight: 600;"></div>
+  </form>
+</div>
+
+<nav class="sidebar" aria-label="Основное меню" tabindex="-1">
+  <h2>БулАфто CRM</h2>
+  <button class="menu-item active" data-section="dashboard" tabindex="0" type="button" aria-pressed="true">Главная</button>
+  <button class="menu-item" data-section="works" tabindex="0" type="button" aria-pressed="false">Работы</button>
+  <button class="menu-item" data-section="oil" tabindex="0" type="button" aria-pressed="false">Замена масла</button>
+  <button class="menu-item" data-section="info" tabindex="0" type="button" aria-pressed="false">Инфо</button>
+</nav>
+
+<main class="content">
+
+  <!-- Главная -->
+  <section id="dashboard" class="active" aria-label="Аналитика и записи" tabindex="0">
+    <header class="page-header">Аналитика и записи</header>
+    <div class="notification-list" id="notifications" aria-live="polite" aria-atomic="true"></div>
+    <div class="metrics-grid" role="list">
+      <div class="metric" role="listitem" aria-label="Количество клиентов"><h3 id="metric-clients">0</h3><div>Клиентов</div></div>
+      <div class="metric" role="listitem" aria-label="Количество выполненных работ"><h3 id="metric-works">0</h3><div>Выполнено работ</div></div>
+      <div class="metric" role="listitem" aria-label="Количество работ в работе"><h3 id="metric-inprogress">0</h3><div>В работе</div></div>
+      <div class="metric" role="listitem" aria-label="Общая выручка"><h3 id="metric-revenue">0 ₽</h3><div>Общая выручка</div></div>
+    </div>
+
+    <div class="card-table" aria-label="Текущие невыполненные работы">
+      <h3>Текущие невыполненные работы</h3>
+      <table>
+        <thead>
+          <tr><th>Дата</th><th>Клиент</th><th>Телефон</th><th>VIN</th><th>Вид работы</th><th>Исполнитель</th><th>Стоимость</th><th>ТО — замена масла</th></tr>
+        </thead>
+        <tbody id="pending-table"><tr><td colspan="8">Нет работ в ожидании</td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="card-table" aria-label="Выполненные работы за сегодня">
+      <h3>Выполненные работы за сегодня</h3>
+      <table>
+        <thead>
+          <tr><th>Дата</th><th>Клиент</th><th>Телефон</th><th>VIN</th><th>Вид работы</th><th>Исполнитель</th><th>Стоимость</th><th>ТО — замена масла</th></tr>
+        </thead>
+        <tbody id="today-table"><tr><td colspan="8">Нет работ за сегодня</td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="card-table" aria-label="Статистика по сотрудникам">
+      <h3>Статистика по сотрудникам</h3>
+      <table>
+        <thead><tr><th>Сотрудник</th><th>Выполнено</th><th>Сумма</th></tr></thead>
+        <tbody id="emp-table"><tr><td colspan="3">Нет данных</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Работы -->
+  <section id="works" aria-label="Страница работ" hidden>
+    <header class="page-header">Работы</header>
+    <form id="work-form" onsubmit="event.preventDefault(); addWork();" autocomplete="off" aria-label="Форма добавления и редактирования работ">
+      <input type="hidden" id="work-edit-index" value="-1" />
+      <input type="text" id="work-type" placeholder="Название/тип работы" required aria-required="true" aria-label="Название или тип работы" />
+      <input type="date" id="work-date" required aria-required="true" aria-label="Дата выполнения" />
+      <select id="work-employee" required aria-label="Исполнитель работы">
+        <option value="">Выберите исполнителя</option>
+        <option>Андрей</option>
+        <option>Сергей</option>
+        <option>Евгений</option>
+      </select>
+      <input type="text" id="work-client-name" placeholder="Имя клиента" required aria-required="true" aria-label="Имя клиента" />
+      <input type="text" id="work-client-phone" placeholder="Телефон клиента" required aria-required="true" aria-label="Телефон клиента" />
+      <input type="text" id="work-car-vin" placeholder="VIN автомобиля" required aria-required="true" aria-label="VIN автомобиля" />
+      <textarea id="work-car-history" placeholder="Детали авто/история (необязательно)" rows="2" aria-label="Детали авто или история"></textarea>
+      <input type="number" id="work-cost" placeholder="Стоимость (₽)" min="0" required aria-required="true" aria-label="Стоимость работы в рублях" />
+      <label><input type="checkbox" id="work-oil-change" aria-label="ТО — замена масла" />ТО — замена масла</label>
+      <select id="work-status" required aria-label="Статус работы">
+        <option value="done">Выполнено</option>
+        <option value="pending">В ожидании</option>
+      </select>
+      <button type="submit" id="work-submit-btn" aria-label="Добавить или сохранить работу">Добавить работу</button>
+      <button type="button" id="work-cancel-btn" style="display:none;" onclick="cancelEdit()" aria-label="Отмена редактирования">Отмена</button>
+    </form>
+    <button type="button" style="margin-bottom:16px;" onclick="saveWorksToCSV()" aria-label="Сохранить работы в CSV файл">Сохранить работы в CSV</button>
+    <input type="search" id="work-search" class="search-box" placeholder="Поиск по работам" aria-label="Поиск по работам" oninput="renderWorks()" />
+    <div class="card-table" style="padding-top: 2px;">
+      <table id="works-table" role="grid" aria-describedby="work-search">
+        <thead>
+          <tr>
+            <th onclick="sortTable('works',0)" scope="col" tabindex="0" role="button" aria-label="Сортировать по типу работы">Тип работы ▲▼</th>
+            <th onclick="sortTable('works',1)" scope="col" tabindex="0" role="button" aria-label="Сортировать по дате">Дата ▲▼</th>
+            <th onclick="sortTable('works',2)" scope="col" tabindex="0" role="button" aria-label="Сортировать по исполнителю">Исполнитель ▲▼</th>
+            <th scope="col">Клиент</th>
+            <th scope="col">Телефон</th>
+            <th scope="col">VIN</th>
+            <th onclick="sortTable('works',6)" scope="col" tabindex="0" role="button" aria-label="Сортировать по стоимости">Стоимость ▲▼</th>
+            <th onclick="sortTable('works',7)" scope="col" tabindex="0" role="button" aria-label="Сортировать по статусу">Статус ▲▼</th>
+            <th scope="col">Замена масла</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <span class="note">Клик по строке для редактирования</span>
+  </section>
+
+  <!-- Замена масла -->
+  <section id="oil" aria-label="Замена масла" hidden>
+    <header class="page-header">ТО — замена масла</header>
+    <div class="filter-inline" aria-label="Фильтр по году и месяцу замены масла">
+      <select id="oil-filter-year" aria-label="Фильтр по году замены масла" onchange="renderOilReminders()">
+        <option value="">Все годы</option>
+      </select>
+      <select id="oil-filter-month" aria-label="Фильтр по месяцу замены масла" onchange="renderOilReminders()">
+        <option value="">Все месяцы</option>
+      </select>
+    </div>
+    <div class="card-table" aria-live="polite" aria-atomic="true">
+      <table>
+        <thead>
+          <tr><th>Дата</th><th>Клиент</th><th>Телефон</th><th>VIN</th><th>Исполнитель</th></tr>
+        </thead>
+        <tbody id="oil-table-body"><tr><td colspan="5">Нет данных</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Инфо -->
+  <section id="info" aria-label="Информация о сервисе" hidden>
+    <header class="page-header">Информация о сервисе</header>
+    <div class="card-table" style="max-width: 440px;">
+      <table>
+        <tbody>
+          <tr><th>Имя:</th><td>БулАфто</td></tr>
+          <tr><th>Телефон:</th><td>89204325865</td></tr>
+          <tr><th>Дата действия лицензии:</th><td>01.01.2026</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Аутентификация
+  const loginContainer = document.getElementById('login-container');
+  const loginForm = document.getElementById('login-form');
+  const loginError = document.getElementById('login-error');
+
+  function checkLogin() {
+    const user = localStorage.getItem('crm_logged_in');
+    if(user === 'admin') {
+      loginContainer.style.display = 'none';
+      initApp();
+      return true;
+    } else {
+      loginContainer.style.display = 'flex';
+      return false;
+    }
+  }
+
+  loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value;
+    if(username === 'admin' && password === 'admin') {
+      localStorage.setItem('crm_logged_in', 'admin');
+      loginError.style.display = 'none';
+      loginContainer.style.display = 'none';
+      initApp();
+    } else {
+      loginError.textContent = 'Неверный логин или пароль';
+      loginError.style.display = 'block';
+    }
+  });
+
+  function logout() {
+    localStorage.removeItem('crm_logged_in');
+    location.reload();
+  }
+
+  // DOM и переменные
+  const employees=['Андрей','Сергей','Евгений'];
+  let clients=[], works=[];
+  let workSortColumn=1, workSortAsc=false;
+
+  // Инициализация после успешного входа
+  function initApp() {
+    // Навигация меню
+    document.querySelectorAll('.menu-item').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const section = btn.dataset.section;
+        showSection(section);
+      });
+    });
+    showSection('dashboard');
+  }
+
+  function showSection(id) {
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.section === id);
+      item.setAttribute('aria-pressed', item.classList.contains('active'));
+    });
+    document.querySelectorAll('.content section').forEach(sec => {
+      if(sec.id === id) {
+        sec.hidden = false;
+        sec.classList.add('active');
+        if(id==='dashboard'){
+          updateDashboard();
+          renderNotDone();
+          renderToday();
+          renderEmployeeStats();
+        }
+        else if(id==='works') renderWorks();
+        else if(id==='oil') renderOilReminders();
+      } else {
+        sec.hidden = true;
+        sec.classList.remove('active');
+      }
+    });
+  }
+
+  // Добавление клиентов (без дубликатов)
+  function addClient(name, phone){
+    if(!name||!phone) return false;
+    if(clients.some(c=>c.name===name && c.phone===phone)) return false;
+    clients.push({name,phone});
+    return true;
+  }
+
+  // Добавить или отредактировать работу
+  function addWork(){
+    const type=document.getElementById('work-type').value.trim();
+    const date=document.getElementById('work-date').value;
+    const employee=document.getElementById('work-employee').value;
+    const clientName=document.getElementById('work-client-name').value.trim();
+    const clientPhone=document.getElementById('work-client-phone').value.trim();
+    const carVin=document.getElementById('work-car-vin').value.trim();
+    const carHistory=document.getElementById('work-car-history').value.trim();
+    const cost=Number(document.getElementById('work-cost').value);
+    const status=document.getElementById('work-status').value;
+    const oilChange=document.getElementById('work-oil-change').checked;
+    const editIndex=Number(document.getElementById('work-edit-index').value);
+
+    if(!type||!date||!employee||!clientName||!clientPhone||!carVin||isNaN(cost)){
+      alert('Пожалуйста, заполните все обязательные поля корректно');
+      return;
+    }
+    addClient(clientName, clientPhone);
+
+    const workRecord = {type, date, employee, clientName, clientPhone, carVin, carHistory, cost, status, oilChange};
+
+    if(editIndex >= 0 && editIndex < works.length) {
+      works[editIndex] = workRecord;
+      cancelEdit();
+    } else {
+      works.push(workRecord);
+      document.getElementById('work-form').reset();
+    }
+    renderWorks();
+    updateDashboard();
+    renderNotDone();
+    renderToday();
+    renderEmployeeStats();
+    renderOilReminders();
+  }
+
+  // Отобразить список работ с поиском и сортировкой
+  function renderWorks() {
+    const tbody = document.querySelector('#works-table tbody');
+    const search = document.getElementById('work-search').value.trim().toLowerCase();
+    tbody.innerHTML = '';
+
+    let filtered = works;
+    if(search) {
+      filtered = works.filter(w =>
+        (w.carVin && w.carVin.toLowerCase().includes(search)) ||
+        (w.clientName && w.clientName.toLowerCase().includes(search)) ||
+        (w.clientPhone && w.clientPhone.toLowerCase().includes(search)) ||
+        (w.employee && w.employee.toLowerCase().includes(search)) ||
+        (w.type && w.type.toLowerCase().includes(search))
+      );
+    }
+
+    if(filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; color:#888;">Нет совпадений по поиску</td></tr>`;
+      return;
+    }
+
+    filtered.sort((a, b) => {
+      let aVal, bVal;
+      switch(workSortColumn) {
+        case 0: aVal = a.type.toLowerCase(); bVal = b.type.toLowerCase(); break;
+        case 1: aVal = a.date; bVal = b.date; break;
+        case 2: aVal = a.employee.toLowerCase(); bVal = b.employee.toLowerCase(); break;
+        case 6: aVal = a.cost; bVal = b.cost; break;
+        case 7: aVal = a.status; bVal = b.status; break;
+        default: aVal = ''; bVal = '';
+      }
+      return (aVal < bVal ? (workSortAsc ? -1 : 1) : (aVal > bVal ? (workSortAsc ? 1 : -1) : 0));
+    });
+
+    for(const w of filtered) {
+      const statusClass = w.status === 'done' ? 'done' : 'pending';
+      const statusText = w.status === 'done' ? 'Выполнено' : 'В ожидании';
+      tbody.insertAdjacentHTML('beforeend', `
+        <tr tabindex="0" title="${w.carHistory || '-'}" onclick="startEditWork(${works.indexOf(w)})" onkeypress="if(event.key==='Enter')startEditWork(${works.indexOf(w)})">
+          <td>${w.type}</td>
+          <td>${w.date}</td>
+          <td>${w.employee}</td>
+          <td>${w.clientName}</td>
+          <td>${w.clientPhone}</td>
+          <td>${w.carVin}</td>
+          <td>${w.cost.toLocaleString()} ₽</td>
+          <td><span class="status ${statusClass}">${statusText}</span></td>
+          <td class="oil-cell"><input type="checkbox" disabled ${w.oilChange ? 'checked' : ''}></td>
+        </tr>
+      `);
+    }
+  }
+
+  // Начать редактирование записи
+  function startEditWork(index) {
+    if(index < 0 || index >= works.length) return;
+    const w = works[index];
+    document.getElementById('work-edit-index').value = index;
+    document.getElementById('work-type').value = w.type;
+    document.getElementById('work-date').value = w.date;
+    document.getElementById('work-employee').value = w.employee;
+    document.getElementById('work-client-name').value = w.clientName;
+    document.getElementById('work-client-phone').value = w.clientPhone;
+    document.getElementById('work-car-vin').value = w.carVin;
+    document.getElementById('work-car-history').value = w.carHistory;
+    document.getElementById('work-cost').value = w.cost;
+    document.getElementById('work-status').value = w.status;
+    document.getElementById('work-oil-change').checked = !!w.oilChange;
+    document.getElementById('work-submit-btn').textContent = "Сохранить";
+    document.getElementById('work-cancel-btn').style.display = "inline-block";
+  }
+
+  // Отмена редактирования
+  function cancelEdit() {
+    document.getElementById('work-edit-index').value = -1;
+    document.getElementById('work-form').reset();
+    document.getElementById('work-submit-btn').textContent = "Добавить работу";
+    document.getElementById('work-cancel-btn').style.display = "none";
+    renderWorks();
+  }
+
+  // Сортировка таблицы по колонке
+  function sortTable(tableId, colIndex) {
+    if(tableId !== 'works') return;
+    workSortAsc = workSortColumn === colIndex ? !workSortAsc : true;
+    workSortColumn = colIndex;
+    renderWorks();
+  }
+
+  // Обновление метрик и уведомлений на Главной
+  function updateDashboard() {
+    document.getElementById('metric-clients').textContent = clients.length;
+
+    const doneWorks = works.filter(w => w.status === 'done');
+    const pendingWorks = works.filter(w => w.status === 'pending');
+
+    document.getElementById('metric-works').textContent = doneWorks.length;
+    document.getElementById('metric-inprogress').textContent = pendingWorks.length;
+
+    const revenue = doneWorks.reduce((sum, w) => sum + w.cost, 0);
+    document.getElementById('metric-revenue').textContent = revenue.toLocaleString() + ' ₽';
+
+    const notifContainer = document.getElementById('notifications');
+    notifContainer.innerHTML = '';
+
+    const now = new Date();
+    const upcoming = works.filter(w => {
+      const d = new Date(w.date);
+      return d >= now && w.status === 'pending';
+    });
+    const overdue = works.filter(w => w.status === 'pending' && new Date(w.date) < now);
+
+    let messages = [];
+    if(upcoming.length) messages.push(`Ближайшие работы в ожидании: ${upcoming.length}`);
+    if(overdue.length) messages.push(`Просрочено работ: ${overdue.length}`);
+
+    if(messages.length === 0) messages.push('Нет новых уведомлений.');
+
+    messages.forEach(msg => {
+      const div = document.createElement('div');
+      div.className = 'notification-item';
+      div.textContent = msg;
+      notifContainer.appendChild(div);
+    });
+  }
+
+  // Невыполненные работы — таблица на Главной
+  function renderNotDone(){
+    const tbody = document.getElementById('pending-table');
+    tbody.innerHTML = '';
+    const pending = works.filter(w => w.status === 'pending');
+    if(pending.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="8">Нет работ в ожидании</td></tr>';
+      return;
+    }
+    pending.sort((a,b) => new Date(a.date) - new Date(b.date));
+    for(const w of pending) {
+      tbody.insertAdjacentHTML('beforeend', `
+        <tr>
+          <td>${w.date}</td><td>${w.clientName}</td><td>${w.clientPhone}</td><td>${w.carVin}</td>
+          <td>${w.type}</td><td>${w.employee}</td><td>${w.cost.toLocaleString()} ₽</td>
+          <td style="text-align:center;"><input type="checkbox" disabled ${w.oilChange?'checked':''}></td>
+        </tr>
+      `);
+    }
+  }
+
+  // Выполненные работы за сегодня
+  function renderToday() {
+    const tbody = document.getElementById('today-table');
+    tbody.innerHTML = '';
+    const todayISO = new Date().toISOString().slice(0,10);
+    const todayWorks = works.filter(w => w.status === 'done' && w.date === todayISO);
+    if(todayWorks.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="8">Нет работ за сегодня</td></tr>';
+      return;
+    }
+    todayWorks.sort((a,b) => a.employee.localeCompare(b.employee));
+    for(const w of todayWorks) {
+      tbody.insertAdjacentHTML('beforeend', `
+        <tr>
+          <td>${w.date}</td><td>${w.clientName}</td><td>${w.clientPhone}</td><td>${w.carVin}</td>
+          <td>${w.type}</td><td>${w.employee}</td><td>${w.cost.toLocaleString()} ₽</td>
+          <td style="text-align:center;"><input type="checkbox" disabled ${w.oilChange?'checked':''}></td>
+        </tr>
+      `);
+    }
+  }
+
+  // Статистика по сотрудникам
+  function renderEmployeeStats() {
+    const tbody = document.getElementById('emp-table');
+    tbody.innerHTML = '';
+    let anyData = false;
+    for(const emp of employees) {
+      const empWorks = works.filter(w => w.status === 'done' && w.employee === emp);
+      if(empWorks.length > 0) {
+        anyData = true;
+        const sum = empWorks.reduce((acc,w) => acc + w.cost, 0);
+        tbody.insertAdjacentHTML('beforeend', `
+          <tr><td>${emp}</td><td>${empWorks.length}</td><td>${sum.toLocaleString()} ₽</td></tr>
+        `);
+      }
+    }
+    if(!anyData) tbody.innerHTML = '<tr><td colspan="3">Нет данных</td></tr>';
+  }
+
+  // Таблица замены масла с фильтрами
+  function renderOilReminders() {
+    const yearSel = document.getElementById('oil-filter-year');
+    const monthSel = document.getElementById('oil-filter-month');
+    const tbody = document.getElementById('oil-table-body');
+
+    if(yearSel.options.length === 1) {
+      const yearsSet = new Set(works.filter(w => w.oilChange).map(w => new Date(w.date).getFullYear()));
+      yearsSet.add(new Date().getFullYear());
+      Array.from(yearsSet).sort().forEach(y => yearSel.add(new Option(y, y)));
+    }
+    if(monthSel.options.length === 1) {
+      for(let m=1; m<=12; m++) monthSel.add(new Option(`${m} месяц`, m));
+    }
+
+    const filterYear = yearSel.value ? Number(yearSel.value) : null;
+    const filterMonth = monthSel.value ? Number(monthSel.value) : null;
+
+    const filtered = works.filter(w => {
+      if(!w.oilChange) return false;
+      const d = new Date(w.date);
+      if(filterYear && d.getFullYear() !== filterYear) return false;
+      if(filterMonth && (d.getMonth()+1) !== filterMonth) return false;
+      return true;
+    });
+
+    tbody.innerHTML = '';
+    if(filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5">Нет данных</td></tr>';
+      return;
+    }
+
+    filtered.sort((a,b) => new Date(a.date) - new Date(b.date));
+
+    for(const w of filtered) {
+      tbody.insertAdjacentHTML('beforeend', `
+        <tr>
+          <td>${w.date}</td>
+          <td>${w.clientName}</td>
+          <td>${w.clientPhone}</td>
+          <td>${w.carVin}</td>
+          <td>${w.employee}</td>
+        </tr>
+      `);
+    }
+  }
+
+  // Сохранение работ в CSV
+  function saveWorksToCSV() {
+    if(works.length == 0){
+      alert('Нет работ для сохранения');
+      return;
+    }
+    const headers = ['Тип работы', 'Дата', 'Исполнитель', 'Клиент', 'Телефон', 'VIN', 'Детали авто', 'Стоимость (₽)', 'Статус', 'ТО - замена масла'];
+    const rows = works.map(w => [
+      w.type,
+      w.date,
+      w.employee,
+      w.clientName,
+      w.clientPhone,
+      w.carVin,
+      w.carHistory ? `"${w.carHistory.replace(/"/g, '""')}"` : '',
+      w.cost,
+      w.status === 'done' ? 'Выполнено' : 'В ожидании',
+      w.oilChange ? 'Да' : 'Нет'
+    ]);
+    const csvContent = [headers, ...rows].map(e => e.join(',')).join('\r\n');
+    const blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `works_${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // Инициализация
+  checkLogin();
+
+  // Проверка входа
+  function checkLogin() {
+    const loggedIn = localStorage.getItem('crm_logged_in') === 'admin';
+    if(loggedIn) {
+      document.getElementById('login-container').style.display = 'none';
+      initApp();
+    }
+    else document.getElementById('login-container').style.display = 'flex';
+  }
+
+  // Сохранение при успешной авторизации
+  document.getElementById('login-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const user = document.getElementById('login-username').value.trim();
+    const pass = document.getElementById('login-password').value;
+    const err = document.getElementById('login-error');
+
+    if(user === 'admin' && pass === 'admin') {
+      localStorage.setItem('crm_logged_in', 'admin');
+      err.style.display = 'none';
+      document.getElementById('login-container').style.display = 'none';
+      initApp();
+    } else {
+      err.textContent = 'Неверный логин или пароль';
+      err.style.display = 'block';
+    }
+  });
+
+  function initApp() {
+    // Навигация по меню
+    document.querySelectorAll('.menu-item').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        showSection(btn.dataset.section);
+      });
+    });
+    showSection('dashboard');
+  }
+</script>
+</body>
+</html>
