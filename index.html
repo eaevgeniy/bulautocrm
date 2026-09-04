@@ -233,21 +233,13 @@
             font-size: 12px;
         }
 
-        /* footer — минимальный */
+        /* footer — пустой, только отступ */
         .footer {
-            background: #1e2b24;
-            color: #cdc6ba;
-            padding: 20px 0 16px;
-            margin-top: 20px;
-            border-radius: 24px 24px 0 0;
-        }
-        .footer a {
-            color: #d4c7b4;
-            text-decoration: none;
-            margin-right: 22px;
-        }
-        .footer a:hover {
-            color: white;
+            background: transparent;
+            padding: 0;
+            margin-top: 0;
+            border-radius: 0;
+            min-height: 20px;
         }
 
         @media (max-width: 700px) {
@@ -389,22 +381,9 @@
     </div>
 </div>
 
-<!-- footer -->
+<!-- footer — полностью пустой, без текста и ссылок -->
 <footer class="footer">
-    <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
-        <div>
-            <p style="font-size: 16px; font-weight: 400;">Охотник & Рыбак — доска объявлений</p>
-            <p style="font-size: 13px; opacity: 0.7;">Соблюдение 152-ФЗ, модерация, защита от спама</p>
-        </div>
-        <div>
-            <a href="#"><i class="fas fa-gavel"></i> Юридическая информация</a>
-            <a href="#"><i class="fas fa-shield-alt"></i> Безопасность</a>
-            <a href="#"><i class="fas fa-envelope"></i> Поддержка</a>
-        </div>
-        <div style="font-size: 14px; opacity: 0.6;">
-            <i class="fas fa-database"></i> Тренажёр: 258 вопросов • Экзамен 100 вопросов
-        </div>
-    </div>
+    <!-- ничего не выводим -->
 </footer>
 
 </body>
