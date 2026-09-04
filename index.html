@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Охотник & Рыбак — Доска объявлений</title>
-    <!-- Font Awesome 5 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -25,7 +24,6 @@
             padding: 0 20px;
         }
 
-        /* header */
         .header {
             background: #1e3a2f;
             color: #f0ede8;
@@ -47,7 +45,6 @@
         .logo h1 {
             font-size: 24px;
             font-weight: 600;
-            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -102,7 +99,6 @@
             background: #b9aa8e33;
         }
 
-        /* страницы */
         .page {
             display: none;
         }
@@ -110,19 +106,17 @@
             display: block;
         }
 
-        /* категории на главной — 4 колонки на ПК, 2 на мобильных */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             margin: 20px 0 24px;
-            justify-content: center;
         }
 
         .category-card {
             background: #fffffffa;
             border-radius: 14px;
-            padding: 14px 14px 12px;
+            padding: 14px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             transition: 0.2s ease;
             border: 1px solid #e3dbd0;
@@ -154,7 +148,6 @@
             font-size: 13px;
             color: #4b534b;
             margin-bottom: 6px;
-            line-height: 1.3;
         }
         .sub-tags {
             display: flex;
@@ -168,10 +161,8 @@
             border-radius: 40px;
             font-size: 11px;
             color: #2d3d2d;
-            letter-spacing: 0.2px;
         }
 
-        /* объявления — тоже центрируем */
         .ads-heading {
             font-size: 20px;
             font-weight: 600;
@@ -210,11 +201,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #4b534b;
-            font-size: 13px;
             margin-bottom: 10px;
-            background-size: cover;
-            background-position: center;
         }
         .ad-card h4 {
             font-size: 15px;
@@ -245,7 +232,6 @@
             color: #3a4a3a;
         }
 
-        /* страница категории */
         .category-page-header {
             background: #e7e1d6;
             border-radius: 16px;
@@ -279,7 +265,6 @@
             color: #2f3d32;
         }
 
-        /* страница правил */
         .rules-content {
             background: #fcfaf7;
             border-radius: 24px;
@@ -290,7 +275,6 @@
         .rules-content h2 {
             font-size: 28px;
             margin-bottom: 12px;
-            color: #1e2b1e;
         }
         .rules-content h3 {
             font-size: 20px;
@@ -546,6 +530,7 @@
             margin: 20px 0 30px;
             align-items: flex-start;
         }
+
         .community-sidebar {
             flex: 0 0 220px;
             background: white;
@@ -582,10 +567,48 @@
         .community-sidebar .menu-item.active i {
             color: #1e3a2f;
         }
+
         .community-feed {
             flex: 1;
             min-width: 0;
         }
+
+        /* шапка ленты с кнопкой создания публикации */
+        .feed-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .feed-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1e2b1e;
+        }
+        .create-post-btn {
+            background: #1e3a2f;
+            color: white;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .create-post-btn:hover {
+            background: #2a4f3f;
+        }
+        .create-post-btn i {
+            font-size: 16px;
+        }
+
         .news-card {
             background: white;
             border-radius: 18px;
@@ -656,7 +679,6 @@
             background: transparent;
             padding: 0;
             margin-top: 0;
-            border-radius: 0;
             min-height: 10px;
         }
 
@@ -688,6 +710,14 @@
             .community-sidebar .menu-item i {
                 width: 16px;
             }
+            .feed-header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .create-post-btn {
+                justify-content: center;
+            }
         }
 
         @media (max-width: 700px) {
@@ -708,8 +738,6 @@
                 font-size: 20px;
                 justify-content: center;
             }
-
-            /* 2 колонки для мобильных */
             .category-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -718,7 +746,6 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
-
             .category-page-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -754,9 +781,15 @@
             .ads-heading {
                 font-size: 18px;
             }
+            .feed-header h2 {
+                font-size: 19px;
+            }
+            .create-post-btn {
+                font-size: 14px;
+                padding: 6px 16px;
+            }
         }
 
-        /* очень маленькие экраны */
         @media (max-width: 420px) {
             .category-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -801,7 +834,6 @@
 </head>
 <body>
 
-    <!-- header -->
     <header class="header">
         <div class="container header-inner">
             <div class="logo">
@@ -826,7 +858,7 @@
 
     <div class="container">
 
-        <!-- ======== ГЛАВНАЯ ======== -->
+        <!-- ===== ГЛАВНАЯ ===== -->
         <div class="page active" id="page-main">
             <div class="category-grid">
                 <div class="category-card" data-category="hunting">
@@ -861,7 +893,7 @@
             <div class="ads-grid" id="main-ads"></div>
         </div>
 
-        <!-- ======== СТРАНИЦА КАТЕГОРИИ ======== -->
+        <!-- ===== СТРАНИЦА КАТЕГОРИИ ===== -->
         <div class="page" id="page-category">
             <div class="category-page-header">
                 <div>
@@ -873,12 +905,11 @@
             <div class="ads-grid" id="category-ads"></div>
         </div>
 
-        <!-- ======== ТРЕНАЖЁР ======== -->
+        <!-- ===== ТРЕНАЖЁР ===== -->
         <div class="page" id="page-trainer">
             <div class="trainer-wrapper">
                 <h2><i class="fas fa-graduation-cap" style="color:#1e3a2f;"></i> Тренажёр для охотников</h2>
                 <div class="subtitle">258 официальных вопросов охотминимума с пояснениями</div>
-
                 <div class="trainer-modes">
                     <div class="mode-card">
                         <strong><i class="fas fa-pencil-alt" style="color:#1e3a2f;"></i> Тренировка</strong>
@@ -891,14 +922,12 @@
                         <span class="highlight">реальный экзамен</span>
                     </div>
                 </div>
-
                 <div class="trainer-footer">
                     <span><i class="fas fa-tag" style="color:#1e3a2f;"></i> <strong>Темы:</strong> законодательство, биология, оружие, сроки охоты, первая помощь</span>
                     <span class="tag"><i class="fas fa-download"></i> Скачать вопросы PDF</span>
                 </div>
             </div>
 
-            <!-- КВИЗ -->
             <div class="quiz-block" id="quiz-block">
                 <h3><i class="fas fa-brain" style="color:#1e3a2f;"></i> Тренажёр для охотников — проверь себя</h3>
                 <div class="quiz-desc">Ответьте на 5 случайных вопросов из охотминимума. После каждого ответа вы увидите пояснение.</div>
@@ -913,7 +942,7 @@
             </div>
         </div>
 
-        <!-- ======== СООБЩЕСТВО ======== -->
+        <!-- ===== СООБЩЕСТВО ===== -->
         <div class="page" id="page-community">
             <div class="community-layout">
                 <aside class="community-sidebar">
@@ -924,11 +953,21 @@
                     <div class="menu-item" data-tab="gallery"><i class="fas fa-images"></i> Фотогалерея</div>
                     <div class="menu-item" data-tab="forum"><i class="fas fa-comments"></i> Форум</div>
                 </aside>
-                <main class="community-feed" id="community-feed"></main>
+
+                <main class="community-feed">
+                    <!-- шапка ленты с кнопкой "Создать публикацию" -->
+                    <div class="feed-header">
+                        <h2 id="feed-title">Новости</h2>
+                        <button class="create-post-btn" id="create-post-btn">
+                            <i class="fas fa-plus-circle"></i> Создать публикацию
+                        </button>
+                    </div>
+                    <div id="community-feed"></div>
+                </main>
             </div>
         </div>
 
-        <!-- ======== УСЛУГИ ======== -->
+        <!-- ===== УСЛУГИ ===== -->
         <div class="page" id="page-services-page">
             <div class="category-page-header">
                 <div>
@@ -940,12 +979,11 @@
             <div class="ads-grid" id="services-ads"></div>
         </div>
 
-        <!-- ======== ПРАВИЛА ======== -->
+        <!-- ===== ПРАВИЛА ===== -->
         <div class="page" id="page-rules">
             <div class="rules-content">
                 <h2><i class="fas fa-gavel" style="color:#1e3a2f;"></i> Правила размещения объявлений</h2>
                 <p style="font-size: 16px; color: #2f3d32; margin-bottom: 20px;">Соблюдение законодательства РФ — обязательное условие для всех пользователей.</p>
-
                 <h3><span class="badge-danger">⛔ Категорически запрещено</span></h3>
                 <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Согласно законодательству РФ и правилам маркетплейсов, на сайте <strong>нельзя размещать</strong> объявления о продаже:</p>
                 <ul>
@@ -958,7 +996,6 @@
                     <li>Устройства для глушения сигнала, средства негласного наблюдения</li>
                     <li>Контрафакт и подделки</li>
                 </ul>
-
                 <h3><span class="badge-warning">⚠️ Ограниченные категории</span></h3>
                 <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Эти товары можно размещать, но <strong>с ручной модерацией</strong> и предупреждениями:</p>
                 <ul>
@@ -968,7 +1005,6 @@
                     <li>Капканы и ловушки (могут быть запрещены в некоторых регионах)</li>
                     <li>Чучела животных (требуют подтверждения легальности)</li>
                 </ul>
-
                 <h3><span class="badge-success">✅ Разрешённые категории</span></h3>
                 <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Эти товары можно размещать <strong>без особых ограничений</strong>:</p>
                 <ul>
@@ -980,7 +1016,6 @@
                     <li>Услуги (гиды, инструкторы, ремонт)</li>
                     <li>Собаки (продажа щенков, услуги вязки)</li>
                 </ul>
-
                 <div style="margin-top: 24px; padding: 16px 20px; background: #e7e1d6; border-radius: 16px;">
                     <p style="font-size: 15px; color: #1e2b2f;"><i class="fas fa-info-circle" style="color:#1e3a2f;"></i> <strong>Важно:</strong> Нарушение правил влечёт за собой блокировку аккаунта без возможности восстановления. Если вы сомневаетесь, можно ли разместить товар, — обратитесь в поддержку.</p>
                 </div>
@@ -992,11 +1027,11 @@
     <footer class="footer"></footer>
 
     <script>
-        // ========== ДАННЫЕ ==========
+        // ===== ДАННЫЕ =====
         const adsData = {
             hunting: [
-                { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес', tag: 'аренда',
-                    icon: 'fa-campground' },
+                { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес',
+                    tag: 'аренда', icon: 'fa-campground' },
                 { title: 'Патронташ кожаный 12-й кал.', desc: 'Новый, на 24 патрона, регулируемый ремень', price: '2 500 ₽',
                     tag: 'продажа', icon: 'fa-bullseye' },
                 { title: 'Оптический прицел VOMZ 3-9x40', desc: 'С креплением, отличное состояние', price: '7 200 ₽',
@@ -1085,7 +1120,6 @@
                 tag: 'услуга', icon: 'fa-compass' },
         ];
 
-        // ========== НОВОСТИ ==========
         const newsData = [{
             id: 1,
             category: 'Новости',
@@ -1208,32 +1242,32 @@
             likes: 44,
         }, ];
 
-        // ========== КВИЗ ==========
+        // ===== КВИЗ =====
         const quizQuestions = [{
             question: 'Какое наказание предусмотрено за охоту без разрешения в общедоступных охотничьих угодьях?',
             options: ['Административный штраф', 'Уголовная ответственность', 'Предупреждение', 'Лишение охотничьего билета'],
             correct: 0,
-            explanation: 'За охоту без разрешения предусмотрен административный штраф по ст. 8.37 КоАП РФ. Уголовная ответственность наступает только при причинении крупного ущерба.'
+            explanation: 'За охоту без разрешения предусмотрен административный штраф по ст. 8.37 КоАП РФ.'
         }, {
             question: 'Какой минимальный калибр гладкоствольного оружия разрешён для охоты на крупного зверя?',
             options: ['12-й', '16-й', '20-й', '28-й'],
             correct: 1,
-            explanation: 'Для охоты на крупного зверя минимальный калибр — 16-й (по правилам охоты). Однако на практике чаще используют 12-й калибр.'
+            explanation: 'Для охоты на крупного зверя минимальный калибр — 16-й (по правилам охоты).'
         }, {
             question: 'Что из перечисленного НЕ является объектом охоты в РФ?',
             options: ['Заяц-русак', 'Барсук', 'Косуля', 'Ёж обыкновенный'],
             correct: 3,
-            explanation: 'Ёж обыкновенный не входит в перечень охотничьих ресурсов в РФ, в отличие от зайца, барсука и косули.'
+            explanation: 'Ёж обыкновенный не входит в перечень охотничьих ресурсов в РФ.'
         }, {
             question: 'Какой документ удостоверяет право на хранение и ношение охотничьего оружия?',
             options: ['Охотничий билет', 'Разрешение на хранение и ношение', 'Лицензия на оружие', 'Паспорт оружия'],
             correct: 1,
-            explanation: 'Право на хранение и ношение даёт разрешение, выдаваемое органами лицензионно-разрешительной работы. Охотничий билет подтверждает только право на охоту.'
+            explanation: 'Право на хранение и ношение даёт разрешение, выдаваемое органами лицензионно-разрешительной работы.'
         }, {
             question: 'Какое расстояние должно быть от строений при стрельбе из гладкоствольного оружия?',
             options: ['50 метров', '100 метров', '200 метров', 'Не менее 300 метров'],
             correct: 2,
-            explanation: 'Стрельба из гладкоствольного оружия разрешена на расстоянии не менее 200 метров от строений (если иное не оговорено специальными правилами).'
+            explanation: 'Стрельба из гладкоствольного оружия разрешена на расстоянии не менее 200 метров от строений.'
         }, {
             question: 'Какой вид дичи разрешено добывать в весенний период?',
             options: ['Глухарь на току', 'Тетерев на току', 'Вальдшнеп на вечерней тяге', 'Все перечисленные'],
@@ -1243,15 +1277,15 @@
             question: 'Какой размер штрафа за браконьерство (незаконную добычу лося) установлен в РФ?',
             options: ['до 10 000 ₽', 'до 50 000 ₽', 'до 200 000 ₽', 'до 500 000 ₽'],
             correct: 2,
-            explanation: 'За незаконную добычу лося предусмотрен штраф до 200 000 ₽ или в размере дохода за период до 1 года, а также возможна уголовная ответственность.'
+            explanation: 'За незаконную добычу лося предусмотрен штраф до 200 000 ₽.'
         }, {
             question: 'Что из перечисленного относится к охотничьим собакам?',
             options: ['Лайка', 'Овчарка', 'Терьер', 'Дог'],
             correct: 0,
-            explanation: 'Лайка — традиционная охотничья порода. Овчарки, терьеры и доги не являются специализированными охотничьими породами в РФ.'
+            explanation: 'Лайка — традиционная охотничья порода.'
         }, ];
 
-        // ========== РЕНДЕР ==========
+        // ===== РЕНДЕР =====
         function renderAds(container, ads) {
             container.innerHTML = ads.map(ad => `
                 <div class="ad-card">
@@ -1270,11 +1304,46 @@
 
         function renderNews(filter = 'all') {
             const feed = document.getElementById('community-feed');
+            const titleMap = {
+                'news': 'Новости',
+                'articles': 'Статьи',
+                'video': 'Видео',
+                'clips': 'Ролики',
+                'gallery': 'Фотогалерея',
+                'forum': 'Форум'
+            };
+            const title = titleMap[filter] || 'Новости';
+            document.getElementById('feed-title').textContent = title;
+
             let filtered = newsData;
-            if (filter !== 'all') {
+            if (filter !== 'all' && filter !== 'gallery' && filter !== 'forum') {
                 const map = { 'news': 'Новости', 'articles': 'Статьи', 'video': 'Видео', 'clips': 'Ролики' };
                 const cat = map[filter];
                 if (cat) filtered = newsData.filter(n => n.category === cat);
+            }
+            if (filter === 'gallery') {
+                feed.innerHTML = `
+                    <div style="background:white; border-radius:18px; padding:30px; text-align:center; border:1px solid #e3dbd0;">
+                        <i class="fas fa-images" style="font-size:48px; color:#1e3a2f; opacity:0.3; margin-bottom:12px; display:block;"></i>
+                        <p style="font-size:18px; color:#4f5a4f;">Фотогалерея — загружайте свои трофеи и снаряжение</p>
+                        <button class="create-post-btn" style="margin:12px auto 0; background:#1e3a2f; color:white; border:none; padding:8px 22px; border-radius:40px; font-size:15px; font-weight:500; cursor:pointer;">
+                            <i class="fas fa-upload"></i> Загрузить фото
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            if (filter === 'forum') {
+                feed.innerHTML = `
+                    <div style="background:white; border-radius:18px; padding:30px; text-align:center; border:1px solid #e3dbd0;">
+                        <i class="fas fa-comments" style="font-size:48px; color:#1e3a2f; opacity:0.3; margin-bottom:12px; display:block;"></i>
+                        <p style="font-size:18px; color:#4f5a4f;">Форум — обсуждайте охоту и рыбалку с единомышленниками</p>
+                        <button class="create-post-btn" style="margin:12px auto 0; background:#1e3a2f; color:white; border:none; padding:8px 22px; border-radius:40px; font-size:15px; font-weight:500; cursor:pointer;">
+                            <i class="fas fa-plus-circle"></i> Создать тему
+                        </button>
+                    </div>
+                `;
+                return;
             }
             if (filtered.length === 0) {
                 feed.innerHTML =
@@ -1302,7 +1371,7 @@
             `).join('');
         }
 
-        // ========== КВИЗ ЛОГИКА ==========
+        // ===== КВИЗ ЛОГИКА =====
         let currentQuiz = 0;
         let quizQuestionsShuffled = [];
 
@@ -1396,13 +1465,13 @@
             }
         });
 
-        // ========== ИНИЦИАЛИЗАЦИЯ ==========
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
         renderAds(document.getElementById('main-ads'), mainAds);
         renderAds(document.getElementById('services-ads'), adsData.services);
         renderNews('all');
         initQuiz();
 
-        // ========== НАВИГАЦИЯ ==========
+        // ===== НАВИГАЦИЯ =====
         const pages = {
             main: document.getElementById('page-main'),
             category: document.getElementById('page-category'),
@@ -1428,7 +1497,7 @@
             });
         });
 
-        // ========== КАТЕГОРИИ ==========
+        // ===== КАТЕГОРИИ =====
         const categoryNames = {
             hunting: 'Охота',
             fishing: 'Рыбалка',
@@ -1452,7 +1521,7 @@
         document.getElementById('back-to-main').addEventListener('click', () => showPage('main'));
         document.getElementById('back-to-main-from-services').addEventListener('click', () => showPage('main'));
 
-        // ========== СООБЩЕСТВО ==========
+        // ===== СООБЩЕСТВО: МЕНЮ =====
         document.querySelectorAll('.community-sidebar .menu-item').forEach(item => {
             item.addEventListener('click', function() {
                 document.querySelectorAll('.community-sidebar .menu-item').forEach(i => i.classList.remove(
@@ -1460,6 +1529,12 @@
                 this.classList.add('active');
                 renderNews(this.dataset.tab);
             });
+        });
+
+        // ===== КНОПКА "Создать публикацию" =====
+        document.getElementById('create-post-btn').addEventListener('click', function() {
+            alert('📝 Открыть форму создания публикации в разделе "' + document.getElementById('feed-title')
+                .textContent + '"');
         });
     </script>
 </body>
