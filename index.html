@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Охотник & Рыбак — Доска объявлений</title>
     <!-- Font Awesome 5 (free) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
             margin: 0;
@@ -31,6 +31,9 @@
             color: #f0ede8;
             padding: 14px 0;
             border-bottom: 4px solid #c7a86b;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .header-inner {
@@ -74,8 +77,10 @@
             transition: 0.2s;
             border-bottom: 2px solid transparent;
             padding-bottom: 4px;
+            cursor: pointer;
         }
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             border-bottom-color: #d4b483;
             color: #fff;
         }
@@ -103,14 +108,15 @@
             background: #b9aa8e33;
         }
 
-        /* hero — полностью убран */
-        .hero {
-            padding: 0;
-            margin: 0;
-            background: transparent;
+        /* страницы (по умолчанию главная) */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
         }
 
-        /* compact categories */
+        /* категории на главной */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -122,13 +128,14 @@
             background: #fffffffa;
             border-radius: 14px;
             padding: 14px 14px 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             transition: 0.2s ease;
             border: 1px solid #e3dbd0;
+            cursor: pointer;
         }
         .category-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
         }
         .category-card .icon {
             font-size: 22px;
@@ -167,7 +174,7 @@
             letter-spacing: 0.2px;
         }
 
-        /* объявления (рандомные) */
+        /* объявления */
         .ads-heading {
             font-size: 20px;
             font-weight: 600;
@@ -188,12 +195,12 @@
             border-radius: 14px;
             padding: 14px;
             border: 1px solid #e3dbd0;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
             transition: 0.2s;
         }
         .ad-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
         }
         .ad-card .ad-image {
             height: 110px;
@@ -235,6 +242,41 @@
             color: #3a4a3a;
         }
 
+        /* страница категории (список объявлений) */
+        .category-page-header {
+            background: #e7e1d6;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin: 20px 0 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .category-page-header h2 {
+            font-size: 26px;
+            font-weight: 600;
+        }
+        .category-page-header .back-link {
+            color: #1e3a2f;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            background: #ffffffcc;
+            padding: 6px 18px;
+            border-radius: 40px;
+            transition: 0.2s;
+        }
+        .category-page-header .back-link:hover {
+            background: #fff;
+        }
+
+        .category-page-header .cat-stats {
+            font-size: 14px;
+            color: #2f3d32;
+        }
+
         /* footer — пустой */
         .footer {
             background: transparent;
@@ -269,130 +311,305 @@
                 grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
                 gap: 12px;
             }
+            .category-page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- header -->
-<header class="header">
-    <div class="container header-inner">
-        <div class="logo">
-            <h1>
-                <i class="fas fa-tree" style="color: #d4b483;"></i>
-                Охотник <span>&</span> Рыбак
-                <span class="sub">— Доска объявлений</span>
-            </h1>
+    <!-- header -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <h1>
+                    <i class="fas fa-tree" style="color: #d4b483;"></i>
+                    Охотник <span>&</span> Рыбак
+                    <span class="sub">— Доска объявлений</span>
+                </h1>
+            </div>
+            <div class="nav-links">
+                <a class="active" data-page="main">Объявления</a>
+                <a data-page="trainer">Тренажёр</a>
+                <a data-page="community">Сообщество</a>
+            </div>
+            <div class="user-actions">
+                <span class="btn-outline-light"><i class="fas fa-user-plus"></i> Вход</span>
+                <span class="btn-outline-light"><i class="fas fa-plus-circle"></i> Разместить</span>
+            </div>
         </div>
-        <div class="nav-links">
-            <a href="#">Объявления</a>
-            <a href="#">Тренажёр</a>
-            <a href="#">Сообщество</a>
-            <!-- Тарифы убраны -->
+    </header>
+
+    <div class="container">
+
+        <!-- ======== ГЛАВНАЯ СТРАНИЦА ======== -->
+        <div class="page active" id="page-main">
+            <!-- категории -->
+            <div class="category-grid">
+                <div class="category-card" data-category="hunting">
+                    <div class="icon"><i class="fas fa-gun"></i></div>
+                    <h3>Охота</h3>
+                    <p>Снаряжение, одежда, оптика, собаки, манки, туры</p>
+                    <div class="sub-tags"><span>чехлы</span><span>патронташи</span><span>ножи</span><span>оптика</span></div>
+                </div>
+                <div class="category-card" data-category="fishing">
+                    <div class="icon"><i class="fas fa-fish"></i></div>
+                    <h3>Рыбалка</h3>
+                    <p>Снасти, катушки, приманки, эхолоты, лодки</p>
+                    <div class="sub-tags"><span>спиннинги</span><span>фидеры</span><span>воблеры</span><span>ПВХ</span></div>
+                </div>
+                <div class="category-card" data-category="transport">
+                    <div class="icon"><i class="fas fa-ship"></i></div>
+                    <h3>Транспорт и плавсредства</h3>
+                    <p>Лодки, моторы, прицепы, квадроциклы, снегоходы</p>
+                    <div class="sub-tags"><span>моторы</span><span>прицепы</span><span>внедорожники</span></div>
+                </div>
+                <div class="category-card" data-category="houses">
+                    <div class="icon"><i class="fas fa-home"></i></div>
+                    <h3>Домики и базы</h3>
+                    <p>Продажа, аренда, угодья, бытовки</p>
+                    <div class="sub-tags"><span>охотничьи домики</span><span>кемпинги</span><span>участки</span></div>
+                </div>
+                <div class="category-card" data-category="services">
+                    <div class="icon"><i class="fas fa-tools"></i></div>
+                    <h3>Услуги</h3>
+                    <p>Ремонт, гиды, инструкторы, транспортировка</p>
+                    <div class="sub-tags"><span>гиды</span><span>ремонт лодок</span><span>выезды</span></div>
+                </div>
+            </div>
+
+            <!-- Свежие объявления (8 штук) -->
+            <div class="ads-heading">
+                <i class="fas fa-bullhorn" style="color:#1e3a2f;"></i> Свежие объявления
+            </div>
+            <div class="ads-grid" id="main-ads">
+                <!-- будут вставлены из JS -->
+            </div>
         </div>
-        <div class="user-actions">
-            <span class="btn-outline-light"><i class="fas fa-user-plus"></i> Вход</span>
-            <span class="btn-outline-light"><i class="fas fa-plus-circle"></i> Разместить</span>
+
+        <!-- ======== СТРАНИЦА КАТЕГОРИИ (динамическая) ======== -->
+        <div class="page" id="page-category">
+            <div class="category-page-header">
+                <div>
+                    <h2 id="category-title">Охота</h2>
+                    <div class="cat-stats" id="category-stats">12 объявлений</div>
+                </div>
+                <span class="back-link" id="back-to-main"><i class="fas fa-arrow-left"></i> На главную</span>
+            </div>
+            <div class="ads-grid" id="category-ads"></div>
         </div>
+
+        <!-- ======== СТРАНИЦА ТРЕНАЖЁР ======== -->
+        <div class="page" id="page-trainer">
+            <div style="background: #dce6d6; border-radius: 24px; padding: 30px 28px; margin: 20px 0 30px; border-left: 8px solid #1e3a2f;">
+                <h2 style="font-size: 28px; display: flex; align-items: center; gap: 12px;">
+                    <i class="fas fa-graduation-cap" style="color:#1e3a2f;"></i> Тренажёр для охотников
+                </h2>
+                <p style="font-size: 16px; margin: 10px 0 16px; color: #1e2b2f;">258 официальных вопросов охотминимума с пояснениями</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+                    <div style="background: white; border-radius: 16px; padding: 16px 22px; flex: 1 1 180px;">
+                        <strong><i class="fas fa-pencil-alt" style="color:#1e3a2f;"></i> Тренировка</strong>
+                        <div style="font-size: 14px; color: #3a4a3a;">10–258 вопросов с пояснениями</div>
+                        <span style="background: #ebdccb; padding: 2px 12px; border-radius: 40px; font-size: 13px; display: inline-block; margin-top: 6px;">свободный режим</span>
+                    </div>
+                    <div style="background: white; border-radius: 16px; padding: 16px 22px; flex: 1 1 180px;">
+                        <strong><i class="fas fa-clock" style="color:#1e3a2f;"></i> Экзамен</strong>
+                        <div style="font-size: 14px; color: #3a4a3a;">100 вопросов, 120 минут, 75%</div>
+                        <span style="background: #ebdccb; padding: 2px 12px; border-radius: 40px; font-size: 13px; display: inline-block; margin-top: 6px;">реальный экзамен</span>
+                    </div>
+                    <div style="background: white; border-radius: 16px; padding: 16px 22px; flex: 1 1 180px;">
+                        <strong><i class="fas fa-star" style="color:#1e3a2f;"></i> Статистика</strong>
+                        <div style="font-size: 14px; color: #3a4a3a;">Прогресс по темам, история</div>
+                        <span style="background: #ebdccb; padding: 2px 12px; border-radius: 40px; font-size: 13px; display: inline-block; margin-top: 6px;">премиум-доступ</span>
+                    </div>
+                </div>
+                <div style="margin-top: 18px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center;">
+                    <span><i class="fas fa-tag" style="color:#1e3a2f;"></i> <strong>Темы:</strong> законодательство, биология, оружие, сроки охоты, первая помощь</span>
+                    <span style="background: #1e3a2f10; padding: 6px 16px; border-radius: 40px;"><i class="fas fa-download"></i> Скачать вопросы PDF</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======== СТРАНИЦА СООБЩЕСТВО ======== -->
+        <div class="page" id="page-community">
+            <div style="background: #ede8df; border-radius: 24px; padding: 28px 24px; margin: 20px 0 30px;">
+                <h2 style="font-size: 26px; display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+                    <i class="fas fa-comments" style="color:#1e3a2f;"></i> Сообщество охотников и рыбаков
+                </h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;">
+                    <div style="background: white; border-radius: 14px; padding: 16px; border: 1px solid #ddd6ca;">
+                        <i class="fas fa-newspaper" style="color:#1e3a2f; font-size: 20px;"></i>
+                        <h4 style="margin: 6px 0 4px;">Статьи и обзоры</h4>
+                        <p style="font-size: 14px; color: #4b534b;">Тесты снаряжения, отчёты о выездах</p>
+                    </div>
+                    <div style="background: white; border-radius: 14px; padding: 16px; border: 1px solid #ddd6ca;">
+                        <i class="fas fa-images" style="color:#1e3a2f; font-size: 20px;"></i>
+                        <h4 style="margin: 6px 0 4px;">Фотогалерея</h4>
+                        <p style="font-size: 14px; color: #4b534b;">Трофеи, места, снаряжение в деле</p>
+                    </div>
+                    <div style="background: white; border-radius: 14px; padding: 16px; border: 1px solid #ddd6ca;">
+                        <i class="fas fa-question-circle" style="color:#1e3a2f; font-size: 20px;"></i>
+                        <h4 style="margin: 6px 0 4px;">Вопросы и советы</h4>
+                        <p style="font-size: 14px; color: #4b534b;">Форум для обсуждений</p>
+                    </div>
+                    <div style="background: white; border-radius: 14px; padding: 16px; border: 1px solid #ddd6ca;">
+                        <i class="fas fa-user-friends" style="color:#1e3a2f; font-size: 20px;"></i>
+                        <h4 style="margin: 6px 0 4px;">Клубы по интересам</h4>
+                        <p style="font-size: 14px; color: #4b534b;">Объединяйтесь с единомышленниками</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-</header>
 
-<!-- hero — полностью убран -->
-<section class="hero"></section>
+    <!-- footer -->
+    <footer class="footer"></footer>
 
-<!-- main categories — компактные -->
-<div class="container">
-    <div class="category-grid">
-        <div class="category-card">
-            <div class="icon"><i class="fas fa-gun"></i></div>
-            <h3>Охота</h3>
-            <p>Снаряжение, одежда, оптика, собаки, манки, туры</p>
-            <div class="sub-tags"><span>чехлы</span><span>патронташи</span><span>ножи</span><span>оптика</span></div>
-        </div>
-        <div class="category-card">
-            <div class="icon"><i class="fas fa-fish"></i></div>
-            <h3>Рыбалка</h3>
-            <p>Снасти, катушки, приманки, эхолоты, лодки</p>
-            <div class="sub-tags"><span>спиннинги</span><span>фидеры</span><span>воблеры</span><span>ПВХ</span></div>
-        </div>
-        <div class="category-card">
-            <div class="icon"><i class="fas fa-ship"></i></div>
-            <h3>Транспорт и плавсредства</h3>
-            <p>Лодки, моторы, прицепы, квадроциклы, снегоходы</p>
-            <div class="sub-tags"><span>моторы</span><span>прицепы</span><span>внедорожники</span></div>
-        </div>
-        <div class="category-card">
-            <div class="icon"><i class="fas fa-home"></i></div>
-            <h3>Домики и базы</h3>
-            <p>Продажа, аренда, угодья, бытовки</p>
-            <div class="sub-tags"><span>охотничьи домики</span><span>кемпинги</span><span>участки</span></div>
-        </div>
-        <div class="category-card">
-            <div class="icon"><i class="fas fa-tools"></i></div>
-            <h3>Услуги</h3>
-            <p>Ремонт, гиды, инструкторы, транспортировка</p>
-            <div class="sub-tags"><span>гиды</span><span>ремонт лодок</span><span>выезды</span></div>
-        </div>
-    </div>
+    <script>
+        // ========== ДАННЫЕ ==========
+        const adsData = {
+            hunting: [
+                { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-campground' },
+                { title: 'Патронташ кожаный 12-й кал.', desc: 'Новый, на 24 патрона, регулируемый ремень', price: '2 500 ₽', tag: 'продажа', icon: 'fa-bullseye' },
+                { title: 'Оптический прицел VOMZ 3-9x40', desc: 'С креплением, отличное состояние', price: '7 200 ₽', tag: 'продажа', icon: 'fa-binoculars' },
+                { title: 'Охотничий нож «Тайга»', desc: 'Сталь 95X18, рукоять из карельской березы', price: '4 800 ₽', tag: 'продажа', icon: 'fa-cut' },
+                { title: 'Манок на утку «Джек»', desc: 'Звуковой, профессиональный', price: '1 200 ₽', tag: 'продажа', icon: 'fa-music' },
+                { title: 'Щенок лайки (род. 2025)', desc: 'Привит, документы, от рабочих родителей', price: '25 000 ₽', tag: 'продажа', icon: 'fa-dog' },
+            ],
+            fishing: [
+                { title: 'Спиннинг Shimano Crucial', desc: '2.4 м, тест 5-25 г, состояние отличное', price: '8 500 ₽', tag: 'продажа', icon: 'fa-fish' },
+                { title: 'Катушка Daiwa Revros 2500', desc: 'Безынерционная, 5 подшипников', price: '3 900 ₽', tag: 'продажа', icon: 'fa-cog' },
+                { title: 'Набор воблеров (10 шт.)', desc: 'Разные размеры и цвета, оригинал', price: '2 200 ₽', tag: 'продажа', icon: 'fa-bug' },
+                { title: 'Эхолот Lowrance Hook 7', desc: 'С картами, GPS, отличный', price: '32 000 ₽', tag: 'продажа', icon: 'fa-satellite' },
+                { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽', tag: 'продажа', icon: 'fa-ship' },
+                { title: 'Костюм рыбацкий зимний', desc: 'Размер L, термо, ветрозащита', price: '6 500 ₽', tag: 'продажа', icon: 'fa-tshirt' },
+            ],
+            transport: [
+                { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽', tag: 'продажа', icon: 'fa-ship' },
+                { title: 'Лодочный мотор Yamaha 9.9', desc: '4-такт, 2022 г., мало часов', price: '95 000 ₽', tag: 'продажа', icon: 'fa-engine' },
+                { title: 'Прицеп для лодки МЗСА', desc: 'Одноосный, до 500 кг, документы', price: '28 000 ₽', tag: 'продажа', icon: 'fa-truck' },
+                { title: 'Квадроцикл Stels 650', desc: '2021 г., пробег 800 км, отличное состояние', price: '180 000 ₽', tag: 'продажа', icon: 'fa-motorcycle' },
+                { title: 'Снегоход Yamaha Viking', desc: 'Профессиональный, 2020 г., наработка 1500 км', price: '320 000 ₽', tag: 'продажа', icon: 'fa-snowmobile' },
+                { title: 'Внедорожник УАЗ-469', desc: 'Подготовка для охоты, лебёдка, дополнительные фары', price: '250 000 ₽', tag: 'продажа', icon: 'fa-car' },
+            ],
+            houses: [
+                { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-home' },
+                { title: 'Рыболовная база на Волге', desc: 'Домик у воды, кемпинг, места для рыбалки', price: '8 000 ₽ / сут', tag: 'аренда', icon: 'fa-water' },
+                { title: 'Земельный участок под охотхозяйство', desc: '40 га, лес, река, подъезд круглый год', price: '1 200 000 ₽', tag: 'продажа', icon: 'fa-tree' },
+                { title: 'Бытовка мобильная 6x3 м', desc: 'С мебелью, печкой, для выездов', price: '35 000 ₽', tag: 'продажа', icon: 'fa-warehouse' },
+                { title: 'Домик в Карелии на берегу озера', desc: 'Гостевой дом, баня, причал, 4 спальных места', price: '15 000 ₽ / сут', tag: 'аренда', icon: 'fa-cabin' },
+                { title: 'Охотничья база в Смоленской обл.', desc: '2 домика, баня, 30 га угодий', price: '2 500 000 ₽', tag: 'продажа', icon: 'fa-building' },
+            ],
+            services: [
+                { title: 'Ремонт лодочных моторов', desc: 'Диагностика, ремонт, запчасти в наличии', price: 'от 1 500 ₽', tag: 'услуга', icon: 'fa-tools' },
+                { title: 'Гид по охоте в Тверской области', desc: 'Организация выезда, знание угодий, сопровождение', price: '5 000 ₽ / день', tag: 'услуга', icon: 'fa-compass' },
+                { title: 'Транспортировка лодки', desc: 'Перевозка до 7 м, по всей России', price: 'от 20 ₽ / км', tag: 'услуга', icon: 'fa-truck' },
+                { title: 'Инструктор по рыбалке', desc: 'Обучение, спиннинг, фидер, нахлыст', price: '3 500 ₽ / занятие', tag: 'услуга', icon: 'fa-chalkboard-teacher' },
+                { title: 'Организация выезда под ключ', desc: 'Проживание, питание, снаряжение, гид', price: 'от 15 000 ₽', tag: 'услуга', icon: 'fa-umbrella-beach' },
+                { title: 'Ремонт оптики и прицелов', desc: 'Чистка, юстировка, замена деталей', price: 'от 2 000 ₽', tag: 'услуга', icon: 'fa-eye' },
+            ]
+        };
 
-    <!-- РАНДОМНЫЕ ОБЪЯВЛЕНИЯ (4 штуки) -->
-    <div class="ads-heading">
-        <i class="fas fa-bullhorn" style="color:#1e3a2f;"></i> Свежие объявления
-    </div>
-    <div class="ads-grid">
-        <!-- 1 -->
-        <div class="ad-card">
-            <div class="ad-image" style="background-image: linear-gradient(135deg, #b9aa8e 0%, #d9d0c0 100%);">
-                <i class="fas fa-campground" style="font-size: 28px; color: #2f3d32;"></i>
-            </div>
-            <h4>Охотничий домик в Тверской обл.</h4>
-            <p>Аренда на сезон, печь, баня</p>
-            <div class="ad-meta">
-                <span class="ad-price">12 000 ₽ / мес</span>
-                <span class="ad-tag">аренда</span>
-            </div>
-        </div>
-        <!-- 2 -->
-        <div class="ad-card">
-            <div class="ad-image" style="background-image: linear-gradient(135deg, #7b8f7b 0%, #b5c4b5 100%);">
-                <i class="fas fa-fish" style="font-size: 28px; color: #1e2b1e;"></i>
-            </div>
-            <h4>Спиннинг Shimano Crucial</h4>
-            <p>2.4 м, тест 5-25 г, отличное</p>
-            <div class="ad-meta">
-                <span class="ad-price">8 500 ₽</span>
-                <span class="ad-tag">продажа</span>
-            </div>
-        </div>
-        <!-- 3 -->
-        <div class="ad-card">
-            <div class="ad-image" style="background-image: linear-gradient(135deg, #a67c4b 0%, #d4b483 100%);">
-                <i class="fas fa-tree" style="font-size: 28px; color: #2f3d32;"></i>
-            </div>
-            <h4>Лодка ПВХ «Нептун 380»</h4>
-            <p>2023 г., мотор не входит</p>
-            <div class="ad-meta">
-                <span class="ad-price">42 000 ₽</span>
-                <span class="ad-tag">продажа</span>
-            </div>
-        </div>
-        <!-- 4 -->
-        <div class="ad-card">
-            <div class="ad-image" style="background-image: linear-gradient(135deg, #4f6b4f 0%, #8aa08a 100%);">
-                <i class="fas fa-binoculars" style="font-size: 28px; color: #e8e2d9;"></i>
-            </div>
-            <h4>Бинокль Nikon Monarch 10x42</h4>
-            <p>Ремень и чехол в комплекте</p>
-            <div class="ad-meta">
-                <span class="ad-price">18 900 ₽</span>
-                <span class="ad-tag">продажа</span>
-            </div>
-        </div>
-    </div>
-</div>
+        // дополнительные объявления для главной (смесь)
+        const mainAds = [
+            { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-campground' },
+            { title: 'Спиннинг Shimano Crucial', desc: '2.4 м, тест 5-25 г, состояние отличное', price: '8 500 ₽', tag: 'продажа', icon: 'fa-fish' },
+            { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽', tag: 'продажа', icon: 'fa-ship' },
+            { title: 'Бинокль Nikon Monarch 10x42', desc: 'Ремень и чехол в комплекте', price: '18 900 ₽', tag: 'продажа', icon: 'fa-binoculars' },
+            { title: 'Квадроцикл Stels 650', desc: '2021 г., пробег 800 км, отличное состояние', price: '180 000 ₽', tag: 'продажа', icon: 'fa-motorcycle' },
+            { title: 'Эхолот Lowrance Hook 7', desc: 'С картами, GPS, отличный', price: '32 000 ₽', tag: 'продажа', icon: 'fa-satellite' },
+            { title: 'Рыболовная база на Волге', desc: 'Домик у воды, кемпинг, места для рыбалки', price: '8 000 ₽ / сут', tag: 'аренда', icon: 'fa-water' },
+            { title: 'Гид по охоте в Тверской области', desc: 'Организация выезда, знание угодий', price: '5 000 ₽ / день', tag: 'услуга', icon: 'fa-compass' },
+        ];
 
-<!-- footer — пустой -->
-<footer class="footer"></footer>
+        // ========== РЕНДЕР ==========
+        function renderAds(container, ads) {
+            container.innerHTML = ads.map(ad => `
+                <div class="ad-card">
+                    <div class="ad-image" style="background: linear-gradient(135deg, #b9aa8e 0%, #d9d0c0 100%);">
+                        <i class="fas ${ad.icon}" style="font-size: 28px; color: #2f3d32;"></i>
+                    </div>
+                    <h4>${ad.title}</h4>
+                    <p>${ad.desc}</p>
+                    <div class="ad-meta">
+                        <span class="ad-price">${ad.price}</span>
+                        <span class="ad-tag">${ad.tag}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
 
+        // главная
+        renderAds(document.getElementById('main-ads'), mainAds);
+
+        // ========== НАВИГАЦИЯ МЕЖДУ СТРАНИЦАМИ ==========
+        const pages = {
+            main: document.getElementById('page-main'),
+            category: document.getElementById('page-category'),
+            trainer: document.getElementById('page-trainer'),
+            community: document.getElementById('page-community'),
+        };
+
+        function showPage(pageId) {
+            Object.values(pages).forEach(p => p.classList.remove('active'));
+            if (pageId === 'main') {
+                pages.main.classList.add('active');
+            } else if (pageId === 'category') {
+                pages.category.classList.add('active');
+            } else if (pageId === 'trainer') {
+                pages.trainer.classList.add('active');
+            } else if (pageId === 'community') {
+                pages.community.classList.add('active');
+            }
+            // обновить активную ссылку
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.toggle('active', link.dataset.page === pageId);
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // обработчики навигации
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.dataset.page;
+                if (page === 'main') showPage('main');
+                else if (page === 'trainer') showPage('trainer');
+                else if (page === 'community') showPage('community');
+            });
+        });
+
+        // ========== КАТЕГОРИИ ==========
+        const categoryNames = {
+            hunting: 'Охота',
+            fishing: 'Рыбалка',
+            transport: 'Транспорт и плавсредства',
+            houses: 'Домики и базы',
+            services: 'Услуги'
+        };
+
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const cat = this.dataset.category;
+                if (!cat) return;
+                const ads = adsData[cat] || [];
+                document.getElementById('category-title').textContent = categoryNames[cat] || cat;
+                document.getElementById('category-stats').textContent = `${ads.length} объявлений`;
+                renderAds(document.getElementById('category-ads'), ads);
+                showPage('category');
+            });
+        });
+
+        // возврат на главную
+        document.getElementById('back-to-main').addEventListener('click', function() {
+            showPage('main');
+        });
+
+        // ========== АДАПТИВ: закрываем мобильное меню при клике ==========
+        // (ничего не нужно, всё и так работает)
+    </script>
 </body>
 </html>
