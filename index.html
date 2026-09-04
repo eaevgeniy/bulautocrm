@@ -45,10 +45,20 @@
             font-size: 26px;
             font-weight: 600;
             letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         .logo span {
             color: #d4b483;
             font-weight: 300;
+        }
+        .logo .sub {
+            font-size: 16px;
+            font-weight: 400;
+            color: #b9aa8e;
+            margin-left: 4px;
         }
 
         .nav-links {
@@ -92,24 +102,13 @@
             background: #b9aa8e33;
         }
 
-        /* hero — упрощённый */
+        /* hero — полностью убран, только отступ */
         .hero {
-            background: linear-gradient(145deg, #d9d0c0 0%, #c7baa6 100%);
-            padding: 24px 0 20px;
-            border-radius: 0 0 24px 24px;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
-            margin-bottom: 24px;
-        }
-        .hero-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .hero-text h2 {
-            font-size: 32px;
-            font-weight: 600;
-            color: #1e2b1e;
+            padding: 0;
+            margin: 0;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
         }
 
         /* main grid */
@@ -233,7 +232,7 @@
             font-size: 12px;
         }
 
-        /* footer — пустой, только отступ */
+        /* footer — пустой */
         .footer {
             background: transparent;
             padding: 0;
@@ -253,8 +252,11 @@
                 gap: 14px;
                 font-size: 15px;
             }
-            .hero-text h2 {
-                font-size: 26px;
+            .logo h1 {
+                font-size: 22px;
+            }
+            .logo .sub {
+                font-size: 14px;
             }
         }
     </style>
@@ -265,7 +267,11 @@
 <header class="header">
     <div class="container header-inner">
         <div class="logo">
-            <h1><i class="fas fa-tree" style="color: #d4b483; margin-right: 8px;"></i>Охотник<span> & Рыбак</span></h1>
+            <h1>
+                <i class="fas fa-tree" style="color: #d4b483;"></i>
+                Охотник <span>&</span> Рыбак
+                <span class="sub">— Доска объявлений</span>
+            </h1>
         </div>
         <div class="nav-links">
             <a href="#">Объявления</a>
@@ -280,16 +286,12 @@
     </div>
 </header>
 
-<!-- hero -->
+<!-- hero — полностью убран -->
 <section class="hero">
-    <div class="container hero-content">
-        <div class="hero-text">
-            <h2>Доска объявлений для охотников и рыбаков</h2>
-        </div>
-    </div>
+    <!-- ничего не выводим -->
 </section>
 
-<!-- main categories (без Сообщество и Тренажёр) -->
+<!-- main categories -->
 <div class="container">
     <div class="category-grid">
         <div class="category-card">
@@ -322,7 +324,6 @@
             <p>Ремонт, гиды, инструкторы, транспортировка</p>
             <div class="sub-tags"><span>гиды</span><span>ремонт лодок</span><span>выезды</span></div>
         </div>
-        <!-- вместо Сообщество и Тренажёр — пустые карточки, но мы их не показываем, т.к. убрали -->
     </div>
 
     <!-- РАНДОМНЫЕ ОБЪЯВЛЕНИЯ (4 штуки) -->
@@ -381,7 +382,7 @@
     </div>
 </div>
 
-<!-- footer — полностью пустой, без текста и ссылок -->
+<!-- footer — пустой -->
 <footer class="footer">
     <!-- ничего не выводим -->
 </footer>
