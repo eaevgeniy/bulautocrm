@@ -67,7 +67,7 @@
         .nav-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 18px;
+            gap: 16px;
             font-size: 15px;
             font-weight: 500;
         }
@@ -108,7 +108,7 @@
             background: #b9aa8e33;
         }
 
-        /* страницы (по умолчанию главная) */
+        /* страницы */
         .page {
             display: none;
         }
@@ -116,7 +116,7 @@
             display: block;
         }
 
-        /* категории на главной */
+        /* категории на главной — без Услуг */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -242,7 +242,7 @@
             color: #3a4a3a;
         }
 
-        /* страница категории (список объявлений) */
+        /* страница категории */
         .category-page-header {
             background: #e7e1d6;
             border-radius: 16px;
@@ -271,13 +271,82 @@
         .category-page-header .back-link:hover {
             background: #fff;
         }
-
         .category-page-header .cat-stats {
             font-size: 14px;
             color: #2f3d32;
         }
 
-        /* footer — пустой */
+        /* страница правил */
+        .rules-content {
+            background: #fcfaf7;
+            border-radius: 24px;
+            padding: 28px 30px;
+            margin: 20px 0 30px;
+            border: 1px solid #ddd6ca;
+        }
+        .rules-content h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: #1e2b1e;
+        }
+        .rules-content h3 {
+            font-size: 20px;
+            margin: 24px 0 10px;
+            color: #1e3a2f;
+        }
+        .rules-content h4 {
+            font-size: 17px;
+            margin: 18px 0 8px;
+            color: #2f4a2f;
+        }
+        .rules-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 6px 0 10px;
+        }
+        .rules-content ul li {
+            padding: 6px 0 6px 28px;
+            position: relative;
+            font-size: 15px;
+            line-height: 1.5;
+            border-bottom: 1px solid #ede8df;
+        }
+        .rules-content ul li:last-child {
+            border-bottom: none;
+        }
+        .rules-content ul li::before {
+            content: "•";
+            position: absolute;
+            left: 6px;
+            color: #1e3a2f;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .rules-content .badge-danger {
+            background: #c0392b20;
+            color: #a93226;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .rules-content .badge-warning {
+            background: #f39c1220;
+            color: #b9770e;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .rules-content .badge-success {
+            background: #27ae6020;
+            color: #1e8449;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
         .footer {
             background: transparent;
             padding: 0;
@@ -294,8 +363,8 @@
             }
             .nav-links {
                 justify-content: center;
-                gap: 12px;
-                font-size: 14px;
+                gap: 10px;
+                font-size: 13px;
             }
             .logo h1 {
                 font-size: 20px;
@@ -314,6 +383,16 @@
             .category-page-header {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+            .rules-content {
+                padding: 18px 16px;
+            }
+            .rules-content h2 {
+                font-size: 22px;
+            }
+            .rules-content ul li {
+                font-size: 14px;
+                padding-left: 22px;
             }
         }
     </style>
@@ -334,6 +413,8 @@
                 <a class="active" data-page="main">Объявления</a>
                 <a data-page="trainer">Тренажёр</a>
                 <a data-page="community">Сообщество</a>
+                <a data-page="services-page">Услуги</a>
+                <a data-page="rules">Правила</a>
             </div>
             <div class="user-actions">
                 <span class="btn-outline-light"><i class="fas fa-user-plus"></i> Вход</span>
@@ -344,9 +425,8 @@
 
     <div class="container">
 
-        <!-- ======== ГЛАВНАЯ СТРАНИЦА ======== -->
+        <!-- ======== ГЛАВНАЯ (без Услуг) ======== -->
         <div class="page active" id="page-main">
-            <!-- категории -->
             <div class="category-grid">
                 <div class="category-card" data-category="hunting">
                     <div class="icon"><i class="fas fa-gun"></i></div>
@@ -372,24 +452,16 @@
                     <p>Продажа, аренда, угодья, бытовки</p>
                     <div class="sub-tags"><span>охотничьи домики</span><span>кемпинги</span><span>участки</span></div>
                 </div>
-                <div class="category-card" data-category="services">
-                    <div class="icon"><i class="fas fa-tools"></i></div>
-                    <h3>Услуги</h3>
-                    <p>Ремонт, гиды, инструкторы, транспортировка</p>
-                    <div class="sub-tags"><span>гиды</span><span>ремонт лодок</span><span>выезды</span></div>
-                </div>
+                <!-- Услуги убраны с главной -->
             </div>
 
-            <!-- Свежие объявления (8 штук) -->
             <div class="ads-heading">
                 <i class="fas fa-bullhorn" style="color:#1e3a2f;"></i> Свежие объявления
             </div>
-            <div class="ads-grid" id="main-ads">
-                <!-- будут вставлены из JS -->
-            </div>
+            <div class="ads-grid" id="main-ads"></div>
         </div>
 
-        <!-- ======== СТРАНИЦА КАТЕГОРИИ (динамическая) ======== -->
+        <!-- ======== СТРАНИЦА КАТЕГОРИИ ======== -->
         <div class="page" id="page-category">
             <div class="category-page-header">
                 <div>
@@ -401,7 +473,7 @@
             <div class="ads-grid" id="category-ads"></div>
         </div>
 
-        <!-- ======== СТРАНИЦА ТРЕНАЖЁР ======== -->
+        <!-- ======== ТРЕНАЖЁР ======== -->
         <div class="page" id="page-trainer">
             <div style="background: #dce6d6; border-radius: 24px; padding: 30px 28px; margin: 20px 0 30px; border-left: 8px solid #1e3a2f;">
                 <h2 style="font-size: 28px; display: flex; align-items: center; gap: 12px;">
@@ -432,7 +504,7 @@
             </div>
         </div>
 
-        <!-- ======== СТРАНИЦА СООБЩЕСТВО ======== -->
+        <!-- ======== СООБЩЕСТВО ======== -->
         <div class="page" id="page-community">
             <div style="background: #ede8df; border-radius: 24px; padding: 28px 24px; margin: 20px 0 30px;">
                 <h2 style="font-size: 26px; display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
@@ -463,66 +535,161 @@
             </div>
         </div>
 
+        <!-- ======== УСЛУГИ (отдельная страница) ======== -->
+        <div class="page" id="page-services-page">
+            <div class="category-page-header">
+                <div>
+                    <h2><i class="fas fa-tools" style="color:#1e3a2f;"></i> Услуги</h2>
+                    <div class="cat-stats">6 объявлений</div>
+                </div>
+                <span class="back-link" id="back-to-main-from-services"><i class="fas fa-arrow-left"></i> На главную</span>
+            </div>
+            <div class="ads-grid" id="services-ads"></div>
+        </div>
+
+        <!-- ======== ПРАВИЛА ======== -->
+        <div class="page" id="page-rules">
+            <div class="rules-content">
+                <h2><i class="fas fa-gavel" style="color:#1e3a2f;"></i> Правила размещения объявлений</h2>
+                <p style="font-size: 16px; color: #2f3d32; margin-bottom: 20px;">Соблюдение законодательства РФ — обязательное условие для всех пользователей.</p>
+
+                <h3><span class="badge-danger">⛔ Категорически запрещено</span></h3>
+                <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Согласно законодательству РФ и правилам маркетплейсов, на сайте <strong>нельзя размещать</strong> объявления о продаже:</p>
+                <ul>
+                    <li>Огнестрельное оружие (гладкоствольное, нарезное, пневматическое мощнее 7,5 Дж)</li>
+                    <li>Патроны, боеприпасы, порох, капсюли, гильзы, пули, дробь</li>
+                    <li>Холодное оружие (ножи, классифицированные как оружие, кастеты, нунчаки)</li>
+                    <li>Газовое оружие, электрошоковые устройства, средства самообороны</li>
+                    <li>Лицензии, разрешения, охотничьи билеты, путёвки (документы)</li>
+                    <li>Наркотические вещества, рецептурные лекарства</li>
+                    <li>Устройства для глушения сигнала, средства негласного наблюдения</li>
+                    <li>Контрафакт и подделки</li>
+                </ul>
+
+                <h3><span class="badge-warning">⚠️ Ограниченные категории</span></h3>
+                <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Эти товары можно размещать, но <strong>с ручной модерацией</strong> и предупреждениями:</p>
+                <ul>
+                    <li>Пневматическое оружие до 7,5 Дж (требует указания мощности)</li>
+                    <li>Охотничьи ножи (только если не являются холодным оружием по сертификату)</li>
+                    <li>Оптика и прицелы (без ограничений, но модерация на предмет военных)</li>
+                    <li>Капканы и ловушки (могут быть запрещены в некоторых регионах)</li>
+                    <li>Чучела животных (требуют подтверждения легальности)</li>
+                </ul>
+
+                <h3><span class="badge-success">✅ Разрешённые категории</span></h3>
+                <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Эти товары можно размещать <strong>без особых ограничений</strong>:</p>
+                <ul>
+                    <li>Одежда и обувь для охоты/рыбалки</li>
+                    <li>Снаряжение (чехлы, ремни, патронташи — без патронов)</li>
+                    <li>Лодки, моторы, прицепы</li>
+                    <li>Эхолоты, навигаторы, электроника</li>
+                    <li>Домики, базы, угодья (аренда и продажа)</li>
+                    <li>Услуги (гиды, инструкторы, ремонт)</li>
+                    <li>Собаки (продажа щенков, услуги вязки)</li>
+                </ul>
+
+                <div style="margin-top: 24px; padding: 16px 20px; background: #e7e1d6; border-radius: 16px;">
+                    <p style="font-size: 15px; color: #1e2b2f;"><i class="fas fa-info-circle" style="color:#1e3a2f;"></i> <strong>Важно:</strong> Нарушение правил влечёт за собой блокировку аккаунта без возможности восстановления. Если вы сомневаетесь, можно ли разместить товар, — обратитесь в поддержку.</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- footer -->
     <footer class="footer"></footer>
 
     <script>
         // ========== ДАННЫЕ ==========
         const adsData = {
             hunting: [
-                { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-campground' },
-                { title: 'Патронташ кожаный 12-й кал.', desc: 'Новый, на 24 патрона, регулируемый ремень', price: '2 500 ₽', tag: 'продажа', icon: 'fa-bullseye' },
-                { title: 'Оптический прицел VOMZ 3-9x40', desc: 'С креплением, отличное состояние', price: '7 200 ₽', tag: 'продажа', icon: 'fa-binoculars' },
-                { title: 'Охотничий нож «Тайга»', desc: 'Сталь 95X18, рукоять из карельской березы', price: '4 800 ₽', tag: 'продажа', icon: 'fa-cut' },
-                { title: 'Манок на утку «Джек»', desc: 'Звуковой, профессиональный', price: '1 200 ₽', tag: 'продажа', icon: 'fa-music' },
-                { title: 'Щенок лайки (род. 2025)', desc: 'Привит, документы, от рабочих родителей', price: '25 000 ₽', tag: 'продажа', icon: 'fa-dog' },
+                { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес', tag: 'аренда',
+                    icon: 'fa-campground' },
+                { title: 'Патронташ кожаный 12-й кал.', desc: 'Новый, на 24 патрона, регулируемый ремень', price: '2 500 ₽',
+                    tag: 'продажа', icon: 'fa-bullseye' },
+                { title: 'Оптический прицел VOMZ 3-9x40', desc: 'С креплением, отличное состояние', price: '7 200 ₽',
+                    tag: 'продажа', icon: 'fa-binoculars' },
+                { title: 'Охотничий нож «Тайга»', desc: 'Сталь 95X18, рукоять из карельской березы', price: '4 800 ₽',
+                    tag: 'продажа', icon: 'fa-cut' },
+                { title: 'Манок на утку «Джек»', desc: 'Звуковой, профессиональный', price: '1 200 ₽', tag: 'продажа',
+                    icon: 'fa-music' },
+                { title: 'Щенок лайки (род. 2025)', desc: 'Привит, документы, от рабочих родителей', price: '25 000 ₽',
+                    tag: 'продажа', icon: 'fa-dog' },
             ],
             fishing: [
-                { title: 'Спиннинг Shimano Crucial', desc: '2.4 м, тест 5-25 г, состояние отличное', price: '8 500 ₽', tag: 'продажа', icon: 'fa-fish' },
-                { title: 'Катушка Daiwa Revros 2500', desc: 'Безынерционная, 5 подшипников', price: '3 900 ₽', tag: 'продажа', icon: 'fa-cog' },
-                { title: 'Набор воблеров (10 шт.)', desc: 'Разные размеры и цвета, оригинал', price: '2 200 ₽', tag: 'продажа', icon: 'fa-bug' },
-                { title: 'Эхолот Lowrance Hook 7', desc: 'С картами, GPS, отличный', price: '32 000 ₽', tag: 'продажа', icon: 'fa-satellite' },
-                { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽', tag: 'продажа', icon: 'fa-ship' },
-                { title: 'Костюм рыбацкий зимний', desc: 'Размер L, термо, ветрозащита', price: '6 500 ₽', tag: 'продажа', icon: 'fa-tshirt' },
+                { title: 'Спиннинг Shimano Crucial', desc: '2.4 м, тест 5-25 г, состояние отличное', price: '8 500 ₽',
+                    tag: 'продажа', icon: 'fa-fish' },
+                { title: 'Катушка Daiwa Revros 2500', desc: 'Безынерционная, 5 подшипников', price: '3 900 ₽',
+                    tag: 'продажа', icon: 'fa-cog' },
+                { title: 'Набор воблеров (10 шт.)', desc: 'Разные размеры и цвета, оригинал', price: '2 200 ₽',
+                    tag: 'продажа', icon: 'fa-bug' },
+                { title: 'Эхолот Lowrance Hook 7', desc: 'С картами, GPS, отличный', price: '32 000 ₽', tag: 'продажа',
+                    icon: 'fa-satellite' },
+                { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽',
+                    tag: 'продажа', icon: 'fa-ship' },
+                { title: 'Костюм рыбацкий зимний', desc: 'Размер L, термо, ветрозащита', price: '6 500 ₽', tag: 'продажа',
+                    icon: 'fa-tshirt' },
             ],
             transport: [
-                { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽', tag: 'продажа', icon: 'fa-ship' },
-                { title: 'Лодочный мотор Yamaha 9.9', desc: '4-такт, 2022 г., мало часов', price: '95 000 ₽', tag: 'продажа', icon: 'fa-engine' },
-                { title: 'Прицеп для лодки МЗСА', desc: 'Одноосный, до 500 кг, документы', price: '28 000 ₽', tag: 'продажа', icon: 'fa-truck' },
-                { title: 'Квадроцикл Stels 650', desc: '2021 г., пробег 800 км, отличное состояние', price: '180 000 ₽', tag: 'продажа', icon: 'fa-motorcycle' },
-                { title: 'Снегоход Yamaha Viking', desc: 'Профессиональный, 2020 г., наработка 1500 км', price: '320 000 ₽', tag: 'продажа', icon: 'fa-snowmobile' },
-                { title: 'Внедорожник УАЗ-469', desc: 'Подготовка для охоты, лебёдка, дополнительные фары', price: '250 000 ₽', tag: 'продажа', icon: 'fa-car' },
+                { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽',
+                    tag: 'продажа', icon: 'fa-ship' },
+                { title: 'Лодочный мотор Yamaha 9.9', desc: '4-такт, 2022 г., мало часов', price: '95 000 ₽',
+                    tag: 'продажа', icon: 'fa-engine' },
+                { title: 'Прицеп для лодки МЗСА', desc: 'Одноосный, до 500 кг, документы', price: '28 000 ₽',
+                    tag: 'продажа', icon: 'fa-truck' },
+                { title: 'Квадроцикл Stels 650', desc: '2021 г., пробег 800 км, отличное состояние', price: '180 000 ₽',
+                    tag: 'продажа', icon: 'fa-motorcycle' },
+                { title: 'Снегоход Yamaha Viking', desc: 'Профессиональный, 2020 г., наработка 1500 км', price: '320 000 ₽',
+                    tag: 'продажа', icon: 'fa-snowmobile' },
+                { title: 'Внедорожник УАЗ-469', desc: 'Подготовка для охоты, лебёдка, дополнительные фары', price: '250 000 ₽',
+                    tag: 'продажа', icon: 'fa-car' },
             ],
             houses: [
-                { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-home' },
-                { title: 'Рыболовная база на Волге', desc: 'Домик у воды, кемпинг, места для рыбалки', price: '8 000 ₽ / сут', tag: 'аренда', icon: 'fa-water' },
-                { title: 'Земельный участок под охотхозяйство', desc: '40 га, лес, река, подъезд круглый год', price: '1 200 000 ₽', tag: 'продажа', icon: 'fa-tree' },
-                { title: 'Бытовка мобильная 6x3 м', desc: 'С мебелью, печкой, для выездов', price: '35 000 ₽', tag: 'продажа', icon: 'fa-warehouse' },
-                { title: 'Домик в Карелии на берегу озера', desc: 'Гостевой дом, баня, причал, 4 спальных места', price: '15 000 ₽ / сут', tag: 'аренда', icon: 'fa-cabin' },
-                { title: 'Охотничья база в Смоленской обл.', desc: '2 домика, баня, 30 га угодий', price: '2 500 000 ₽', tag: 'продажа', icon: 'fa-building' },
+                { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья',
+                    price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-home' },
+                { title: 'Рыболовная база на Волге', desc: 'Домик у воды, кемпинг, места для рыбалки', price: '8 000 ₽ / сут',
+                    tag: 'аренда', icon: 'fa-water' },
+                { title: 'Земельный участок под охотхозяйство', desc: '40 га, лес, река, подъезд круглый год',
+                    price: '1 200 000 ₽', tag: 'продажа', icon: 'fa-tree' },
+                { title: 'Бытовка мобильная 6x3 м', desc: 'С мебелью, печкой, для выездов', price: '35 000 ₽',
+                    tag: 'продажа', icon: 'fa-warehouse' },
+                { title: 'Домик в Карелии на берегу озера', desc: 'Гостевой дом, баня, причал, 4 спальных места',
+                    price: '15 000 ₽ / сут', tag: 'аренда', icon: 'fa-cabin' },
+                { title: 'Охотничья база в Смоленской обл.', desc: '2 домика, баня, 30 га угодий', price: '2 500 000 ₽',
+                    tag: 'продажа', icon: 'fa-building' },
             ],
             services: [
-                { title: 'Ремонт лодочных моторов', desc: 'Диагностика, ремонт, запчасти в наличии', price: 'от 1 500 ₽', tag: 'услуга', icon: 'fa-tools' },
-                { title: 'Гид по охоте в Тверской области', desc: 'Организация выезда, знание угодий, сопровождение', price: '5 000 ₽ / день', tag: 'услуга', icon: 'fa-compass' },
-                { title: 'Транспортировка лодки', desc: 'Перевозка до 7 м, по всей России', price: 'от 20 ₽ / км', tag: 'услуга', icon: 'fa-truck' },
-                { title: 'Инструктор по рыбалке', desc: 'Обучение, спиннинг, фидер, нахлыст', price: '3 500 ₽ / занятие', tag: 'услуга', icon: 'fa-chalkboard-teacher' },
-                { title: 'Организация выезда под ключ', desc: 'Проживание, питание, снаряжение, гид', price: 'от 15 000 ₽', tag: 'услуга', icon: 'fa-umbrella-beach' },
-                { title: 'Ремонт оптики и прицелов', desc: 'Чистка, юстировка, замена деталей', price: 'от 2 000 ₽', tag: 'услуга', icon: 'fa-eye' },
+                { title: 'Ремонт лодочных моторов', desc: 'Диагностика, ремонт, запчасти в наличии', price: 'от 1 500 ₽',
+                    tag: 'услуга', icon: 'fa-tools' },
+                { title: 'Гид по охоте в Тверской области', desc: 'Организация выезда, знание угодий, сопровождение',
+                    price: '5 000 ₽ / день', tag: 'услуга', icon: 'fa-compass' },
+                { title: 'Транспортировка лодки', desc: 'Перевозка до 7 м, по всей России', price: 'от 20 ₽ / км',
+                    tag: 'услуга', icon: 'fa-truck' },
+                { title: 'Инструктор по рыбалке', desc: 'Обучение, спиннинг, фидер, нахлыст', price: '3 500 ₽ / занятие',
+                    tag: 'услуга', icon: 'fa-chalkboard-teacher' },
+                { title: 'Организация выезда под ключ', desc: 'Проживание, питание, снаряжение, гид',
+                    price: 'от 15 000 ₽', tag: 'услуга', icon: 'fa-umbrella-beach' },
+                { title: 'Ремонт оптики и прицелов', desc: 'Чистка, юстировка, замена деталей', price: 'от 2 000 ₽',
+                    tag: 'услуга', icon: 'fa-eye' },
             ]
         };
 
-        // дополнительные объявления для главной (смесь)
         const mainAds = [
-            { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-campground' },
-            { title: 'Спиннинг Shimano Crucial', desc: '2.4 м, тест 5-25 г, состояние отличное', price: '8 500 ₽', tag: 'продажа', icon: 'fa-fish' },
-            { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽', tag: 'продажа', icon: 'fa-ship' },
-            { title: 'Бинокль Nikon Monarch 10x42', desc: 'Ремень и чехол в комплекте', price: '18 900 ₽', tag: 'продажа', icon: 'fa-binoculars' },
-            { title: 'Квадроцикл Stels 650', desc: '2021 г., пробег 800 км, отличное состояние', price: '180 000 ₽', tag: 'продажа', icon: 'fa-motorcycle' },
-            { title: 'Эхолот Lowrance Hook 7', desc: 'С картами, GPS, отличный', price: '32 000 ₽', tag: 'продажа', icon: 'fa-satellite' },
-            { title: 'Рыболовная база на Волге', desc: 'Домик у воды, кемпинг, места для рыбалки', price: '8 000 ₽ / сут', tag: 'аренда', icon: 'fa-water' },
-            { title: 'Гид по охоте в Тверской области', desc: 'Организация выезда, знание угодий', price: '5 000 ₽ / день', tag: 'услуга', icon: 'fa-compass' },
+            { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья',
+                price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-campground' },
+            { title: 'Спиннинг Shimano Crucial', desc: '2.4 м, тест 5-25 г, состояние отличное', price: '8 500 ₽',
+                tag: 'продажа', icon: 'fa-fish' },
+            { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽',
+                tag: 'продажа', icon: 'fa-ship' },
+            { title: 'Бинокль Nikon Monarch 10x42', desc: 'Ремень и чехол в комплекте', price: '18 900 ₽',
+                tag: 'продажа', icon: 'fa-binoculars' },
+            { title: 'Квадроцикл Stels 650', desc: '2021 г., пробег 800 км, отличное состояние', price: '180 000 ₽',
+                tag: 'продажа', icon: 'fa-motorcycle' },
+            { title: 'Эхолот Lowrance Hook 7', desc: 'С картами, GPS, отличный', price: '32 000 ₽', tag: 'продажа',
+                icon: 'fa-satellite' },
+            { title: 'Рыболовная база на Волге', desc: 'Домик у воды, кемпинг, места для рыбалки', price: '8 000 ₽ / сут',
+                tag: 'аренда', icon: 'fa-water' },
+            { title: 'Гид по охоте в Тверской области', desc: 'Организация выезда, знание угодий', price: '5 000 ₽ / день',
+                tag: 'услуга', icon: 'fa-compass' },
         ];
 
         // ========== РЕНДЕР ==========
@@ -542,43 +709,32 @@
             `).join('');
         }
 
-        // главная
         renderAds(document.getElementById('main-ads'), mainAds);
+        renderAds(document.getElementById('services-ads'), adsData.services);
 
-        // ========== НАВИГАЦИЯ МЕЖДУ СТРАНИЦАМИ ==========
+        // ========== НАВИГАЦИЯ ==========
         const pages = {
             main: document.getElementById('page-main'),
             category: document.getElementById('page-category'),
             trainer: document.getElementById('page-trainer'),
             community: document.getElementById('page-community'),
+            'services-page': document.getElementById('page-services-page'),
+            rules: document.getElementById('page-rules'),
         };
 
         function showPage(pageId) {
             Object.values(pages).forEach(p => p.classList.remove('active'));
-            if (pageId === 'main') {
-                pages.main.classList.add('active');
-            } else if (pageId === 'category') {
-                pages.category.classList.add('active');
-            } else if (pageId === 'trainer') {
-                pages.trainer.classList.add('active');
-            } else if (pageId === 'community') {
-                pages.community.classList.add('active');
-            }
-            // обновить активную ссылку
+            if (pages[pageId]) pages[pageId].classList.add('active');
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.classList.toggle('active', link.dataset.page === pageId);
             });
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // обработчики навигации
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                const page = this.dataset.page;
-                if (page === 'main') showPage('main');
-                else if (page === 'trainer') showPage('trainer');
-                else if (page === 'community') showPage('community');
+                showPage(this.dataset.page);
             });
         });
 
@@ -603,13 +759,8 @@
             });
         });
 
-        // возврат на главную
-        document.getElementById('back-to-main').addEventListener('click', function() {
-            showPage('main');
-        });
-
-        // ========== АДАПТИВ: закрываем мобильное меню при клике ==========
-        // (ничего не нужно, всё и так работает)
+        document.getElementById('back-to-main').addEventListener('click', () => showPage('main'));
+        document.getElementById('back-to-main-from-services').addEventListener('click', () => showPage('main'));
     </script>
 </body>
 </html>
