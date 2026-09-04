@@ -329,11 +329,11 @@
             font-weight: 600;
         }
 
-        /* ===== ТРЕНАЖЁР ===== */
+        /* ===== ТРЕНАЖЁР — ПК версия с левым выравниванием ===== */
         .trainer-wrapper {
             background: #dce6d6;
             border-radius: 24px;
-            padding: 30px 28px;
+            padding: 30px 32px;
             margin: 20px 0 30px;
             border-left: 8px solid #1e3a2f;
         }
@@ -347,7 +347,7 @@
         .trainer-wrapper .subtitle {
             font-size: 16px;
             color: #1e2b2f;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .trainer-modes {
@@ -355,17 +355,16 @@
             flex-wrap: wrap;
             gap: 18px;
             margin-bottom: 18px;
-            justify-content: center;
         }
         .mode-card {
             background: white;
             border-radius: 16px;
-            padding: 16px 22px;
-            flex: 1 1 200px;
-            max-width: 280px;
+            padding: 18px 24px;
+            flex: 1 1 240px;
+            max-width: 340px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
             border: 1px solid #cbd6c5;
-            text-align: center;
+            text-align: left;
         }
         .mode-card strong {
             display: block;
@@ -376,15 +375,16 @@
             color: #3a4a3a;
             font-size: 14px;
             display: block;
+            margin: 4px 0 6px;
         }
         .mode-card .highlight {
             background: #ebdccb;
-            padding: 2px 12px;
+            padding: 2px 14px;
             border-radius: 40px;
             font-size: 13px;
             font-weight: 600;
             display: inline-block;
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
         .trainer-footer {
@@ -393,7 +393,6 @@
             gap: 14px;
             align-items: center;
             margin-top: 6px;
-            justify-content: center;
         }
         .trainer-footer .tag {
             background: #1e3a2f10;
@@ -401,20 +400,19 @@
             border-radius: 40px;
         }
 
-        /* ===== КВИЗ ===== */
+        /* ===== КВИЗ — левое выравнивание ===== */
         .quiz-block {
             background: white;
             border-radius: 20px;
-            padding: 24px 28px;
+            padding: 28px 32px;
             margin: 20px 0 10px;
             border: 1px solid #cbd6c5;
-            text-align: center;
+            text-align: left;
         }
         .quiz-block h3 {
-            font-size: 20px;
+            font-size: 22px;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
             margin-bottom: 4px;
         }
@@ -427,20 +425,16 @@
             font-size: 18px;
             font-weight: 500;
             margin-bottom: 14px;
-            padding: 12px 16px;
+            padding: 14px 18px;
             background: #f0f2ed;
             border-radius: 12px;
-            text-align: left;
         }
         .quiz-block .options {
             display: flex;
             flex-direction: column;
             gap: 8px;
             margin-bottom: 16px;
-            text-align: left;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
         .quiz-block .options label {
             display: flex;
@@ -469,10 +463,7 @@
             border-radius: 12px;
             margin-top: 12px;
             font-size: 16px;
-            text-align: left;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
         .quiz-block .quiz-result.show {
             display: block;
@@ -521,6 +512,12 @@
             font-size: 14px;
             color: #4f5a4f;
             margin-bottom: 12px;
+        }
+        .quiz-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
         }
 
         /* ===== СООБЩЕСТВО ===== */
@@ -573,7 +570,6 @@
             min-width: 0;
         }
 
-        /* шапка ленты с кнопкой создания публикации */
         .feed-header {
             display: flex;
             align-items: center;
@@ -718,6 +714,30 @@
             .create-post-btn {
                 justify-content: center;
             }
+            .trainer-modes {
+                justify-content: center;
+            }
+            .mode-card {
+                max-width: 100%;
+                text-align: center;
+            }
+            .quiz-block {
+                text-align: center;
+            }
+            .quiz-block .options {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .quiz-block .quiz-result {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .quiz-actions {
+                justify-content: center;
+            }
+            .trainer-footer {
+                justify-content: center;
+            }
         }
 
         @media (max-width: 700px) {
@@ -773,10 +793,10 @@
                 font-size: 22px;
             }
             .quiz-block {
-                padding: 16px;
+                padding: 18px 16px;
             }
-            .mode-card {
-                max-width: 100%;
+            .quiz-block h3 {
+                font-size: 19px;
             }
             .ads-heading {
                 font-size: 18px;
@@ -935,7 +955,7 @@
                 <div class="question" id="quiz-question">Загрузка вопроса...</div>
                 <div class="options" id="quiz-options"></div>
                 <div class="quiz-result" id="quiz-result"></div>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center;">
+                <div class="quiz-actions">
                     <button class="quiz-btn" id="quiz-submit">Ответить</button>
                     <button class="quiz-btn next-btn" id="quiz-next" style="display:none;">Следующий вопрос →</button>
                 </div>
@@ -955,7 +975,6 @@
                 </aside>
 
                 <main class="community-feed">
-                    <!-- шапка ленты с кнопкой "Создать публикацию" -->
                     <div class="feed-header">
                         <h2 id="feed-title">Новости</h2>
                         <button class="create-post-btn" id="create-post-btn">
@@ -1525,7 +1544,7 @@
         document.querySelectorAll('.community-sidebar .menu-item').forEach(item => {
             item.addEventListener('click', function() {
                 document.querySelectorAll('.community-sidebar .menu-item').forEach(i => i.classList.remove(
-                'active'));
+                    'active'));
                 this.classList.add('active');
                 renderNews(this.dataset.tab);
             });
