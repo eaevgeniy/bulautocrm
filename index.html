@@ -116,7 +116,7 @@
             display: block;
         }
 
-        /* категории на главной — без Услуг */
+        /* категории на главной */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -294,11 +294,6 @@
             margin: 24px 0 10px;
             color: #1e3a2f;
         }
-        .rules-content h4 {
-            font-size: 17px;
-            margin: 18px 0 8px;
-            color: #2f4a2f;
-        }
         .rules-content ul {
             list-style: none;
             padding: 0;
@@ -347,12 +342,159 @@
             font-weight: 600;
         }
 
+        /* ===== СООБЩЕСТВО — ЛЕЙАУТ КАК ДЗЕН ===== */
+        .community-layout {
+            display: flex;
+            gap: 28px;
+            margin: 20px 0 30px;
+            align-items: flex-start;
+        }
+
+        /* левое меню */
+        .community-sidebar {
+            flex: 0 0 220px;
+            background: white;
+            border-radius: 18px;
+            padding: 18px 0;
+            border: 1px solid #e3dbd0;
+            position: sticky;
+            top: 90px;
+        }
+        .community-sidebar .menu-item {
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #2f3d32;
+            cursor: pointer;
+            transition: 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 3px solid transparent;
+        }
+        .community-sidebar .menu-item i {
+            width: 20px;
+            color: #4f5a4f;
+        }
+        .community-sidebar .menu-item:hover {
+            background: #f0ebe2;
+        }
+        .community-sidebar .menu-item.active {
+            background: #e7e1d6;
+            border-left-color: #1e3a2f;
+            font-weight: 600;
+        }
+        .community-sidebar .menu-item.active i {
+            color: #1e3a2f;
+        }
+
+        /* центральный блок с новостями */
+        .community-feed {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 18px;
+            padding: 20px 22px;
+            margin-bottom: 18px;
+            border: 1px solid #e3dbd0;
+            transition: 0.15s;
+        }
+        .news-card:hover {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+        }
+        .news-card .news-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: #4f5a4f;
+            margin-bottom: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .news-card .news-meta .tag {
+            background: #e7e1d6;
+            padding: 0 12px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #1e3a2f;
+        }
+        .news-card h3 {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1e2b1e;
+        }
+        .news-card p {
+            font-size: 15px;
+            color: #3a4a3a;
+            line-height: 1.5;
+        }
+        .news-card .news-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #4f5a4f;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .news-card .news-footer .views {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .news-card .news-footer .actions {
+            display: flex;
+            gap: 18px;
+        }
+        .news-card .news-footer .actions span {
+            cursor: default;
+            transition: 0.1s;
+        }
+        .news-card .news-footer .actions span:hover {
+            color: #1e3a2f;
+        }
+
         .footer {
             background: transparent;
             padding: 0;
             margin-top: 0;
             border-radius: 0;
             min-height: 10px;
+        }
+
+        @media (max-width: 820px) {
+            .community-layout {
+                flex-direction: column;
+            }
+            .community-sidebar {
+                flex: auto;
+                position: static;
+                display: flex;
+                flex-wrap: wrap;
+                padding: 10px 14px;
+                gap: 4px;
+                border-radius: 14px;
+            }
+            .community-sidebar .menu-item {
+                padding: 6px 14px;
+                border-left: none;
+                border-radius: 40px;
+                font-size: 14px;
+                background: transparent;
+            }
+            .community-sidebar .menu-item.active {
+                background: #e7e1d6;
+                border-left: none;
+            }
+            .community-sidebar .menu-item i {
+                width: 16px;
+            }
         }
 
         @media (max-width: 700px) {
@@ -394,6 +536,12 @@
                 font-size: 14px;
                 padding-left: 22px;
             }
+            .news-card {
+                padding: 16px;
+            }
+            .news-card h3 {
+                font-size: 17px;
+            }
         }
     </style>
 </head>
@@ -425,7 +573,7 @@
 
     <div class="container">
 
-        <!-- ======== ГЛАВНАЯ (без Услуг) ======== -->
+        <!-- ======== ГЛАВНАЯ ======== -->
         <div class="page active" id="page-main">
             <div class="category-grid">
                 <div class="category-card" data-category="hunting">
@@ -452,7 +600,6 @@
                     <p>Продажа, аренда, угодья, бытовки</p>
                     <div class="sub-tags"><span>охотничьи домики</span><span>кемпинги</span><span>участки</span></div>
                 </div>
-                <!-- Услуги убраны с главной -->
             </div>
 
             <div class="ads-heading">
@@ -504,38 +651,27 @@
             </div>
         </div>
 
-        <!-- ======== СООБЩЕСТВО ======== -->
+        <!-- ======== СООБЩЕСТВО (ДЗЕН-СТИЛЬ) ======== -->
         <div class="page" id="page-community">
-            <div style="background: #ede8df; border-radius: 24px; padding: 28px 24px; margin: 20px 0 30px;">
-                <h2 style="font-size: 26px; display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
-                    <i class="fas fa-comments" style="color:#1e3a2f;"></i> Сообщество охотников и рыбаков
-                </h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;">
-                    <div style="background: white; border-radius: 14px; padding: 16px; border: 1px solid #ddd6ca;">
-                        <i class="fas fa-newspaper" style="color:#1e3a2f; font-size: 20px;"></i>
-                        <h4 style="margin: 6px 0 4px;">Статьи и обзоры</h4>
-                        <p style="font-size: 14px; color: #4b534b;">Тесты снаряжения, отчёты о выездах</p>
-                    </div>
-                    <div style="background: white; border-radius: 14px; padding: 16px; border: 1px solid #ddd6ca;">
-                        <i class="fas fa-images" style="color:#1e3a2f; font-size: 20px;"></i>
-                        <h4 style="margin: 6px 0 4px;">Фотогалерея</h4>
-                        <p style="font-size: 14px; color: #4b534b;">Трофеи, места, снаряжение в деле</p>
-                    </div>
-                    <div style="background: white; border-radius: 14px; padding: 16px; border: 1px solid #ddd6ca;">
-                        <i class="fas fa-question-circle" style="color:#1e3a2f; font-size: 20px;"></i>
-                        <h4 style="margin: 6px 0 4px;">Вопросы и советы</h4>
-                        <p style="font-size: 14px; color: #4b534b;">Форум для обсуждений</p>
-                    </div>
-                    <div style="background: white; border-radius: 14px; padding: 16px; border: 1px solid #ddd6ca;">
-                        <i class="fas fa-user-friends" style="color:#1e3a2f; font-size: 20px;"></i>
-                        <h4 style="margin: 6px 0 4px;">Клубы по интересам</h4>
-                        <p style="font-size: 14px; color: #4b534b;">Объединяйтесь с единомышленниками</p>
-                    </div>
-                </div>
+            <div class="community-layout">
+                <!-- левое меню -->
+                <aside class="community-sidebar">
+                    <div class="menu-item active" data-tab="news"><i class="fas fa-newspaper"></i> Новости</div>
+                    <div class="menu-item" data-tab="articles"><i class="fas fa-file-alt"></i> Статьи</div>
+                    <div class="menu-item" data-tab="video"><i class="fas fa-video"></i> Видео</div>
+                    <div class="menu-item" data-tab="clips"><i class="fas fa-film"></i> Ролики</div>
+                    <div class="menu-item" data-tab="gallery"><i class="fas fa-images"></i> Фотогалерея</div>
+                    <div class="menu-item" data-tab="forum"><i class="fas fa-comments"></i> Форум</div>
+                </aside>
+
+                <!-- центральный фид -->
+                <main class="community-feed" id="community-feed">
+                    <!-- новости рендерятся из JS -->
+                </main>
             </div>
         </div>
 
-        <!-- ======== УСЛУГИ (отдельная страница) ======== -->
+        <!-- ======== УСЛУГИ ======== -->
         <div class="page" id="page-services-page">
             <div class="category-page-header">
                 <div>
@@ -599,7 +735,7 @@
     <footer class="footer"></footer>
 
     <script>
-        // ========== ДАННЫЕ ==========
+        // ========== ДАННЫЕ ДЛЯ ОБЪЯВЛЕНИЙ ==========
         const adsData = {
             hunting: [
                 { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес', tag: 'аренда',
@@ -692,6 +828,129 @@
                 tag: 'услуга', icon: 'fa-compass' },
         ];
 
+        // ========== НОВОСТИ ДЛЯ СООБЩЕСТВА ==========
+        const newsData = [{
+            id: 1,
+            category: 'Новости',
+            tag: 'Законодательство',
+            title: 'В России утверждены новые сроки весенней охоты 2026',
+            excerpt: 'Минприроды опубликовало приказ с обновлёнными сроками охоты на пернатую дичь. Изменения затронули 15 регионов.',
+            date: '2 часа назад',
+            views: '1.2k',
+            comments: 18,
+            likes: 34,
+        }, {
+            id: 2,
+            category: 'Новости',
+            tag: 'Снаряжение',
+            title: 'Обзор новых тепловизоров Pulsar на выставке «Охота и Рыбалка»',
+            excerpt: 'На ежегодной выставке представили обновлённую линейку тепловизионных прицелов с улучшенной матрицей и увеличенным временем работы.',
+            date: '5 часов назад',
+            views: '856',
+            comments: 12,
+            likes: 27,
+        }, {
+            id: 3,
+            category: 'Статьи',
+            tag: 'Советы',
+            title: 'Как выбрать лодку ПВХ для охоты на утку: советы бывалых',
+            excerpt: 'Разбираем критерии выбора: материал, жёсткость днища, вместимость и особенности эксплуатации в холодной воде.',
+            date: 'вчера',
+            views: '2.3k',
+            comments: 42,
+            likes: 89,
+        }, {
+            id: 4,
+            category: 'Видео',
+            tag: 'Обучение',
+            title: 'Видеоурок: правильная установка манка на селезня',
+            excerpt: 'Опытный охотник показывает технику работы с манком и секреты привлечения птицы в сезон весенней охоты.',
+            date: 'вчера',
+            views: '4.7k',
+            comments: 27,
+            likes: 112,
+        }, {
+            id: 5,
+            category: 'Ролики',
+            tag: 'Трофеи',
+            title: 'Охота на медведя в Карелии — видеоотчёт с поля',
+            excerpt: 'Короткий ролик с реалами охоты на берлоге. Съёмка с тепловизора и комментарии егеря.',
+            date: '2 дня назад',
+            views: '6.1k',
+            comments: 53,
+            likes: 204,
+        }, {
+            id: 6,
+            category: 'Новости',
+            tag: 'Правила',
+            title: 'Ужесточена ответственность за браконьерство в заповедных зонах',
+            excerpt: 'Госдума приняла поправки к КоАП, увеличивающие штрафы за незаконную охоту в особо охраняемых территориях.',
+            date: '3 дня назад',
+            views: '980',
+            comments: 31,
+            likes: 41,
+        }, {
+            id: 7,
+            category: 'Статьи',
+            tag: 'Снаряжение',
+            title: 'Тест-драйв: новая модель эхолота Lowrance HDS PRO',
+            excerpt: 'Проверяем в полевых условиях работу новых боковых сканеров и картографию в реальном времени.',
+            date: '3 дня назад',
+            views: '1.5k',
+            comments: 19,
+            likes: 53,
+        }, {
+            id: 8,
+            category: 'Видео',
+            tag: 'Рыбалка',
+            title: 'Ловля щуки на джиг — разбор техники от профи',
+            excerpt: 'Подробное видео с пояснением проводок, выбора приманки и мест стоянки хищника.',
+            date: '4 дня назад',
+            views: '3.2k',
+            comments: 47,
+            likes: 91,
+        }, {
+            id: 9,
+            category: 'Ролики',
+            tag: 'Юмор',
+            title: 'Смешные моменты с охоты — подборка коротких видео',
+            excerpt: 'Курьёзные ситуации, которые случаются даже с опытными охотниками. Заряжаемся хорошим настроением!',
+            date: '5 дней назад',
+            views: '8.4k',
+            comments: 76,
+            likes: 312,
+        }, {
+            id: 10,
+            category: 'Новости',
+            tag: 'Снаряжение',
+            title: 'Новый закон о маркировке охотничьих ножей: что изменится',
+            excerpt: 'С 1 июля 2026 года все ножи для охоты должны иметь сертификацию. Разбираем, как это повлияет на рынок.',
+            date: '6 дней назад',
+            views: '678',
+            comments: 23,
+            likes: 29,
+        }, {
+            id: 11,
+            category: 'Статьи',
+            tag: 'Снаряжение',
+            title: 'Сравнение 5 популярных моделей биноклей для охоты',
+            excerpt: 'Тестируем оптику от Nikon, Zeiss, Bushnell, VOMZ и Olympus в реальных условиях.',
+            date: '6 дней назад',
+            views: '2.1k',
+            comments: 34,
+            likes: 67,
+        }, {
+            id: 12,
+            category: 'Видео',
+            tag: 'Обучение',
+            title: 'Как чистить и обслуживать лодочный мотор после сезона',
+            excerpt: 'Подробная инструкция по консервации мотора на зиму: промывка, замена масла, смазка.',
+            date: 'неделю назад',
+            views: '1.9k',
+            comments: 16,
+            likes: 44,
+        }, ];
+
         // ========== РЕНДЕР ==========
         function renderAds(container, ads) {
             container.innerHTML = ads.map(ad => `
@@ -709,8 +968,49 @@
             `).join('');
         }
 
+        function renderNews(filter = 'all') {
+            const feed = document.getElementById('community-feed');
+            let filtered = newsData;
+            if (filter !== 'all') {
+                const map = {
+                    'news': 'Новости',
+                    'articles': 'Статьи',
+                    'video': 'Видео',
+                    'clips': 'Ролики'
+                };
+                const cat = map[filter];
+                if (cat) filtered = newsData.filter(n => n.category === cat);
+            }
+            if (filtered.length === 0) {
+                feed.innerHTML =
+                    `<div style="background:white; border-radius:18px; padding:30px; text-align:center; border:1px solid #e3dbd0;"><p style="font-size:18px; color:#4f5a4f;">Нет материалов в этом разделе</p></div>`;
+                return;
+            }
+            feed.innerHTML = filtered.map(n => `
+                <div class="news-card">
+                    <div class="news-meta">
+                        <span style="font-weight:500;">${n.category}</span>
+                        <span class="tag">${n.tag}</span>
+                        <span>${n.date}</span>
+                    </div>
+                    <h3>${n.title}</h3>
+                    <p>${n.excerpt}</p>
+                    <div class="news-footer">
+                        <div class="views"><i class="fas fa-eye"></i> ${n.views}</div>
+                        <div class="actions">
+                            <span><i class="far fa-comment"></i> ${n.comments}</span>
+                            <span><i class="far fa-heart"></i> ${n.likes}</span>
+                            <span><i class="far fa-bookmark"></i></span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========== ИНИЦИАЛИЗАЦИЯ ==========
         renderAds(document.getElementById('main-ads'), mainAds);
         renderAds(document.getElementById('services-ads'), adsData.services);
+        renderNews('all');
 
         // ========== НАВИГАЦИЯ ==========
         const pages = {
@@ -761,6 +1061,17 @@
 
         document.getElementById('back-to-main').addEventListener('click', () => showPage('main'));
         document.getElementById('back-to-main-from-services').addEventListener('click', () => showPage('main'));
+
+        // ========== СООБЩЕСТВО: МЕНЮ ==========
+        document.querySelectorAll('.community-sidebar .menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.community-sidebar .menu-item').forEach(i => i.classList.remove(
+                'active'));
+                this.classList.add('active');
+                const tab = this.dataset.tab;
+                renderNews(tab);
+            });
+        });
     </script>
 </body>
 </html>
