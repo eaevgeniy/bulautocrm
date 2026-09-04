@@ -342,15 +342,192 @@
             font-weight: 600;
         }
 
-        /* ===== СООБЩЕСТВО — ЛЕЙАУТ КАК ДЗЕН ===== */
+        /* ===== ТРЕНАЖЁР ===== */
+        .trainer-wrapper {
+            background: #dce6d6;
+            border-radius: 24px;
+            padding: 30px 28px;
+            margin: 20px 0 30px;
+            border-left: 8px solid #1e3a2f;
+        }
+        .trainer-wrapper h2 {
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+        .trainer-wrapper .subtitle {
+            font-size: 16px;
+            color: #1e2b2f;
+            margin-bottom: 18px;
+        }
+
+        .trainer-modes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .mode-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px 22px;
+            flex: 1 1 200px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            border: 1px solid #cbd6c5;
+        }
+        .mode-card strong {
+            display: block;
+            font-size: 18px;
+            color: #1e3a2f;
+        }
+        .mode-card small {
+            color: #3a4a3a;
+            font-size: 14px;
+            display: block;
+        }
+        .mode-card .highlight {
+            background: #ebdccb;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 6px;
+        }
+
+        .trainer-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            margin-top: 6px;
+        }
+        .trainer-footer .tag {
+            background: #1e3a2f10;
+            padding: 6px 16px;
+            border-radius: 40px;
+        }
+
+        /* ===== ТРЕНАЖЁР — ПРОВЕРЬ СЕБЯ ===== */
+        .quiz-block {
+            background: white;
+            border-radius: 20px;
+            padding: 24px 28px;
+            margin: 20px 0 10px;
+            border: 1px solid #cbd6c5;
+        }
+        .quiz-block h3 {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .quiz-block .quiz-desc {
+            font-size: 15px;
+            color: #3a4a3a;
+            margin-bottom: 16px;
+        }
+        .quiz-block .question {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 14px;
+            padding: 12px 16px;
+            background: #f0f2ed;
+            border-radius: 12px;
+        }
+        .quiz-block .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .quiz-block .options label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            background: #f8f9f6;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.15s;
+            font-size: 15px;
+        }
+        .quiz-block .options label:hover {
+            background: #eef0ea;
+        }
+        .quiz-block .options input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #1e3a2f;
+            flex-shrink: 0;
+        }
+        .quiz-block .quiz-result {
+            display: none;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-top: 12px;
+            font-size: 16px;
+        }
+        .quiz-block .quiz-result.show {
+            display: block;
+        }
+        .quiz-block .quiz-result.correct {
+            background: #d4edda;
+            border: 1px solid #b7d7b7;
+            color: #1e5a2e;
+        }
+        .quiz-block .quiz-result.wrong {
+            background: #f8dddd;
+            border: 1px solid #e5bebe;
+            color: #7a2a2a;
+        }
+        .quiz-block .quiz-result .explanation {
+            margin-top: 6px;
+            font-size: 15px;
+            color: #2f3d32;
+        }
+        .quiz-btn {
+            background: #1e3a2f;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .quiz-btn:hover {
+            background: #2a4f3f;
+        }
+        .quiz-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .quiz-btn.next-btn {
+            background: #c7a86b;
+            margin-left: 10px;
+        }
+        .quiz-btn.next-btn:hover {
+            background: #b89656;
+        }
+        .quiz-progress {
+            font-size: 14px;
+            color: #4f5a4f;
+            margin-bottom: 12px;
+        }
+
+        /* ===== СООБЩЕСТВО ===== */
         .community-layout {
             display: flex;
             gap: 28px;
             margin: 20px 0 30px;
             align-items: flex-start;
         }
-
-        /* левое меню */
         .community-sidebar {
             flex: 0 0 220px;
             background: white;
@@ -387,13 +564,10 @@
         .community-sidebar .menu-item.active i {
             color: #1e3a2f;
         }
-
-        /* центральный блок с новостями */
         .community-feed {
             flex: 1;
             min-width: 0;
         }
-
         .news-card {
             background: white;
             border-radius: 18px;
@@ -542,6 +716,15 @@
             .news-card h3 {
                 font-size: 17px;
             }
+            .trainer-wrapper {
+                padding: 20px 16px;
+            }
+            .trainer-wrapper h2 {
+                font-size: 22px;
+            }
+            .quiz-block {
+                padding: 16px;
+            }
         }
     </style>
 </head>
@@ -620,41 +803,50 @@
             <div class="ads-grid" id="category-ads"></div>
         </div>
 
-        <!-- ======== ТРЕНАЖЁР ======== -->
+        <!-- ======== ТРЕНАЖЁР (без Статистики, с Проверь себя) ======== -->
         <div class="page" id="page-trainer">
-            <div style="background: #dce6d6; border-radius: 24px; padding: 30px 28px; margin: 20px 0 30px; border-left: 8px solid #1e3a2f;">
-                <h2 style="font-size: 28px; display: flex; align-items: center; gap: 12px;">
-                    <i class="fas fa-graduation-cap" style="color:#1e3a2f;"></i> Тренажёр для охотников
-                </h2>
-                <p style="font-size: 16px; margin: 10px 0 16px; color: #1e2b2f;">258 официальных вопросов охотминимума с пояснениями</p>
-                <div style="display: flex; flex-wrap: wrap; gap: 16px;">
-                    <div style="background: white; border-radius: 16px; padding: 16px 22px; flex: 1 1 180px;">
+            <div class="trainer-wrapper">
+                <h2><i class="fas fa-graduation-cap" style="color:#1e3a2f;"></i> Тренажёр для охотников</h2>
+                <div class="subtitle">258 официальных вопросов охотминимума с пояснениями</div>
+
+                <div class="trainer-modes">
+                    <div class="mode-card">
                         <strong><i class="fas fa-pencil-alt" style="color:#1e3a2f;"></i> Тренировка</strong>
-                        <div style="font-size: 14px; color: #3a4a3a;">10–258 вопросов с пояснениями</div>
-                        <span style="background: #ebdccb; padding: 2px 12px; border-radius: 40px; font-size: 13px; display: inline-block; margin-top: 6px;">свободный режим</span>
+                        <small>10–258 вопросов с пояснениями после ответа</small>
+                        <span class="highlight">свободный режим</span>
                     </div>
-                    <div style="background: white; border-radius: 16px; padding: 16px 22px; flex: 1 1 180px;">
+                    <div class="mode-card">
                         <strong><i class="fas fa-clock" style="color:#1e3a2f;"></i> Экзамен</strong>
-                        <div style="font-size: 14px; color: #3a4a3a;">100 вопросов, 120 минут, 75%</div>
-                        <span style="background: #ebdccb; padding: 2px 12px; border-radius: 40px; font-size: 13px; display: inline-block; margin-top: 6px;">реальный экзамен</span>
+                        <small>100 вопросов, 120 минут, 75% правильных</small>
+                        <span class="highlight">реальный экзамен</span>
                     </div>
-                    <div style="background: white; border-radius: 16px; padding: 16px 22px; flex: 1 1 180px;">
-                        <strong><i class="fas fa-star" style="color:#1e3a2f;"></i> Статистика</strong>
-                        <div style="font-size: 14px; color: #3a4a3a;">Прогресс по темам, история</div>
-                        <span style="background: #ebdccb; padding: 2px 12px; border-radius: 40px; font-size: 13px; display: inline-block; margin-top: 6px;">премиум-доступ</span>
-                    </div>
+                    <!-- Статистика убрана -->
                 </div>
-                <div style="margin-top: 18px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center;">
+
+                <div class="trainer-footer">
                     <span><i class="fas fa-tag" style="color:#1e3a2f;"></i> <strong>Темы:</strong> законодательство, биология, оружие, сроки охоты, первая помощь</span>
-                    <span style="background: #1e3a2f10; padding: 6px 16px; border-radius: 40px;"><i class="fas fa-download"></i> Скачать вопросы PDF</span>
+                    <span class="tag"><i class="fas fa-download"></i> Скачать вопросы PDF</span>
+                </div>
+            </div>
+
+            <!-- ===== НОВЫЙ БЛОК: Тренажёр для охотников — проверь себя ===== -->
+            <div class="quiz-block" id="quiz-block">
+                <h3><i class="fas fa-brain" style="color:#1e3a2f;"></i> Тренажёр для охотников — проверь себя</h3>
+                <div class="quiz-desc">Ответьте на 5 случайных вопросов из охотминимума. После каждого ответа вы увидите пояснение.</div>
+                <div class="quiz-progress" id="quiz-progress">Вопрос 1 из 5</div>
+                <div class="question" id="quiz-question">Загрузка вопроса...</div>
+                <div class="options" id="quiz-options"></div>
+                <div class="quiz-result" id="quiz-result"></div>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                    <button class="quiz-btn" id="quiz-submit">Ответить</button>
+                    <button class="quiz-btn next-btn" id="quiz-next" style="display:none;">Следующий вопрос →</button>
                 </div>
             </div>
         </div>
 
-        <!-- ======== СООБЩЕСТВО (ДЗЕН-СТИЛЬ) ======== -->
+        <!-- ======== СООБЩЕСТВО ======== -->
         <div class="page" id="page-community">
             <div class="community-layout">
-                <!-- левое меню -->
                 <aside class="community-sidebar">
                     <div class="menu-item active" data-tab="news"><i class="fas fa-newspaper"></i> Новости</div>
                     <div class="menu-item" data-tab="articles"><i class="fas fa-file-alt"></i> Статьи</div>
@@ -663,11 +855,7 @@
                     <div class="menu-item" data-tab="gallery"><i class="fas fa-images"></i> Фотогалерея</div>
                     <div class="menu-item" data-tab="forum"><i class="fas fa-comments"></i> Форум</div>
                 </aside>
-
-                <!-- центральный фид -->
-                <main class="community-feed" id="community-feed">
-                    <!-- новости рендерятся из JS -->
-                </main>
+                <main class="community-feed" id="community-feed"></main>
             </div>
         </div>
 
@@ -828,7 +1016,7 @@
                 tag: 'услуга', icon: 'fa-compass' },
         ];
 
-        // ========== НОВОСТИ ДЛЯ СООБЩЕСТВА ==========
+        // ========== НОВОСТИ ==========
         const newsData = [{
             id: 1,
             category: 'Новости',
@@ -951,6 +1139,49 @@
             likes: 44,
         }, ];
 
+        // ========== ВОПРОСЫ ДЛЯ КВИЗА ==========
+        const quizQuestions = [{
+            question: 'Какое наказание предусмотрено за охоту без разрешения в общедоступных охотничьих угодьях?',
+            options: ['Административный штраф', 'Уголовная ответственность', 'Предупреждение', 'Лишение охотничьего билета'],
+            correct: 0,
+            explanation: 'За охоту без разрешения предусмотрен административный штраф по ст. 8.37 КоАП РФ. Уголовная ответственность наступает только при причинении крупного ущерба.'
+        }, {
+            question: 'Какой минимальный калибр гладкоствольного оружия разрешён для охоты на крупного зверя?',
+            options: ['12-й', '16-й', '20-й', '28-й'],
+            correct: 1,
+            explanation: 'Для охоты на крупного зверя минимальный калибр — 16-й (по правилам охоты). Однако на практике чаще используют 12-й калибр.'
+        }, {
+            question: 'Что из перечисленного НЕ является объектом охоты в РФ?',
+            options: ['Заяц-русак', 'Барсук', 'Косуля', 'Ёж обыкновенный'],
+            correct: 3,
+            explanation: 'Ёж обыкновенный не входит в перечень охотничьих ресурсов в РФ, в отличие от зайца, барсука и косули.'
+        }, {
+            question: 'Какой документ удостоверяет право на хранение и ношение охотничьего оружия?',
+            options: ['Охотничий билет', 'Разрешение на хранение и ношение', 'Лицензия на оружие', 'Паспорт оружия'],
+            correct: 1,
+            explanation: 'Право на хранение и ношение даёт разрешение, выдаваемое органами лицензионно-разрешительной работы. Охотничий билет подтверждает только право на охоту.'
+        }, {
+            question: 'Какое расстояние должно быть от строений при стрельбе из гладкоствольного оружия?',
+            options: ['50 метров', '100 метров', '200 метров', 'Не менее 300 метров'],
+            correct: 2,
+            explanation: 'Стрельба из гладкоствольного оружия разрешена на расстоянии не менее 200 метров от строений (если иное не оговорено специальными правилами).'
+        }, {
+            question: 'Какой вид дичи разрешено добывать в весенний период?',
+            options: ['Глухарь на току', 'Тетерев на току', 'Вальдшнеп на вечерней тяге', 'Все перечисленные'],
+            correct: 3,
+            explanation: 'Весной разрешена охота на глухаря, тетерева и вальдшнепа при соблюдении сроков и лимитов.'
+        }, {
+            question: 'Какой размер штрафа за браконьерство (незаконную добычу лося) установлен в РФ?',
+            options: ['до 10 000 ₽', 'до 50 000 ₽', 'до 200 000 ₽', 'до 500 000 ₽'],
+            correct: 2,
+            explanation: 'За незаконную добычу лося предусмотрен штраф до 200 000 ₽ или в размере дохода за период до 1 года, а также возможна уголовная ответственность.'
+        }, {
+            question: 'Что из перечисленного относится к охотничьим собакам?',
+            options: ['Лайка', 'Овчарка', 'Терьер', 'Дог'],
+            correct: 0,
+            explanation: 'Лайка — традиционная охотничья порода. Овчарки, терьеры и доги не являются специализированными охотничьими породами в РФ.'
+        }, ];
+
         // ========== РЕНДЕР ==========
         function renderAds(container, ads) {
             container.innerHTML = ads.map(ad => `
@@ -972,12 +1203,7 @@
             const feed = document.getElementById('community-feed');
             let filtered = newsData;
             if (filter !== 'all') {
-                const map = {
-                    'news': 'Новости',
-                    'articles': 'Статьи',
-                    'video': 'Видео',
-                    'clips': 'Ролики'
-                };
+                const map = { 'news': 'Новости', 'articles': 'Статьи', 'video': 'Видео', 'clips': 'Ролики' };
                 const cat = map[filter];
                 if (cat) filtered = newsData.filter(n => n.category === cat);
             }
@@ -1007,10 +1233,104 @@
             `).join('');
         }
 
+        // ========== КВИЗ ==========
+        let currentQuiz = 0;
+        let quizQuestionsShuffled = [];
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function loadQuizQuestion() {
+            const q = quizQuestionsShuffled[currentQuiz];
+            document.getElementById('quiz-question').textContent = q.question;
+            document.getElementById('quiz-progress').textContent = `Вопрос ${currentQuiz + 1} из ${quizQuestionsShuffled.length}`;
+            const container = document.getElementById('quiz-options');
+            container.innerHTML = q.options.map((opt, idx) => `
+                <label>
+                    <input type="radio" name="quiz-option" value="${idx}">
+                    ${opt}
+                </label>
+            `).join('');
+            document.getElementById('quiz-result').className = 'quiz-result';
+            document.getElementById('quiz-result').textContent = '';
+            document.getElementById('quiz-submit').disabled = false;
+            document.getElementById('quiz-submit').style.display = 'inline-block';
+            document.getElementById('quiz-next').style.display = 'none';
+            // сброс выбора
+            document.querySelectorAll('input[name="quiz-option"]').forEach(el => el.checked = false);
+        }
+
+        function initQuiz() {
+            quizQuestionsShuffled = shuffleArray([...quizQuestions]).slice(0, 5);
+            currentQuiz = 0;
+            loadQuizQuestion();
+        }
+
+        document.getElementById('quiz-submit').addEventListener('click', function() {
+            const selected = document.querySelector('input[name="quiz-option"]:checked');
+            if (!selected) {
+                document.getElementById('quiz-result').className = 'quiz-result show wrong';
+                document.getElementById('quiz-result').textContent = '❌ Выберите один из вариантов ответа.';
+                return;
+            }
+            const answer = parseInt(selected.value);
+            const q = quizQuestionsShuffled[currentQuiz];
+            const correct = q.correct;
+            const resultEl = document.getElementById('quiz-result');
+            if (answer === correct) {
+                resultEl.className = 'quiz-result show correct';
+                resultEl.innerHTML = `✅ Правильно!<div class="explanation">${q.explanation}</div>`;
+            } else {
+                resultEl.className = 'quiz-result show wrong';
+                resultEl.innerHTML = `❌ Неправильно. Правильный ответ: <strong>${q.options[correct]}</strong><div class="explanation">${q.explanation}</div>`;
+            }
+            document.getElementById('quiz-submit').disabled = true;
+            document.getElementById('quiz-submit').style.display = 'none';
+            if (currentQuiz < quizQuestionsShuffled.length - 1) {
+                document.getElementById('quiz-next').style.display = 'inline-block';
+            } else {
+                document.getElementById('quiz-next').textContent = '🏁 Завершить';
+                document.getElementById('quiz-next').style.display = 'inline-block';
+            }
+        });
+
+        document.getElementById('quiz-next').addEventListener('click', function() {
+            if (currentQuiz < quizQuestionsShuffled.length - 1) {
+                currentQuiz++;
+                loadQuizQuestion();
+                document.getElementById('quiz-next').textContent = 'Следующий вопрос →';
+            } else {
+                // завершение
+                document.getElementById('quiz-result').className = 'quiz-result show correct';
+                document.getElementById('quiz-result').innerHTML =
+                    '🎉 <strong>Отлично!</strong> Вы прошли все 5 вопросов. Попробуйте ещё раз или перейдите к полному тренажёру.';
+                document.getElementById('quiz-question').textContent = 'Тест завершён!';
+                document.getElementById('quiz-options').innerHTML = '';
+                document.getElementById('quiz-progress').textContent = 'Готово!';
+                document.getElementById('quiz-next').style.display = 'none';
+                document.getElementById('quiz-submit').style.display = 'none';
+                // кнопка для перезапуска
+                const restartBtn = document.createElement('button');
+                restartBtn.className = 'quiz-btn';
+                restartBtn.textContent = '🔄 Пройти заново';
+                restartBtn.addEventListener('click', function() {
+                    initQuiz();
+                    this.remove();
+                });
+                document.querySelector('.quiz-block').appendChild(restartBtn);
+            }
+        });
+
         // ========== ИНИЦИАЛИЗАЦИЯ ==========
         renderAds(document.getElementById('main-ads'), mainAds);
         renderAds(document.getElementById('services-ads'), adsData.services);
         renderNews('all');
+        initQuiz();
 
         // ========== НАВИГАЦИЯ ==========
         const pages = {
@@ -1068,8 +1388,7 @@
                 document.querySelectorAll('.community-sidebar .menu-item').forEach(i => i.classList.remove(
                 'active'));
                 this.classList.add('active');
-                const tab = this.dataset.tab;
-                renderNews(tab);
+                renderNews(this.dataset.tab);
             });
         });
     </script>
