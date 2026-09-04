@@ -57,12 +57,7 @@
             color: #d4b483;
             font-weight: 300;
         }
-        .logo .sub {
-            font-size: 14px;
-            font-weight: 400;
-            color: #b9aa8e;
-            margin-left: 4px;
-        }
+        /* подзаголовок убран */
 
         .nav-links {
             display: flex;
@@ -410,7 +405,7 @@
             border-radius: 40px;
         }
 
-        /* ===== ТРЕНАЖЁР — ПРОВЕРЬ СЕБЯ ===== */
+        /* ===== КВИЗ ===== */
         .quiz-block {
             background: white;
             border-radius: 20px;
@@ -642,6 +637,7 @@
             min-height: 10px;
         }
 
+        /* ===== МОБИЛЬНАЯ ВЕРСИЯ — ВСЁ ПО ЦЕНТРУ ===== */
         @media (max-width: 820px) {
             .community-layout {
                 flex-direction: column;
@@ -674,7 +670,7 @@
         @media (max-width: 700px) {
             .header-inner {
                 flex-direction: column;
-                align-items: stretch;
+                align-items: center;
                 gap: 8px;
             }
             .nav-links {
@@ -682,11 +678,12 @@
                 gap: 10px;
                 font-size: 13px;
             }
+            .user-actions {
+                justify-content: center;
+            }
             .logo h1 {
                 font-size: 20px;
-            }
-            .logo .sub {
-                font-size: 13px;
+                justify-content: center;
             }
             .category-grid {
                 grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -737,7 +734,6 @@
                 <h1>
                     <i class="fas fa-tree" style="color: #d4b483;"></i>
                     Охотник <span>&</span> Рыбак
-                    <span class="sub">— Доска объявлений</span>
                 </h1>
             </div>
             <div class="nav-links">
@@ -803,7 +799,7 @@
             <div class="ads-grid" id="category-ads"></div>
         </div>
 
-        <!-- ======== ТРЕНАЖЁР (без Статистики, с Проверь себя) ======== -->
+        <!-- ======== ТРЕНАЖЁР ======== -->
         <div class="page" id="page-trainer">
             <div class="trainer-wrapper">
                 <h2><i class="fas fa-graduation-cap" style="color:#1e3a2f;"></i> Тренажёр для охотников</h2>
@@ -820,7 +816,6 @@
                         <small>100 вопросов, 120 минут, 75% правильных</small>
                         <span class="highlight">реальный экзамен</span>
                     </div>
-                    <!-- Статистика убрана -->
                 </div>
 
                 <div class="trainer-footer">
@@ -829,7 +824,7 @@
                 </div>
             </div>
 
-            <!-- ===== НОВЫЙ БЛОК: Тренажёр для охотников — проверь себя ===== -->
+            <!-- КВИЗ: Проверь себя -->
             <div class="quiz-block" id="quiz-block">
                 <h3><i class="fas fa-brain" style="color:#1e3a2f;"></i> Тренажёр для охотников — проверь себя</h3>
                 <div class="quiz-desc">Ответьте на 5 случайных вопросов из охотминимума. После каждого ответа вы увидите пояснение.</div>
@@ -1261,7 +1256,6 @@
             document.getElementById('quiz-submit').disabled = false;
             document.getElementById('quiz-submit').style.display = 'inline-block';
             document.getElementById('quiz-next').style.display = 'none';
-            // сброс выбора
             document.querySelectorAll('input[name="quiz-option"]').forEach(el => el.checked = false);
         }
 
@@ -1269,6 +1263,9 @@
             quizQuestionsShuffled = shuffleArray([...quizQuestions]).slice(0, 5);
             currentQuiz = 0;
             loadQuizQuestion();
+            // убираем старую кнопку перезапуска если есть
+            const oldRestart = document.querySelector('.quiz-block .quiz-restart');
+            if (oldRestart) oldRestart.remove();
         }
 
         document.getElementById('quiz-submit').addEventListener('click', function() {
@@ -1293,9 +1290,10 @@
             document.getElementById('quiz-submit').style.display = 'none';
             if (currentQuiz < quizQuestionsShuffled.length - 1) {
                 document.getElementById('quiz-next').style.display = 'inline-block';
+                document.getElementById('quiz-next').textContent = 'Следующий вопрос →';
             } else {
-                document.getElementById('quiz-next').textContent = '🏁 Завершить';
                 document.getElementById('quiz-next').style.display = 'inline-block';
+                document.getElementById('quiz-next').textContent = '🏁 Завершить';
             }
         });
 
@@ -1314,9 +1312,9 @@
                 document.getElementById('quiz-progress').textContent = 'Готово!';
                 document.getElementById('quiz-next').style.display = 'none';
                 document.getElementById('quiz-submit').style.display = 'none';
-                // кнопка для перезапуска
+                // кнопка перезапуска
                 const restartBtn = document.createElement('button');
-                restartBtn.className = 'quiz-btn';
+                restartBtn.className = 'quiz-btn quiz-restart';
                 restartBtn.textContent = '🔄 Пройти заново';
                 restartBtn.addEventListener('click', function() {
                     initQuiz();
