@@ -6,7 +6,6 @@
     <title>Охотник & Рыбак — Доска объявлений</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -25,7 +24,6 @@
             padding: 0 20px;
         }
 
-        /* ===== ШАПКА ===== */
         .header {
             background: #1e3a2f;
             color: #f0ede8;
@@ -92,7 +90,7 @@
             font-weight: 500;
             font-size: 14px;
             transition: 0.2s;
-            cursor: pointer;
+            cursor: default;
         }
         .btn-outline-light i {
             margin-right: 5px;
@@ -100,13 +98,7 @@
         .btn-outline-light:hover {
             background: #b9aa8e33;
         }
-        .btn-outline-light.active-btn {
-            background: #d4b48333;
-            border-color: #d4b483;
-            color: #d4b483;
-        }
 
-        /* ===== СТРАНИЦЫ (вкладки) ===== */
         .page {
             display: none;
         }
@@ -114,7 +106,6 @@
             display: block;
         }
 
-        /* ===== ГЛАВНАЯ ===== */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -241,6 +232,43 @@
             color: #3a4a3a;
         }
 
+        /* ===== КАРТОЧКИ-ЗАМАНУХИ ===== */
+        .ad-card.trick-card {
+            border: 2px solid #c7a86b;
+            background: #f8f4ed;
+            cursor: pointer;
+        }
+        .ad-card.trick-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+        .ad-card.trick-card .trick-badge {
+            display: inline-block;
+            background: #c7a86b;
+            color: #1e3a2f;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 14px;
+            border-radius: 40px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .ad-card.trick-card .trick-icon {
+            font-size: 48px;
+            color: #1e3a2f;
+            opacity: 0.3;
+            margin: 4px 0 8px;
+        }
+        .ad-card.trick-card h4 {
+            color: #1e3a2f;
+        }
+        .ad-card.trick-card .trick-hint {
+            font-size: 12px;
+            color: #4f5a4f;
+            margin-top: 4px;
+        }
+
         .category-page-header {
             background: #e7e1d6;
             border-radius: 16px;
@@ -269,351 +297,9 @@
         .category-page-header .back-link:hover {
             background: #fff;
         }
-
-        /* ===== СТРАНИЦА РАЗМЕЩЕНИЯ ===== */
-        .form-page {
-            padding: 28px 0 40px;
-        }
-        .form-page h2 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #1e2b1e;
-        }
-        .form-page .subtitle {
-            color: #4f5a4f;
-            font-size: 16px;
-            margin-bottom: 24px;
-        }
-
-        .form-card {
-            background: white;
-            border-radius: 20px;
-            padding: 28px 32px;
-            border: 1px solid #e3dbd0;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 15px;
-            color: #1e2b1e;
-            margin-bottom: 5px;
-        }
-        .form-group label .required {
-            color: #c0392b;
-            margin-left: 2px;
-        }
-        .form-group .hint {
-            font-size: 13px;
-            color: #4f5a4f;
-            font-weight: 400;
-            margin-left: 6px;
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px 14px;
-            border-radius: 10px;
-            border: 1px solid #ddd6ca;
-            font-size: 15px;
-            background: #fcfaf7;
-            transition: 0.15s;
-            outline: none;
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: #d4b483;
-            outline: 2px solid #d4b48344;
-        }
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .params-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .rules-block {
-            background: #f0f2ed;
-            border-radius: 14px;
-            padding: 16px 20px;
-            margin: 6px 0 22px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-            border-left: 4px solid #c7a86b;
-        }
-        .rules-block .rules-link {
-            color: #1e3a2f;
-            font-weight: 600;
-            text-decoration: none;
-            border-bottom: 1px dashed #1e3a2f;
-            cursor: pointer;
+        .category-page-header .cat-stats {
             font-size: 14px;
-            white-space: nowrap;
-        }
-        .rules-block .rules-link:hover {
-            color: #2a4f3f;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-top: 8px;
-        }
-        .btn-primary {
-            background: #1e3a2f;
-            color: white;
-            border: none;
-            padding: 12px 36px;
-            border-radius: 40px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.15s;
-        }
-        .btn-primary:hover {
-            background: #2a4f3f;
-        }
-        .btn-outline-dark {
-            background: transparent;
-            border: 1px solid #b9aa8e;
-            color: #1e2b2f;
-            padding: 12px 30px;
-            border-radius: 40px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.15s;
-        }
-        .btn-outline-dark:hover {
-            background: #ede8df;
-        }
-
-        /* ===== АДМИН-ПАНЕЛЬ ===== */
-        .admin-layout {
-            display: flex;
-            gap: 28px;
-            margin: 20px 0 30px;
-            align-items: flex-start;
-        }
-
-        .admin-sidebar {
-            flex: 0 0 220px;
-            background: #1e3a2f;
-            color: #e8e2d9;
-            border-radius: 18px;
-            padding: 18px 0;
-            border: 1px solid #2f4f40;
-            position: sticky;
-            top: 90px;
-        }
-        .admin-sidebar .menu-item {
-            padding: 10px 20px;
-            font-size: 15px;
-            font-weight: 500;
-            color: #d4d0c8;
-            cursor: pointer;
-            transition: 0.15s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-left: 3px solid transparent;
-        }
-        .admin-sidebar .menu-item i {
-            width: 20px;
-            text-align: center;
-            color: #b9aa8e;
-        }
-        .admin-sidebar .menu-item:hover {
-            background: #2a4f3f;
-            color: #fff;
-        }
-        .admin-sidebar .menu-item.active {
-            background: #2a4f3f;
-            border-left-color: #d4b483;
-            color: #fff;
-        }
-        .admin-sidebar .menu-item.active i {
-            color: #d4b483;
-        }
-        .admin-sidebar .menu-item .badge {
-            margin-left: auto;
-            background: #d4b483;
-            color: #1e3a2f;
-            font-size: 11px;
-            padding: 0 10px;
-            border-radius: 40px;
-            font-weight: 600;
-        }
-
-        .admin-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .admin-panel {
-            display: none;
-        }
-        .admin-panel.active {
-            display: block;
-        }
-
-        .admin-section-card {
-            background: white;
-            border-radius: 18px;
-            padding: 20px 24px;
-            margin-bottom: 18px;
-            border: 1px solid #e3dbd0;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-        }
-        .admin-section-card .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-        .admin-section-card .section-header h3 {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .btn-sm {
-            padding: 4px 14px;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: 0.15s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .btn-sm.primary {
-            background: #1e3a2f;
-            color: white;
-        }
-        .btn-sm.primary:hover {
-            background: #2a4f3f;
-        }
-        .btn-sm.outline {
-            background: transparent;
-            border: 1px solid #b9aa8e;
-            color: #1e2b2f;
-        }
-        .btn-sm.outline:hover {
-            background: #ede8df;
-        }
-        .btn-sm.danger {
-            background: #c0392b20;
-            color: #a93226;
-        }
-        .btn-sm.danger:hover {
-            background: #c0392b30;
-        }
-        .btn-sm.success {
-            background: #27ae6020;
-            color: #1e8449;
-        }
-        .btn-sm.success:hover {
-            background: #27ae6030;
-        }
-        .btn-sm.warning {
-            background: #f39c1220;
-            color: #b9770e;
-        }
-        .btn-sm.warning:hover {
-            background: #f39c1230;
-        }
-        .btn-sm.info {
-            background: #2980b920;
-            color: #1a5276;
-        }
-        .btn-sm.info:hover {
-            background: #2980b930;
-        }
-
-        .table-wrap {
-            overflow-x: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-        th {
-            text-align: left;
-            padding: 10px 8px 8px 0;
-            font-weight: 600;
             color: #2f3d32;
-            border-bottom: 2px solid #e3dbd0;
-        }
-        td {
-            padding: 10px 8px 10px 0;
-            border-bottom: 1px solid #ede8df;
-            vertical-align: middle;
-        }
-        td .status-badge {
-            padding: 2px 12px;
-            border-radius: 40px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        td .status-badge.pending {
-            background: #f39c1220;
-            color: #b9770e;
-        }
-        td .status-badge.published {
-            background: #27ae6020;
-            color: #1e8449;
-        }
-        td .status-badge.active {
-            background: #27ae6020;
-            color: #1e8449;
-        }
-        td .status-badge.inactive {
-            background: #b9aa8e30;
-            color: #4f5a4f;
-        }
-
-        .admin-stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 16px;
-            margin: 16px 0 10px;
-        }
-        .admin-stats-card {
-            background: white;
-            border-radius: 14px;
-            padding: 16px 18px;
-            border: 1px solid #e3dbd0;
-            text-align: center;
-        }
-        .admin-stats-card .number {
-            font-size: 32px;
-            font-weight: 700;
-            color: #1e3a2f;
-        }
-        .admin-stats-card .label {
-            font-size: 14px;
-            color: #4f5a4f;
-            margin-top: 2px;
         }
 
         .rules-content {
@@ -680,61 +366,201 @@
             font-weight: 600;
         }
 
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .modal-overlay.show {
-            display: flex;
-        }
-        .modal {
-            background: white;
+        .trainer-wrapper {
+            background: #dce6d6;
             border-radius: 24px;
             padding: 30px 32px;
-            max-width: 720px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            position: relative;
+            margin: 20px 0 30px;
+            border-left: 8px solid #1e3a2f;
         }
-        .modal .close-modal {
-            position: absolute;
-            top: 14px;
-            right: 20px;
+        .trainer-wrapper h2 {
             font-size: 28px;
-            cursor: pointer;
-            color: #4f5a4f;
-            background: none;
-            border: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
         }
-        .modal .close-modal:hover {
+        .trainer-wrapper .subtitle {
+            font-size: 16px;
             color: #1e2b2f;
+            margin-bottom: 20px;
         }
 
-        .footer {
-            background: transparent;
-            padding: 20px 0;
-            margin-top: 10px;
-            text-align: center;
+        .trainer-modes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .mode-card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px 24px;
+            flex: 1 1 240px;
+            max-width: 340px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            border: 1px solid #cbd6c5;
+            text-align: left;
+        }
+        .mode-card strong {
+            display: block;
+            font-size: 18px;
+            color: #1e3a2f;
+        }
+        .mode-card small {
+            color: #3a4a3a;
+            font-size: 14px;
+            display: block;
+            margin: 4px 0 6px;
+        }
+        .mode-card .highlight {
+            background: #ebdccb;
+            padding: 2px 14px;
+            border-radius: 40px;
             font-size: 13px;
-            color: #4f5a4f;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 4px;
         }
 
-        /* ===== СООБЩЕСТВО — адаптивный лейаут ===== */
+        .trainer-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            margin-top: 6px;
+        }
+        .trainer-footer .tag {
+            background: #1e3a2f10;
+            padding: 6px 16px;
+            border-radius: 40px;
+        }
+
+        .quiz-block {
+            background: white;
+            border-radius: 20px;
+            padding: 28px 32px;
+            margin: 20px 0 10px;
+            border: 1px solid #cbd6c5;
+            text-align: left;
+        }
+        .quiz-block h3 {
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .quiz-block .quiz-desc {
+            font-size: 15px;
+            color: #3a4a3a;
+            margin-bottom: 16px;
+        }
+        .quiz-block .question {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 14px;
+            padding: 14px 18px;
+            background: #f0f2ed;
+            border-radius: 12px;
+        }
+        .quiz-block .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+            max-width: 600px;
+        }
+        .quiz-block .options label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            background: #f8f9f6;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.15s;
+            font-size: 15px;
+        }
+        .quiz-block .options label:hover {
+            background: #eef0ea;
+        }
+        .quiz-block .options input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #1e3a2f;
+            flex-shrink: 0;
+        }
+        .quiz-block .quiz-result {
+            display: none;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-top: 12px;
+            font-size: 16px;
+            max-width: 600px;
+        }
+        .quiz-block .quiz-result.show {
+            display: block;
+        }
+        .quiz-block .quiz-result.correct {
+            background: #d4edda;
+            border: 1px solid #b7d7b7;
+            color: #1e5a2e;
+        }
+        .quiz-block .quiz-result.wrong {
+            background: #f8dddd;
+            border: 1px solid #e5bebe;
+            color: #7a2a2a;
+        }
+        .quiz-block .quiz-result .explanation {
+            margin-top: 6px;
+            font-size: 15px;
+            color: #2f3d32;
+        }
+        .quiz-btn {
+            background: #1e3a2f;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .quiz-btn:hover {
+            background: #2a4f3f;
+        }
+        .quiz-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .quiz-btn.next-btn {
+            background: #c7a86b;
+            margin-left: 10px;
+        }
+        .quiz-btn.next-btn:hover {
+            background: #b89656;
+        }
+        .quiz-progress {
+            font-size: 14px;
+            color: #4f5a4f;
+            margin-bottom: 12px;
+        }
+        .quiz-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
         .community-layout {
             display: flex;
             gap: 28px;
             margin: 20px 0 30px;
             align-items: flex-start;
         }
-
         .community-sidebar {
             flex: 0 0 220px;
             background: white;
@@ -878,22 +704,25 @@
             color: #1e3a2f;
         }
 
-        /* ===== АДАПТИВ: МОБИЛЬНАЯ ВЕРСИЯ ===== */
+        .footer {
+            background: transparent;
+            padding: 0;
+            margin-top: 0;
+            min-height: 10px;
+        }
+
         @media (max-width: 820px) {
             .community-layout {
                 flex-direction: column;
-                gap: 16px;
             }
             .community-sidebar {
-                flex: none;
-                width: 100%;
+                flex: auto;
                 position: static;
                 display: flex;
                 flex-wrap: wrap;
                 padding: 10px 14px;
-                gap: 6px;
+                gap: 4px;
                 border-radius: 14px;
-                justify-content: center;
             }
             .community-sidebar .menu-item {
                 padding: 6px 14px;
@@ -901,7 +730,6 @@
                 border-radius: 40px;
                 font-size: 14px;
                 background: transparent;
-                flex: 0 1 auto;
             }
             .community-sidebar .menu-item.active {
                 background: #e7e1d6;
@@ -918,40 +746,29 @@
             .create-post-btn {
                 justify-content: center;
             }
-            .news-card {
-                padding: 16px;
-            }
-            .news-card h3 {
-                font-size: 17px;
-            }
-            .admin-layout {
-                flex-direction: column;
-            }
-            .admin-sidebar {
-                flex: none;
-                width: 100%;
-                position: static;
-                display: flex;
-                flex-wrap: wrap;
-                padding: 10px 14px;
-                gap: 4px;
-                border-radius: 14px;
+            .trainer-modes {
                 justify-content: center;
             }
-            .admin-sidebar .menu-item {
-                padding: 6px 14px;
-                border-left: none;
-                border-radius: 40px;
-                font-size: 14px;
-                background: transparent;
-                flex: 0 1 auto;
+            .mode-card {
+                max-width: 100%;
+                text-align: center;
             }
-            .admin-sidebar .menu-item.active {
-                background: #2a4f3f;
-                border-left: none;
+            .quiz-block {
+                text-align: center;
             }
-            .admin-sidebar .menu-item .badge {
-                display: none;
+            .quiz-block .options {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .quiz-block .quiz-result {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .quiz-actions {
+                justify-content: center;
+            }
+            .trainer-footer {
+                justify-content: center;
             }
         }
 
@@ -981,33 +798,47 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
-            .form-card {
+            .category-page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .rules-content {
                 padding: 18px 16px;
             }
-            .params-grid {
-                grid-template-columns: 1fr;
+            .rules-content h2 {
+                font-size: 22px;
             }
-            .rules-block {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
+            .rules-content ul li {
+                font-size: 14px;
+                padding-left: 22px;
             }
-            .form-actions {
-                flex-direction: column;
+            .news-card {
+                padding: 16px;
             }
-            .form-actions .btn-primary,
-            .form-actions .btn-outline-dark {
-                width: 100%;
-                justify-content: center;
-                text-align: center;
+            .news-card h3 {
+                font-size: 17px;
             }
-            .community-sidebar .menu-item {
-                font-size: 13px;
-                padding: 4px 12px;
+            .trainer-wrapper {
+                padding: 20px 16px;
             }
-            .admin-sidebar .menu-item {
-                font-size: 13px;
-                padding: 4px 12px;
+            .trainer-wrapper h2 {
+                font-size: 22px;
+            }
+            .quiz-block {
+                padding: 18px 16px;
+            }
+            .quiz-block h3 {
+                font-size: 19px;
+            }
+            .ads-heading {
+                font-size: 18px;
+            }
+            .feed-header h2 {
+                font-size: 19px;
+            }
+            .create-post-btn {
+                font-size: 14px;
+                padding: 6px 16px;
             }
         }
 
@@ -1028,32 +859,33 @@
                 height: 36px;
                 font-size: 18px;
             }
+            .category-card h3 {
+                font-size: 14px;
+            }
+            .category-card p {
+                font-size: 11px;
+            }
+            .sub-tags span {
+                font-size: 10px;
+                padding: 0 8px;
+            }
             .ad-card {
                 padding: 10px;
             }
             .ad-card .ad-image {
                 height: 80px;
             }
-            .community-sidebar .menu-item {
-                font-size: 12px;
-                padding: 4px 10px;
+            .ad-card h4 {
+                font-size: 13px;
             }
-            .admin-sidebar .menu-item {
-                font-size: 12px;
-                padding: 4px 10px;
-            }
-            .news-card {
-                padding: 14px;
-            }
-            .news-card h3 {
-                font-size: 16px;
+            .ad-card p {
+                font-size: 11px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== ШАПКА ===== -->
     <header class="header">
         <div class="container header-inner">
             <div class="logo">
@@ -1070,16 +902,15 @@
                 <a data-page="rules">Правила</a>
             </div>
             <div class="user-actions">
-                <button class="btn-outline-light" id="login-btn"><i class="fas fa-user-shield"></i> Вход</button>
-                <button class="btn-outline-light active-btn" id="post-btn"><i class="fas fa-plus-circle"></i> Разместить</button>
+                <span class="btn-outline-light"><i class="fas fa-user-plus"></i> Вход</span>
+                <span class="btn-outline-light"><i class="fas fa-plus-circle"></i> Разместить</span>
             </div>
         </div>
     </header>
 
     <div class="container">
 
-        <!-- ============================================================ -->
-        <!-- ГЛАВНАЯ СТРАНИЦА -->
+        <!-- ===== ГЛАВНАЯ ===== -->
         <div class="page active" id="page-main">
             <div class="category-grid">
                 <div class="category-card" data-category="hunting">
@@ -1114,8 +945,7 @@
             <div class="ads-grid" id="main-ads"></div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА КАТЕГОРИИ -->
+        <!-- ===== СТРАНИЦА КАТЕГОРИИ ===== -->
         <div class="page" id="page-category">
             <div class="category-page-header">
                 <div>
@@ -1127,46 +957,44 @@
             <div class="ads-grid" id="category-ads"></div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА ТРЕНАЖЁР -->
+        <!-- ===== ТРЕНАЖЁР ===== -->
         <div class="page" id="page-trainer">
-            <div style="background:#dce6d6; border-radius:24px; padding:30px 32px; margin:20px 0 30px; border-left:8px solid #1e3a2f;">
-                <h2 style="font-size:28px; display:flex; align-items:center; gap:12px;"><i class="fas fa-graduation-cap" style="color:#1e3a2f;"></i> Тренажёр для охотников</h2>
-                <p style="font-size:16px; margin-bottom:20px;">258 официальных вопросов охотминимума с пояснениями</p>
-                <div style="display:flex; flex-wrap:wrap; gap:18px; margin-bottom:18px;">
-                    <div style="background:white; border-radius:16px; padding:18px 24px; flex:1 1 240px; max-width:340px; border:1px solid #cbd6c5;">
+            <div class="trainer-wrapper">
+                <h2><i class="fas fa-graduation-cap" style="color:#1e3a2f;"></i> Тренажёр для охотников</h2>
+                <div class="subtitle">258 официальных вопросов охотминимума с пояснениями</div>
+                <div class="trainer-modes">
+                    <div class="mode-card">
                         <strong><i class="fas fa-pencil-alt" style="color:#1e3a2f;"></i> Тренировка</strong>
-                        <div style="color:#3a4a3a; font-size:14px;">10–258 вопросов с пояснениями</div>
-                        <span style="background:#ebdccb; padding:2px 14px; border-radius:40px; font-size:13px; font-weight:600; display:inline-block; margin-top:4px;">свободный режим</span>
+                        <small>10–258 вопросов с пояснениями после ответа</small>
+                        <span class="highlight">свободный режим</span>
                     </div>
-                    <div style="background:white; border-radius:16px; padding:18px 24px; flex:1 1 240px; max-width:340px; border:1px solid #cbd6c5;">
+                    <div class="mode-card">
                         <strong><i class="fas fa-clock" style="color:#1e3a2f;"></i> Экзамен</strong>
-                        <div style="color:#3a4a3a; font-size:14px;">100 вопросов, 120 минут, 75%</div>
-                        <span style="background:#ebdccb; padding:2px 14px; border-radius:40px; font-size:13px; font-weight:600; display:inline-block; margin-top:4px;">реальный экзамен</span>
+                        <small>100 вопросов, 120 минут, 75% правильных</small>
+                        <span class="highlight">реальный экзамен</span>
                     </div>
                 </div>
-                <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
+                <div class="trainer-footer">
                     <span><i class="fas fa-tag" style="color:#1e3a2f;"></i> <strong>Темы:</strong> законодательство, биология, оружие, сроки охоты, первая помощь</span>
-                    <span style="background:#1e3a2f10; padding:6px 16px; border-radius:40px;"><i class="fas fa-download"></i> Скачать PDF</span>
+                    <span class="tag"><i class="fas fa-download"></i> Скачать вопросы PDF</span>
                 </div>
             </div>
 
-            <div style="background:white; border-radius:20px; padding:28px 32px; border:1px solid #cbd6c5; text-align:left;">
-                <h3 style="font-size:22px; display:flex; align-items:center; gap:10px;"><i class="fas fa-brain" style="color:#1e3a2f;"></i> Проверь себя</h3>
-                <p style="color:#3a4a3a; margin-bottom:16px;">Ответьте на 5 случайных вопросов из охотминимума.</p>
-                <div id="quiz-progress" style="font-size:14px; color:#4f5a4f; margin-bottom:12px;">Вопрос 1 из 5</div>
-                <div id="quiz-question" style="font-size:18px; font-weight:500; padding:14px 18px; background:#f0f2ed; border-radius:12px; margin-bottom:14px;">Загрузка...</div>
-                <div id="quiz-options" style="display:flex; flex-direction:column; gap:8px; max-width:600px;"></div>
-                <div id="quiz-result" style="display:none; padding:16px 20px; border-radius:12px; margin-top:12px; max-width:600px;"></div>
-                <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-                    <button class="btn-primary" id="quiz-submit" style="padding:8px 28px; font-size:15px;">Ответить</button>
-                    <button class="btn-primary" id="quiz-next" style="display:none; padding:8px 28px; font-size:15px; background:#c7a86b;">Следующий →</button>
+            <div class="quiz-block" id="quiz-block">
+                <h3><i class="fas fa-brain" style="color:#1e3a2f;"></i> Тренажёр для охотников — проверь себя</h3>
+                <div class="quiz-desc">Ответьте на 5 случайных вопросов из охотминимума. После каждого ответа вы увидите пояснение.</div>
+                <div class="quiz-progress" id="quiz-progress">Вопрос 1 из 5</div>
+                <div class="question" id="quiz-question">Загрузка вопроса...</div>
+                <div class="options" id="quiz-options"></div>
+                <div class="quiz-result" id="quiz-result"></div>
+                <div class="quiz-actions">
+                    <button class="quiz-btn" id="quiz-submit">Ответить</button>
+                    <button class="quiz-btn next-btn" id="quiz-next" style="display:none;">Следующий вопрос →</button>
                 </div>
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА СООБЩЕСТВО (исправлена для мобильных) -->
+        <!-- ===== СООБЩЕСТВО ===== -->
         <div class="page" id="page-community">
             <div class="community-layout">
                 <aside class="community-sidebar">
@@ -1174,6 +1002,8 @@
                     <div class="menu-item" data-tab="articles"><i class="fas fa-file-alt"></i> Статьи</div>
                     <div class="menu-item" data-tab="video"><i class="fas fa-video"></i> Видео</div>
                     <div class="menu-item" data-tab="clips"><i class="fas fa-film"></i> Ролики</div>
+                    <div class="menu-item" data-tab="gallery"><i class="fas fa-images"></i> Фотогалерея</div>
+                    <div class="menu-item" data-tab="forum"><i class="fas fa-comments"></i> Форум</div>
                 </aside>
 
                 <main class="community-feed">
@@ -1188,232 +1018,67 @@
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА УСЛУГИ -->
+        <!-- ===== УСЛУГИ ===== -->
         <div class="page" id="page-services-page">
             <div class="category-page-header">
-                <div><h2><i class="fas fa-tools" style="color:#1e3a2f;"></i> Услуги</h2><div class="cat-stats">6 объявлений</div></div>
+                <div>
+                    <h2><i class="fas fa-tools" style="color:#1e3a2f;"></i> Услуги</h2>
+                    <div class="cat-stats">6 объявлений</div>
+                </div>
                 <span class="back-link" id="back-to-main-from-services"><i class="fas fa-arrow-left"></i> На главную</span>
             </div>
             <div class="ads-grid" id="services-ads"></div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА ПРАВИЛА -->
+        <!-- ===== ПРАВИЛА ===== -->
         <div class="page" id="page-rules">
             <div class="rules-content">
                 <h2><i class="fas fa-gavel" style="color:#1e3a2f;"></i> Правила размещения объявлений</h2>
-                <p style="font-size:16px; color:#2f3d32; margin-bottom:20px;">Соблюдение законодательства РФ — обязательное условие.</p>
+                <p style="font-size: 16px; color: #2f3d32; margin-bottom: 20px;">Соблюдение законодательства РФ — обязательное условие для всех пользователей.</p>
                 <h3><span class="badge-danger">⛔ Категорически запрещено</span></h3>
-                <ul><li>Огнестрельное оружие</li><li>Патроны, боеприпасы</li><li>Холодное оружие</li><li>Газовое оружие, электрошокеры</li><li>Наркотики, контрафакт</li></ul>
+                <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Согласно законодательству РФ и правилам маркетплейсов, на сайте <strong>нельзя размещать</strong> объявления о продаже:</p>
+                <ul>
+                    <li>Огнестрельное оружие (гладкоствольное, нарезное, пневматическое мощнее 7,5 Дж)</li>
+                    <li>Патроны, боеприпасы, порох, капсюли, гильзы, пули, дробь</li>
+                    <li>Холодное оружие (ножи, классифицированные как оружие, кастеты, нунчаки)</li>
+                    <li>Газовое оружие, электрошоковые устройства, средства самообороны</li>
+                    <li>Лицензии, разрешения, охотничьи билеты, путёвки (документы)</li>
+                    <li>Наркотические вещества, рецептурные лекарства</li>
+                    <li>Устройства для глушения сигнала, средства негласного наблюдения</li>
+                    <li>Контрафакт и подделки</li>
+                </ul>
                 <h3><span class="badge-warning">⚠️ Ограниченные категории</span></h3>
-                <ul><li>Пневматика до 7,5 Дж</li><li>Охотничьи ножи</li><li>Оптика, прицелы</li></ul>
+                <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Эти товары можно размещать, но <strong>с ручной модерацией</strong> и предупреждениями:</p>
+                <ul>
+                    <li>Пневматическое оружие до 7,5 Дж (требует указания мощности)</li>
+                    <li>Охотничьи ножи (только если не являются холодным оружием по сертификату)</li>
+                    <li>Оптика и прицелы (без ограничений, но модерация на предмет военных)</li>
+                    <li>Капканы и ловушки (могут быть запрещены в некоторых регионах)</li>
+                    <li>Чучела животных (требуют подтверждения легальности)</li>
+                </ul>
                 <h3><span class="badge-success">✅ Разрешённые категории</span></h3>
-                <ul><li>Одежда, снаряжение</li><li>Лодки, моторы, прицепы</li><li>Эхолоты, электроника</li><li>Домики, базы, угодья</li><li>Услуги, собаки</li></ul>
-            </div>
-        </div>
-
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА РАЗМЕЩЕНИЯ -->
-        <div class="page" id="page-post">
-            <div class="form-page">
-                <h2>📦 Разместить объявление</h2>
-                <p class="subtitle">Заполните форму, чтобы опубликовать объявление. Все поля отмеченные * обязательны.</p>
-                <div class="form-card">
-                    <form id="ad-form" onsubmit="return false;">
-                        <div class="form-group">
-                            <label for="post-category">Раздел <span class="required">*</span></label>
-                            <select id="post-category" required>
-                                <option value="">Выберите раздел</option>
-                                <option value="hunting">Охота</option>
-                                <option value="fishing">Рыбалка</option>
-                                <option value="transport">Транспорт и плавсредства</option>
-                                <option value="houses">Домики и базы</option>
-                                <option value="services">Услуги</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="post-name">Ваше имя <span class="required">*</span></label>
-                            <input type="text" id="post-name" placeholder="Иван Петров" value="Иван Петров" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="post-phone">Телефон <span class="required">*</span></label>
-                            <input type="tel" id="post-phone" placeholder="+7 (912) 345-67-89" value="+7 (912) 345-67-89" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="post-title">Название объявления <span class="required">*</span></label>
-                            <input type="text" id="post-title" placeholder="Например: Охотничий домик в Тверской области" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="post-description">Описание <span class="required">*</span></label>
-                            <textarea id="post-description" placeholder="Подробно опишите товар или услугу..." required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Параметры <span class="hint">(зависят от раздела)</span></label>
-                            <div class="params-grid" id="post-params-grid">
-                                <div style="grid-column:1/-1; padding:12px 0; color:#4f5a4f; font-size:14px;">
-                                    <i class="fas fa-info-circle"></i> Выберите раздел, чтобы увидеть параметры.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="rules-block">
-                            <span><i class="fas fa-gavel"></i> Перед публикацией ознакомьтесь с <strong>правилами</strong></span>
-                            <a class="rules-link" id="open-rules-from-post">Показать правила</a>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn-primary" id="post-submit"><i class="fas fa-check"></i> Опубликовать</button>
-                            <button type="reset" class="btn-outline-dark"><i class="fas fa-undo"></i> Очистить</button>
-                        </div>
-                    </form>
+                <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Эти товары можно размещать <strong>без особых ограничений</strong>:</p>
+                <ul>
+                    <li>Одежда и обувь для охоты/рыбалки</li>
+                    <li>Снаряжение (чехлы, ремни, патронташи — без патронов)</li>
+                    <li>Лодки, моторы, прицепы</li>
+                    <li>Эхолоты, навигаторы, электроника</li>
+                    <li>Домики, базы, угодья (аренда и продажа)</li>
+                    <li>Услуги (гиды, инструкторы, ремонт)</li>
+                    <li>Собаки (продажа щенков, услуги вязки)</li>
+                </ul>
+                <div style="margin-top: 24px; padding: 16px 20px; background: #e7e1d6; border-radius: 16px;">
+                    <p style="font-size: 15px; color: #1e2b2f;"><i class="fas fa-info-circle" style="color:#1e3a2f;"></i> <strong>Важно:</strong> Нарушение правил влечёт за собой блокировку аккаунта без возможности восстановления. Если вы сомневаетесь, можно ли разместить товар, — обратитесь в поддержку.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА АДМИН-ПАНЕЛИ -->
-        <div class="page" id="page-admin">
-            <div class="admin-layout">
-                <aside class="admin-sidebar">
-                    <div class="menu-item active" data-admin="admin-ads"><i class="fas fa-bullhorn"></i> Объявления <span class="badge">5</span></div>
-                    <div class="menu-item" data-admin="admin-trainer"><i class="fas fa-graduation-cap"></i> Тренажёр</div>
-                    <div class="menu-item" data-admin="admin-community"><i class="fas fa-comments"></i> Сообщество <span class="badge">12</span></div>
-                    <div class="menu-item" data-admin="admin-rules"><i class="fas fa-gavel"></i> Правила</div>
-                    <div class="menu-item" data-admin="admin-users"><i class="fas fa-users"></i> Пользователи <span class="badge">47</span></div>
-                    <div class="menu-item" data-admin="admin-stats"><i class="fas fa-chart-bar"></i> Статистика</div>
-                </aside>
-
-                <main class="admin-content">
-                    <div class="admin-panel active" id="admin-ads">
-                        <div class="admin-section-card">
-                            <div class="section-header"><h3><i class="fas fa-gun" style="color:#1e3a2f;"></i> Охота</h3>
-                                <div><button class="btn-sm primary"><i class="fas fa-plus"></i> Добавить</button>
-                                <button class="btn-sm success"><i class="fas fa-check-double"></i> Опубликовать все</button></div>
-                            </div>
-                            <div class="table-wrap">
-                                <table><thead><tr><th>Название</th><th>Автор</th><th>Дата</th><th>Статус</th><th>Действия</th></tr></thead>
-                                <tbody>
-                                    <tr><td>Охотничий домик в Тверской обл.</td><td>ivanov@mail.ru</td><td>14.09.2026</td><td><span class="status-badge pending">на модерации</span></td><td><button class="btn-sm success"><i class="fas fa-check"></i></button> <button class="btn-sm info"><i class="fas fa-eye"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                    <tr><td>Патронташ кожаный</td><td>petrov@mail.ru</td><td>13.09.2026</td><td><span class="status-badge published">опубликовано</span></td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                </tbody></table>
-                            </div>
-                        </div>
-                        <div class="admin-section-card">
-                            <div class="section-header"><h3><i class="fas fa-fish" style="color:#1e3a2f;"></i> Рыбалка</h3>
-                                <div><button class="btn-sm primary"><i class="fas fa-plus"></i> Добавить</button>
-                                <button class="btn-sm success"><i class="fas fa-check-double"></i> Опубликовать все</button></div>
-                            </div>
-                            <div class="table-wrap">
-                                <table><thead><tr><th>Название</th><th>Автор</th><th>Дата</th><th>Статус</th><th>Действия</th></tr></thead>
-                                <tbody>
-                                    <tr><td>Спиннинг Shimano Crucial</td><td>alex@mail.ru</td><td>14.09.2026</td><td><span class="status-badge published">опубликовано</span></td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                    <tr><td>Катушка Daiwa Revros</td><td>mike@mail.ru</td><td>11.09.2026</td><td><span class="status-badge pending">на модерации</span></td><td><button class="btn-sm success"><i class="fas fa-check"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                </tbody></table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="admin-panel" id="admin-trainer">
-                        <div class="admin-section-card">
-                            <div class="section-header"><h3><i class="fas fa-graduation-cap" style="color:#1e3a2f;"></i> Вопросы</h3>
-                                <div><button class="btn-sm primary"><i class="fas fa-plus"></i> Добавить</button>
-                                <button class="btn-sm outline"><i class="fas fa-upload"></i> Импорт</button></div>
-                            </div>
-                            <div class="table-wrap">
-                                <table><thead><tr><th>Вопрос</th><th>Тема</th><th>Правильный ответ</th><th>Действия</th></tr></thead>
-                                <tbody>
-                                    <tr><td>Наказание за охоту без разрешения?</td><td>Законодательство</td><td>Административный штраф</td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                    <tr><td>Минимальный калибр для крупного зверя?</td><td>Оружие</td><td>16-й</td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                </tbody></table>
-                            </div>
-                            <div style="margin-top:12px; font-size:14px; color:#4f5a4f;">Всего: 258 вопросов</div>
-                        </div>
-                    </div>
-                    <div class="admin-panel" id="admin-community">
-                        <div class="admin-section-card">
-                            <div class="section-header"><h3><i class="fas fa-newspaper" style="color:#1e3a2f;"></i> Новости</h3>
-                                <div><button class="btn-sm primary"><i class="fas fa-plus"></i> Добавить</button>
-                                <button class="btn-sm success"><i class="fas fa-check"></i> Опубликовать</button></div>
-                            </div>
-                            <div class="table-wrap">
-                                <table><thead><tr><th>Заголовок</th><th>Автор</th><th>Дата</th><th>Действия</th></tr></thead>
-                                <tbody>
-                                    <tr><td>Новые сроки весенней охоты 2026</td><td>admin@site.ru</td><td>14.09.2026</td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                    <tr><td>Обзор тепловизоров Pulsar</td><td>moder@site.ru</td><td>12.09.2026</td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                </tbody></table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="admin-panel" id="admin-rules">
-                        <div class="admin-section-card">
-                            <div class="section-header"><h3><i class="fas fa-gavel" style="color:#1e3a2f;"></i> Редактирование</h3>
-                                <div><button class="btn-sm primary"><i class="fas fa-save"></i> Сохранить</button>
-                                <button class="btn-sm outline"><i class="fas fa-eye"></i> Предпросмотр</button></div>
-                            </div>
-                            <textarea style="width:100%; min-height:200px; padding:14px 16px; border-radius:12px; border:1px solid #ddd6ca; font-size:15px; font-family:inherit; resize:vertical; background:#fcfaf7;" id="rules-editor">
-                                <h2>Правила размещения объявлений</h2>
-                                <p>Соблюдение законодательства РФ — обязательно.</p>
-                                <h3>⛔ Запрещено</h3>
-                                <ul><li>Огнестрельное оружие</li><li>Патроны</li></ul>
-                                <h3>✅ Разрешено</h3>
-                                <ul><li>Одежда, снаряжение</li><li>Лодки, моторы</li></ul>
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="admin-panel" id="admin-users">
-                        <div class="admin-section-card">
-                            <div class="section-header"><h3><i class="fas fa-users" style="color:#1e3a2f;"></i> Список</h3>
-                                <div><button class="btn-sm primary"><i class="fas fa-search"></i> Поиск</button></div>
-                            </div>
-                            <div class="table-wrap">
-                                <table><thead><tr><th>Имя</th><th>Email</th><th>Телефон</th><th>Дата</th><th>Статус</th><th>Действия</th></tr></thead>
-                                <tbody>
-                                    <tr><td>Иван Петров</td><td>ivanov@mail.ru</td><td>+7 912 345 67 89</td><td>01.09.2026</td><td><span class="status-badge active">активен</span></td><td><button class="btn-sm warning"><i class="fas fa-ban"></i> Блок</button></td></tr>
-                                    <tr><td>Алексей Смирнов</td><td>alex@mail.ru</td><td>+7 923 456 78 90</td><td>28.08.2026</td><td><span class="status-badge pending">ожидает</span></td><td><button class="btn-sm warning"><i class="fas fa-ban"></i> Блок</button></td></tr>
-                                </tbody></table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="admin-panel" id="admin-stats">
-                        <div class="admin-stats-grid">
-                            <div class="admin-stats-card"><div class="number">124</div><div class="label">Всего объявлений</div></div>
-                            <div class="admin-stats-card"><div class="number">2 847</div><div class="label">Заходов в тренажёр</div></div>
-                            <div class="admin-stats-card"><div class="number">156</div><div class="label">Тем на форуме</div></div>
-                            <div class="admin-stats-card"><div class="number">4 231</div><div class="label">Просмотры сегодня</div></div>
-                            <div class="admin-stats-card"><div class="number">47</div><div class="label">Пользователей</div></div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-        </div>
-
     </div>
 
-    <!-- ===== МОДАЛКА ПРАВИЛ ===== -->
-    <div class="modal-overlay" id="rules-modal">
-        <div class="modal">
-            <button class="close-modal" id="close-rules-modal">&times;</button>
-            <h2><i class="fas fa-gavel" style="color:#1e3a2f;"></i> Правила размещения</h2>
-            <h3>⛔ Запрещено</h3>
-            <ul><li>Огнестрельное оружие</li><li>Патроны, боеприпасы</li><li>Холодное оружие</li></ul>
-            <h3>⚠️ Ограниченные</h3>
-            <ul><li>Пневматика до 7,5 Дж</li><li>Охотничьи ножи</li></ul>
-            <h3>✅ Разрешённые</h3>
-            <ul><li>Одежда, снаряжение</li><li>Лодки, моторы</li></ul>
-            <div style="margin-top:16px; text-align:right;">
-                <button class="btn-outline-dark" id="close-rules-btn" style="padding:8px 28px;">Закрыть</button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p>Охотник & Рыбак — доска объявлений · Соблюдение 152-ФЗ, модерация, защита от спама</p>
-        </div>
-    </footer>
+    <footer class="footer"></footer>
 
     <script>
-        // ================================================================
         // ===== ДАННЫЕ =====
-        // ================================================================
         const adsData = {
             hunting: [
                 { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес',
@@ -1487,7 +1152,8 @@
             ]
         };
 
-        const mainAds = [
+        // ===== ОСНОВНЫЕ ОБЪЯВЛЕНИЯ ДЛЯ ГЛАВНОЙ =====
+        const mainAdsBase = [
             { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья',
                 price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-campground' },
             { title: 'Спиннинг Shimano Crucial', desc: '2.4 м, тест 5-25 г, состояние отличное', price: '8 500 ₽',
@@ -1506,12 +1172,72 @@
                 tag: 'услуга', icon: 'fa-compass' },
         ];
 
+        // ===== КАРТОЧКИ-ЗАМАНУХИ =====
+        function getTrickCard() {
+            const rnd = Math.random();
+            if (rnd < 0.5) {
+                // Тренажёр
+                return {
+                    isTrick: true,
+                    type: 'trainer',
+                    title: '🎯 Проверь знания на охотминимуме!',
+                    desc: '258 вопросов с пояснениями. Тренируйся и сдавай экзамен.',
+                    badge: '🔥 Тренажёр',
+                    icon: 'fa-graduation-cap',
+                    hint: 'Кликни, чтобы начать',
+                    targetPage: 'trainer'
+                };
+            } else {
+                // Новость / Статья (рандомно)
+                const isNews = Math.random() < 0.5;
+                return {
+                    isTrick: true,
+                    type: 'community',
+                    title: isNews ? '📰 Свежие новости охоты' : '📖 Интересная статья',
+                    desc: isNews ? 'Новые сроки охоты, обзоры снаряжения и многое другое.' :
+                        'Советы бывалых, обзоры и полезные материалы.',
+                    badge: isNews ? '📌 Новости' : '📌 Статьи',
+                    icon: isNews ? 'fa-newspaper' : 'fa-file-alt',
+                    hint: 'Кликни, чтобы читать',
+                    targetPage: 'community',
+                    targetTab: isNews ? 'news' : 'articles'
+                };
+            }
+        }
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function buildMainAds() {
+            // Берём 6 обычных объявлений (чтобы освободить место для 2 трик-карточек)
+            const shuffledBase = shuffleArray([...mainAdsBase]);
+            const normalAds = shuffledBase.slice(0, 6);
+
+            // Создаём 2 трик-карточки
+            const trick1 = getTrickCard();
+            let trick2 = getTrickCard();
+            // Чтобы не было двух одинаковых типов подряд
+            while (trick2.type === trick1.type) {
+                trick2 = getTrickCard();
+            }
+
+            // Собираем все 8 карточек и перемешиваем
+            const all = [...normalAds, trick1, trick2];
+            return shuffleArray(all);
+        }
+
+        // ===== НОВОСТИ =====
         const newsData = [{
             id: 1,
             category: 'Новости',
             tag: 'Законодательство',
             title: 'В России утверждены новые сроки весенней охоты 2026',
-            excerpt: 'Минприроды опубликовало приказ с обновлёнными сроками охоты на пернатую дичь.',
+            excerpt: 'Минприроды опубликовало приказ с обновлёнными сроками охоты на пернатую дичь. Изменения затронули 15 регионов.',
             date: '2 часа назад',
             views: '1.2k',
             comments: 18,
@@ -1520,8 +1246,8 @@
             id: 2,
             category: 'Новости',
             tag: 'Снаряжение',
-            title: 'Обзор новых тепловизоров Pulsar на выставке',
-            excerpt: 'На ежегодной выставке представили обновлённую линейку тепловизионных прицелов.',
+            title: 'Обзор новых тепловизоров Pulsar на выставке «Охота и Рыбалка»',
+            excerpt: 'На ежегодной выставке представили обновлённую линейку тепловизионных прицелов с улучшенной матрицей и увеличенным временем работы.',
             date: '5 часов назад',
             views: '856',
             comments: 12,
@@ -1530,8 +1256,8 @@
             id: 3,
             category: 'Статьи',
             tag: 'Советы',
-            title: 'Как выбрать лодку ПВХ для охоты на утку',
-            excerpt: 'Разбираем критерии выбора: материал, жёсткость днища, вместимость.',
+            title: 'Как выбрать лодку ПВХ для охоты на утку: советы бывалых',
+            excerpt: 'Разбираем критерии выбора: материал, жёсткость днища, вместимость и особенности эксплуатации в холодной воде.',
             date: 'вчера',
             views: '2.3k',
             comments: 42,
@@ -1541,7 +1267,7 @@
             category: 'Видео',
             tag: 'Обучение',
             title: 'Видеоурок: правильная установка манка на селезня',
-            excerpt: 'Опытный охотник показывает технику работы с манком.',
+            excerpt: 'Опытный охотник показывает технику работы с манком и секреты привлечения птицы в сезон весенней охоты.',
             date: 'вчера',
             views: '4.7k',
             comments: 27,
@@ -1550,45 +1276,231 @@
             id: 5,
             category: 'Ролики',
             tag: 'Трофеи',
-            title: 'Охота на медведя в Карелии — видеоотчёт',
-            excerpt: 'Короткий ролик с реалами охоты на берлоге.',
+            title: 'Охота на медведя в Карелии — видеоотчёт с поля',
+            excerpt: 'Короткий ролик с реалами охоты на берлоге. Съёмка с тепловизора и комментарии егеря.',
             date: '2 дня назад',
             views: '6.1k',
             comments: 53,
             likes: 204,
+        }, {
+            id: 6,
+            category: 'Новости',
+            tag: 'Правила',
+            title: 'Ужесточена ответственность за браконьерство в заповедных зонах',
+            excerpt: 'Госдума приняла поправки к КоАП, увеличивающие штрафы за незаконную охоту в особо охраняемых территориях.',
+            date: '3 дня назад',
+            views: '980',
+            comments: 31,
+            likes: 41,
+        }, {
+            id: 7,
+            category: 'Статьи',
+            tag: 'Снаряжение',
+            title: 'Тест-драйв: новая модель эхолота Lowrance HDS PRO',
+            excerpt: 'Проверяем в полевых условиях работу новых боковых сканеров и картографию в реальном времени.',
+            date: '3 дня назад',
+            views: '1.5k',
+            comments: 19,
+            likes: 53,
+        }, {
+            id: 8,
+            category: 'Видео',
+            tag: 'Рыбалка',
+            title: 'Ловля щуки на джиг — разбор техники от профи',
+            excerpt: 'Подробное видео с пояснением проводок, выбора приманки и мест стоянки хищника.',
+            date: '4 дня назад',
+            views: '3.2k',
+            comments: 47,
+            likes: 91,
+        }, {
+            id: 9,
+            category: 'Ролики',
+            tag: 'Юмор',
+            title: 'Смешные моменты с охоты — подборка коротких видео',
+            excerpt: 'Курьёзные ситуации, которые случаются даже с опытными охотниками. Заряжаемся хорошим настроением!',
+            date: '5 дней назад',
+            views: '8.4k',
+            comments: 76,
+            likes: 312,
+        }, {
+            id: 10,
+            category: 'Новости',
+            tag: 'Снаряжение',
+            title: 'Новый закон о маркировке охотничьих ножей: что изменится',
+            excerpt: 'С 1 июля 2026 года все ножи для охоты должны иметь сертификацию. Разбираем, как это повлияет на рынок.',
+            date: '6 дней назад',
+            views: '678',
+            comments: 23,
+            likes: 29,
+        }, {
+            id: 11,
+            category: 'Статьи',
+            tag: 'Снаряжение',
+            title: 'Сравнение 5 популярных моделей биноклей для охоты',
+            excerpt: 'Тестируем оптику от Nikon, Zeiss, Bushnell, VOMZ и Olympus в реальных условиях.',
+            date: '6 дней назад',
+            views: '2.1k',
+            comments: 34,
+            likes: 67,
+        }, {
+            id: 12,
+            category: 'Видео',
+            tag: 'Обучение',
+            title: 'Как чистить и обслуживать лодочный мотор после сезона',
+            excerpt: 'Подробная инструкция по консервации мотора на зиму: промывка, замена масла, смазка.',
+            date: 'неделю назад',
+            views: '1.9k',
+            comments: 16,
+            likes: 44,
         }, ];
 
-        // ================================================================
-        // ===== РЕНДЕРЫ =====
-        // ================================================================
+        // ===== КВИЗ =====
+        const quizQuestions = [{
+            question: 'Какое наказание предусмотрено за охоту без разрешения в общедоступных охотничьих угодьях?',
+            options: ['Административный штраф', 'Уголовная ответственность', 'Предупреждение', 'Лишение охотничьего билета'],
+            correct: 0,
+            explanation: 'За охоту без разрешения предусмотрен административный штраф по ст. 8.37 КоАП РФ. Уголовная ответственность наступает только при причинении крупного ущерба.'
+        }, {
+            question: 'Какой минимальный калибр гладкоствольного оружия разрешён для охоты на крупного зверя?',
+            options: ['12-й', '16-й', '20-й', '28-й'],
+            correct: 1,
+            explanation: 'Для охоты на крупного зверя минимальный калибр — 16-й (по правилам охоты). Однако на практике чаще используют 12-й калибр.'
+        }, {
+            question: 'Что из перечисленного НЕ является объектом охоты в РФ?',
+            options: ['Заяц-русак', 'Барсук', 'Косуля', 'Ёж обыкновенный'],
+            correct: 3,
+            explanation: 'Ёж обыкновенный не входит в перечень охотничьих ресурсов в РФ, в отличие от зайца, барсука и косули.'
+        }, {
+            question: 'Какой документ удостоверяет право на хранение и ношение охотничьего оружия?',
+            options: ['Охотничий билет', 'Разрешение на хранение и ношение', 'Лицензия на оружие', 'Паспорт оружия'],
+            correct: 1,
+            explanation: 'Право на хранение и ношение даёт разрешение, выдаваемое органами лицензионно-разрешительной работы. Охотничий билет подтверждает только право на охоту.'
+        }, {
+            question: 'Какое расстояние должно быть от строений при стрельбе из гладкоствольного оружия?',
+            options: ['50 метров', '100 метров', '200 метров', 'Не менее 300 метров'],
+            correct: 2,
+            explanation: 'Стрельба из гладкоствольного оружия разрешена на расстоянии не менее 200 метров от строений (если иное не оговорено специальными правилами).'
+        }, {
+            question: 'Какой вид дичи разрешено добывать в весенний период?',
+            options: ['Глухарь на току', 'Тетерев на току', 'Вальдшнеп на вечерней тяге', 'Все перечисленные'],
+            correct: 3,
+            explanation: 'Весной разрешена охота на глухаря, тетерева и вальдшнепа при соблюдении сроков и лимитов.'
+        }, {
+            question: 'Какой размер штрафа за браконьерство (незаконную добычу лося) установлен в РФ?',
+            options: ['до 10 000 ₽', 'до 50 000 ₽', 'до 200 000 ₽', 'до 500 000 ₽'],
+            correct: 2,
+            explanation: 'За незаконную добычу лося предусмотрен штраф до 200 000 ₽ или в размере дохода за период до 1 года, а также возможна уголовная ответственность.'
+        }, {
+            question: 'Что из перечисленного относится к охотничьим собакам?',
+            options: ['Лайка', 'Овчарка', 'Терьер', 'Дог'],
+            correct: 0,
+            explanation: 'Лайка — традиционная охотничья порода. Овчарки, терьеры и доги не являются специализированными охотничьими породами в РФ.'
+        }, ];
+
+        // ===== РЕНДЕР =====
         function renderAds(container, ads) {
-            container.innerHTML = ads.map(ad => `
-                <div class="ad-card">
-                    <div class="ad-image" style="background: linear-gradient(135deg, #b9aa8e 0%, #d9d0c0 100%);">
-                        <i class="fas ${ad.icon}" style="font-size: 28px; color: #2f3d32;"></i>
+            container.innerHTML = ads.map(ad => {
+                // Если это трик-карточка
+                if (ad.isTrick) {
+                    return `
+                        <div class="ad-card trick-card" data-trick="${ad.type}" data-target="${ad.targetPage}" data-tab="${ad.targetTab || ''}">
+                            <div class="trick-badge">${ad.badge}</div>
+                            <div class="trick-icon"><i class="fas ${ad.icon}"></i></div>
+                            <h4>${ad.title}</h4>
+                            <p>${ad.desc}</p>
+                            <div class="trick-hint"><i class="fas fa-arrow-right"></i> ${ad.hint}</div>
+                            <div class="ad-meta" style="margin-top:6px;">
+                                <span class="ad-tag" style="background:#c7a86b; color:#1e3a2f;">перейти →</span>
+                            </div>
+                        </div>
+                    `;
+                }
+                // Обычная карточка
+                return `
+                    <div class="ad-card">
+                        <div class="ad-image" style="background: linear-gradient(135deg, #b9aa8e 0%, #d9d0c0 100%);">
+                            <i class="fas ${ad.icon}" style="font-size: 28px; color: #2f3d32;"></i>
+                        </div>
+                        <h4>${ad.title}</h4>
+                        <p>${ad.desc}</p>
+                        <div class="ad-meta">
+                            <span class="ad-price">${ad.price}</span>
+                            <span class="ad-tag">${ad.tag}</span>
+                        </div>
                     </div>
-                    <h4>${ad.title}</h4>
-                    <p>${ad.desc}</p>
-                    <div class="ad-meta">
-                        <span class="ad-price">${ad.price}</span>
-                        <span class="ad-tag">${ad.tag}</span>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
+
+            // ===== ОБРАБОТЧИКИ ДЛЯ ТРИК-КАРТОЧЕК =====
+            container.querySelectorAll('.trick-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const target = this.dataset.target;
+                    const tab = this.dataset.tab || 'news';
+
+                    if (target === 'trainer') {
+                        // Переход на страницу тренажёра
+                        showPage('trainer');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else if (target === 'community') {
+                        // Переход в сообщество, активируем нужную вкладку
+                        showPage('community');
+                        // Активируем соответствующий пункт меню
+                        document.querySelectorAll('.community-sidebar .menu-item').forEach(item => {
+                            item.classList.toggle('active', item.dataset.tab === tab);
+                        });
+                        renderNews(tab);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            });
         }
 
-        function renderNews(filter) {
+        function renderNews(filter = 'all') {
             const feed = document.getElementById('community-feed');
-            const titles = { news: 'Новости', articles: 'Статьи', video: 'Видео', clips: 'Ролики' };
-            document.getElementById('feed-title').textContent = titles[filter] || 'Новости';
+            const titleMap = {
+                'news': 'Новости',
+                'articles': 'Статьи',
+                'video': 'Видео',
+                'clips': 'Ролики',
+                'gallery': 'Фотогалерея',
+                'forum': 'Форум'
+            };
+            const title = titleMap[filter] || 'Новости';
+            document.getElementById('feed-title').textContent = title;
+
             let filtered = newsData;
-            if (filter !== 'news' && filter !== 'all') {
-                const map = { articles: 'Статьи', video: 'Видео', clips: 'Ролики' };
-                if (map[filter]) filtered = newsData.filter(n => n.category === map[filter]);
+            if (filter !== 'all' && filter !== 'gallery' && filter !== 'forum') {
+                const map = { 'news': 'Новости', 'articles': 'Статьи', 'video': 'Видео', 'clips': 'Ролики' };
+                const cat = map[filter];
+                if (cat) filtered = newsData.filter(n => n.category === cat);
+            }
+            if (filter === 'gallery') {
+                feed.innerHTML = `
+                    <div style="background:white; border-radius:18px; padding:30px; text-align:center; border:1px solid #e3dbd0;">
+                        <i class="fas fa-images" style="font-size:48px; color:#1e3a2f; opacity:0.3; margin-bottom:12px; display:block;"></i>
+                        <p style="font-size:18px; color:#4f5a4f;">Фотогалерея — загружайте свои трофеи и снаряжение</p>
+                        <button class="create-post-btn" style="margin:12px auto 0; background:#1e3a2f; color:white; border:none; padding:8px 22px; border-radius:40px; font-size:15px; font-weight:500; cursor:pointer;">
+                            <i class="fas fa-upload"></i> Загрузить фото
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            if (filter === 'forum') {
+                feed.innerHTML = `
+                    <div style="background:white; border-radius:18px; padding:30px; text-align:center; border:1px solid #e3dbd0;">
+                        <i class="fas fa-comments" style="font-size:48px; color:#1e3a2f; opacity:0.3; margin-bottom:12px; display:block;"></i>
+                        <p style="font-size:18px; color:#4f5a4f;">Форум — обсуждайте охоту и рыбалку с единомышленниками</p>
+                        <button class="create-post-btn" style="margin:12px auto 0; background:#1e3a2f; color:white; border:none; padding:8px 22px; border-radius:40px; font-size:15px; font-weight:500; cursor:pointer;">
+                            <i class="fas fa-plus-circle"></i> Создать тему
+                        </button>
+                    </div>
+                `;
+                return;
             }
             if (filtered.length === 0) {
                 feed.innerHTML =
-                    `<div style="background:white; border-radius:18px; padding:30px; text-align:center; border:1px solid #e3dbd0;"><p style="color:#4f5a4f;">Нет материалов</p></div>`;
+                    `<div style="background:white; border-radius:18px; padding:30px; text-align:center; border:1px solid #e3dbd0;"><p style="font-size:18px; color:#4f5a4f;">Нет материалов в этом разделе</p></div>`;
                 return;
             }
             feed.innerHTML = filtered.map(n => `
@@ -1605,46 +1517,18 @@
                         <div class="actions">
                             <span><i class="far fa-comment"></i> ${n.comments}</span>
                             <span><i class="far fa-heart"></i> ${n.likes}</span>
+                            <span><i class="far fa-bookmark"></i></span>
                         </div>
                     </div>
                 </div>
             `).join('');
         }
 
-        // ================================================================
-        // ===== КВИЗ =====
-        // ================================================================
-        const quizQuestions = [{
-            question: 'Какое наказание за охоту без разрешения?',
-            options: ['Административный штраф', 'Уголовная ответственность', 'Предупреждение'],
-            correct: 0,
-            explanation: 'Штраф по ст. 8.37 КоАП РФ.'
-        }, {
-            question: 'Минимальный калибр для охоты на крупного зверя?',
-            options: ['12-й', '16-й', '20-й'],
-            correct: 1,
-            explanation: 'Минимальный калибр — 16-й.'
-        }, {
-            question: 'Что НЕ является объектом охоты в РФ?',
-            options: ['Заяц-русак', 'Барсук', 'Ёж обыкновенный'],
-            correct: 2,
-            explanation: 'Ёж не входит в перечень охотничьих ресурсов.'
-        }, {
-            question: 'Документ на хранение оружия?',
-            options: ['Охотничий билет', 'Разрешение на хранение', 'Лицензия'],
-            correct: 1,
-            explanation: 'Разрешение выдаёт лицензионно-разрешительная служба.'
-        }, {
-            question: 'Расстояние от строений при стрельбе?',
-            options: ['100 метров', '200 метров', '300 метров'],
-            correct: 1,
-            explanation: 'Не менее 200 метров от строений.'
-        }, ];
+        // ===== КВИЗ ЛОГИКА =====
+        let currentQuiz = 0;
+        let quizQuestionsShuffled = [];
 
-        let quizCurrent = 0;
-        let quizShuffled = [];
-
-        function shuffleArr(arr) {
+        function shuffleArray2(arr) {
             for (let i = arr.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -1652,18 +1536,19 @@
             return arr;
         }
 
-        function loadQuiz() {
-            const q = quizShuffled[quizCurrent];
+        function loadQuizQuestion() {
+            const q = quizQuestionsShuffled[currentQuiz];
             document.getElementById('quiz-question').textContent = q.question;
-            document.getElementById('quiz-progress').textContent = `Вопрос ${quizCurrent + 1} из ${quizShuffled.length}`;
+            document.getElementById('quiz-progress').textContent = `Вопрос ${currentQuiz + 1} из ${quizQuestionsShuffled.length}`;
             const container = document.getElementById('quiz-options');
             container.innerHTML = q.options.map((opt, idx) => `
-                <label style="display:flex; align-items:center; gap:12px; padding:10px 16px; background:#f8f9f6; border-radius:10px; cursor:pointer; border:1px solid transparent; font-size:15px;">
-                    <input type="radio" name="quiz-option" value="${idx}" style="width:18px; height:18px; accent-color:#1e3a2f;">
+                <label>
+                    <input type="radio" name="quiz-option" value="${idx}">
                     ${opt}
                 </label>
             `).join('');
-            document.getElementById('quiz-result').style.display = 'none';
+            document.getElementById('quiz-result').className = 'quiz-result';
+            document.getElementById('quiz-result').textContent = '';
             document.getElementById('quiz-submit').disabled = false;
             document.getElementById('quiz-submit').style.display = 'inline-block';
             document.getElementById('quiz-next').style.display = 'none';
@@ -1671,36 +1556,37 @@
         }
 
         function initQuiz() {
-            quizShuffled = shuffleArr([...quizQuestions]).slice(0, 5);
-            quizCurrent = 0;
-            loadQuiz();
+            quizQuestionsShuffled = shuffleArray2([...quizQuestions]).slice(0, 5);
+            currentQuiz = 0;
+            loadQuizQuestion();
+            const oldRestart = document.querySelector('.quiz-block .quiz-restart');
+            if (oldRestart) oldRestart.remove();
         }
 
         document.getElementById('quiz-submit').addEventListener('click', function() {
             const selected = document.querySelector('input[name="quiz-option"]:checked');
             if (!selected) {
-                document.getElementById('quiz-result').style.display = 'block';
-                document.getElementById('quiz-result').className = 'status-badge pending';
-                document.getElementById('quiz-result').textContent = '❌ Выберите вариант.';
+                document.getElementById('quiz-result').className = 'quiz-result show wrong';
+                document.getElementById('quiz-result').textContent = '❌ Выберите один из вариантов ответа.';
                 return;
             }
             const answer = parseInt(selected.value);
-            const q = quizShuffled[quizCurrent];
+            const q = quizQuestionsShuffled[currentQuiz];
+            const correct = q.correct;
             const resultEl = document.getElementById('quiz-result');
-            resultEl.style.display = 'block';
-            if (answer === q.correct) {
-                resultEl.className = 'status-badge active';
-                resultEl.innerHTML = `✅ Правильно!<br><span style="font-weight:400;">${q.explanation}</span>`;
+            if (answer === correct) {
+                resultEl.className = 'quiz-result show correct';
+                resultEl.innerHTML = `✅ Правильно!<div class="explanation">${q.explanation}</div>`;
             } else {
-                resultEl.className = 'status-badge pending';
+                resultEl.className = 'quiz-result show wrong';
                 resultEl.innerHTML =
-                    `❌ Неправильно. Правильный ответ: <strong>${q.options[q.correct]}</strong><br><span style="font-weight:400;">${q.explanation}</span>`;
+                    `❌ Неправильно. Правильный ответ: <strong>${q.options[correct]}</strong><div class="explanation">${q.explanation}</div>`;
             }
-            this.disabled = true;
-            this.style.display = 'none';
-            if (quizCurrent < quizShuffled.length - 1) {
+            document.getElementById('quiz-submit').disabled = true;
+            document.getElementById('quiz-submit').style.display = 'none';
+            if (currentQuiz < quizQuestionsShuffled.length - 1) {
                 document.getElementById('quiz-next').style.display = 'inline-block';
-                document.getElementById('quiz-next').textContent = 'Следующий →';
+                document.getElementById('quiz-next').textContent = 'Следующий вопрос →';
             } else {
                 document.getElementById('quiz-next').style.display = 'inline-block';
                 document.getElementById('quiz-next').textContent = '🏁 Завершить';
@@ -1708,34 +1594,31 @@
         });
 
         document.getElementById('quiz-next').addEventListener('click', function() {
-            if (quizCurrent < quizShuffled.length - 1) {
-                quizCurrent++;
-                loadQuiz();
+            if (currentQuiz < quizQuestionsShuffled.length - 1) {
+                currentQuiz++;
+                loadQuizQuestion();
+                document.getElementById('quiz-next').textContent = 'Следующий вопрос →';
             } else {
-                document.getElementById('quiz-result').style.display = 'block';
-                document.getElementById('quiz-result').className = 'status-badge active';
-                document.getElementById('quiz-result').innerHTML = '🎉 Отлично! Вы прошли все вопросы.';
+                document.getElementById('quiz-result').className = 'quiz-result show correct';
+                document.getElementById('quiz-result').innerHTML =
+                    '🎉 <strong>Отлично!</strong> Вы прошли все 5 вопросов. Попробуйте ещё раз или перейдите к полному тренажёру.';
                 document.getElementById('quiz-question').textContent = 'Тест завершён!';
                 document.getElementById('quiz-options').innerHTML = '';
                 document.getElementById('quiz-progress').textContent = 'Готово!';
-                this.style.display = 'none';
+                document.getElementById('quiz-next').style.display = 'none';
+                document.getElementById('quiz-submit').style.display = 'none';
                 const restartBtn = document.createElement('button');
-                restartBtn.className = 'btn-primary';
+                restartBtn.className = 'quiz-btn quiz-restart';
                 restartBtn.textContent = '🔄 Пройти заново';
-                restartBtn.style.padding = '8px 28px';
-                restartBtn.style.fontSize = '15px';
                 restartBtn.addEventListener('click', function() {
                     initQuiz();
                     this.remove();
                 });
-                document.querySelector('#page-trainer .quiz-block').appendChild(restartBtn);
+                document.querySelector('.quiz-block').appendChild(restartBtn);
             }
         });
 
-        // ================================================================
         // ===== НАВИГАЦИЯ =====
-        // ================================================================
-        const navLinks = document.querySelectorAll('.nav-links a');
         const pages = {
             main: document.getElementById('page-main'),
             category: document.getElementById('page-category'),
@@ -1743,53 +1626,21 @@
             community: document.getElementById('page-community'),
             'services-page': document.getElementById('page-services-page'),
             rules: document.getElementById('page-rules'),
-            post: document.getElementById('page-post'),
-            admin: document.getElementById('page-admin'),
         };
 
         function showPage(pageId) {
             Object.values(pages).forEach(p => p.classList.remove('active'));
             if (pages[pageId]) pages[pageId].classList.add('active');
-            navLinks.forEach(link => {
+            document.querySelectorAll('.nav-links a').forEach(link => {
                 link.classList.toggle('active', link.dataset.page === pageId);
             });
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        navLinks.forEach(link => {
+        document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                const page = this.dataset.page;
-                if (page === 'post' || page === 'admin') return;
-                showPage(page);
-            });
-        });
-
-        document.getElementById('login-btn').addEventListener('click', function() {
-            showPage('admin');
-            document.querySelectorAll('.admin-sidebar .menu-item').forEach((el, idx) => {
-                el.classList.toggle('active', idx === 0);
-            });
-            document.querySelectorAll('.admin-panel').forEach((el, idx) => {
-                el.classList.toggle('active', idx === 0);
-            });
-        });
-
-        document.getElementById('post-btn').addEventListener('click', function() {
-            showPage('post');
-            if (document.getElementById('post-category').value) {
-                renderPostParams(document.getElementById('post-category').value);
-            }
-        });
-
-        // ===== АДМИН-МЕНЮ =====
-        document.querySelectorAll('.admin-sidebar .menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.admin-sidebar .menu-item').forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-                const panelId = this.dataset.admin;
-                document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
-                document.getElementById(panelId).classList.add('active');
+                showPage(this.dataset.page);
             });
         });
 
@@ -1820,116 +1671,28 @@
         // ===== СООБЩЕСТВО: МЕНЮ =====
         document.querySelectorAll('.community-sidebar .menu-item').forEach(item => {
             item.addEventListener('click', function() {
-                document.querySelectorAll('.community-sidebar .menu-item').forEach(i => {
-                    i.classList.remove('active');
-                });
+                document.querySelectorAll('.community-sidebar .menu-item').forEach(i => i.classList.remove(
+                'active'));
                 this.classList.add('active');
                 renderNews(this.dataset.tab);
             });
         });
 
-        // ===== МОДАЛКА ПРАВИЛ =====
-        const rulesModal = document.getElementById('rules-modal');
-        document.getElementById('open-rules-from-post').addEventListener('click', () => rulesModal.classList.add('show'));
-        document.getElementById('close-rules-modal').addEventListener('click', () => rulesModal.classList.remove('show'));
-        document.getElementById('close-rules-btn').addEventListener('click', () => rulesModal.classList.remove('show'));
-        rulesModal.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('show'); });
-
-        // ===== ФОРМА РАЗМЕЩЕНИЯ =====
-        const postParamsMap = {
-            hunting: [
-                { label: 'Тип товара', type: 'select', options: ['Снаряжение', 'Одежда', 'Оптика', 'Собаки'], default: 'Снаряжение' },
-                { label: 'Состояние', type: 'select', options: ['Новое', 'Б/у'], default: 'Новое' },
-                { label: 'Цена (₽)', type: 'text', placeholder: '5000' },
-            ],
-            fishing: [
-                { label: 'Тип снасти', type: 'select', options: ['Спиннинг', 'Фидер', 'Катушка'], default: 'Спиннинг' },
-                { label: 'Состояние', type: 'select', options: ['Новое', 'Б/у'], default: 'Новое' },
-                { label: 'Цена (₽)', type: 'text', placeholder: '3000' },
-            ],
-            transport: [
-                { label: 'Тип', type: 'select', options: ['Лодка', 'Мотор', 'Прицеп'], default: 'Лодка' },
-                { label: 'Год выпуска', type: 'text', placeholder: '2023' },
-                { label: 'Цена (₽)', type: 'text', placeholder: '45000' },
-            ],
-            houses: [
-                { label: 'Тип объекта', type: 'select', options: ['Домик', 'База', 'Угодья'], default: 'Домик' },
-                { label: 'Тип сделки', type: 'select', options: ['Продажа', 'Аренда'], default: 'Аренда' },
-                { label: 'Цена (₽)', type: 'text', placeholder: '12000/мес' },
-            ],
-            services: [
-                { label: 'Тип услуги', type: 'select', options: ['Ремонт', 'Гид', 'Транспортировка'], default: 'Ремонт' },
-                { label: 'Цена (₽)', type: 'text', placeholder: 'от 1500' },
-            ],
-        };
-
-        function renderPostParams(category) {
-            const fields = postParamsMap[category] || [];
-            const grid = document.getElementById('post-params-grid');
-            if (!fields.length) {
-                grid.innerHTML =
-                    `<div style="grid-column:1/-1; padding:12px 0; color:#4f5a4f; font-size:14px;"><i class="fas fa-info-circle"></i> Дополнительные параметры не требуются.</div>`;
-                return;
-            }
-            let html = '';
-            fields.forEach((field, idx) => {
-                const id = `pp-${idx}`;
-                if (field.type === 'select') {
-                    const opts = field.options.map(o => `<option value="${o}" ${o===field.default?'selected':''}>${o}</option>`)
-                        .join('');
-                    html += `<div><label for="${id}">${field.label}</label><select id="${id}">${opts}</select></div>`;
-                } else {
-                    html +=
-                        `<div><label for="${id}">${field.label}</label><input type="text" id="${id}" placeholder="${field.placeholder||''}" /></div>`;
-                }
-            });
-            grid.innerHTML = html;
-        }
-
-        document.getElementById('post-category').addEventListener('change', function() {
-            renderPostParams(this.value);
+        // ===== КНОПКА "Создать публикацию" =====
+        document.getElementById('create-post-btn').addEventListener('click', function() {
+            alert('📝 Открыть форму создания публикации в разделе "' + document.getElementById('feed-title')
+                .textContent + '"');
         });
 
-        document.getElementById('post-submit').addEventListener('click', function(e) {
-            e.preventDefault();
-            const category = document.getElementById('post-category').value;
-            const name = document.getElementById('post-name').value.trim();
-            const phone = document.getElementById('post-phone').value.trim();
-            const title = document.getElementById('post-title').value.trim();
-            const desc = document.getElementById('post-description').value.trim();
-
-            if (!category || !name || !phone || !title || !desc) {
-                alert('⚠️ Заполните все обязательные поля.');
-                return;
-            }
-
-            const params = {};
-            document.querySelectorAll('#post-params-grid div:has(input), #post-params-grid div:has(select)')
-                .forEach(el => {
-                    const input = el.querySelector('input, select');
-                    const label = el.querySelector('label')?.textContent?.trim() || 'Параметр';
-                    if (input) params[label] = input.value;
-                });
-
-            alert(`✅ Объявление "${title}" отправлено на модерацию!\n\nРаздел: ${categoryNames[category]||category}\nИмя: ${name}\nТелефон: ${phone}`);
-            console.log('📦 Данные:', { category, name, phone, title, desc, params });
-        });
-
-        // ================================================================
         // ===== ИНИЦИАЛИЗАЦИЯ =====
-        // ================================================================
+        // Главная с трик-карточками
+        const mainAds = buildMainAds();
         renderAds(document.getElementById('main-ads'), mainAds);
         renderAds(document.getElementById('services-ads'), adsData.services);
-        renderNews('news');
+        renderNews('all');
         initQuiz();
 
-        document.querySelectorAll('.create-post-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                alert('📝 Открыть форму создания публикации');
-            });
-        });
-
-        console.log('✅ Демо-сайт загружен');
+        console.log('✅ Демо-сайт с трик-карточками загружен');
     </script>
 </body>
 </html>
