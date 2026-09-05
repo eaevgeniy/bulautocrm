@@ -6,7 +6,6 @@
     <title>Охотник & Рыбак — Доска объявлений</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -25,7 +24,6 @@
             padding: 0 20px;
         }
 
-        /* ===== ШАПКА ===== */
         .header {
             background: #1e3a2f;
             color: #f0ede8;
@@ -106,7 +104,6 @@
             color: #d4b483;
         }
 
-        /* ===== СТРАНИЦЫ (вкладки) ===== */
         .page {
             display: none;
         }
@@ -114,7 +111,7 @@
             display: block;
         }
 
-        /* ===== ГЛАВНАЯ ===== */
+        /* ===== КАТЕГОРИИ ===== */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -170,6 +167,93 @@
             border-radius: 40px;
             font-size: 11px;
             color: #2d3d2d;
+        }
+
+        /* ===== ФИЛЬТРЫ ===== */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 16px;
+            background: white;
+            padding: 14px 20px;
+            border-radius: 14px;
+            border: 1px solid #e3dbd0;
+            margin-bottom: 18px;
+            align-items: center;
+        }
+        .filter-bar label {
+            font-weight: 500;
+            font-size: 14px;
+            color: #2f3d32;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .filter-bar select,
+        .filter-bar input {
+            padding: 6px 12px;
+            border-radius: 40px;
+            border: 1px solid #ddd6ca;
+            background: #fcfaf7;
+            font-size: 14px;
+            outline: none;
+        }
+        .filter-bar select:focus,
+        .filter-bar input:focus {
+            border-color: #d4b483;
+            outline: 2px solid #d4b48344;
+        }
+        .filter-bar .btn-sm {
+            margin-left: auto;
+        }
+
+        .btn-sm {
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-sm.primary {
+            background: #1e3a2f;
+            color: white;
+        }
+        .btn-sm.primary:hover {
+            background: #2a4f3f;
+        }
+        .btn-sm.outline {
+            background: transparent;
+            border: 1px solid #b9aa8e;
+            color: #1e2b2f;
+        }
+        .btn-sm.outline:hover {
+            background: #ede8df;
+        }
+        .btn-sm.danger {
+            background: #c0392b20;
+            color: #a93226;
+        }
+        .btn-sm.danger:hover {
+            background: #c0392b30;
+        }
+        .btn-sm.success {
+            background: #27ae6020;
+            color: #1e8449;
+        }
+        .btn-sm.success:hover {
+            background: #27ae6030;
+        }
+        .btn-sm.warning {
+            background: #f39c1220;
+            color: #b9770e;
+        }
+        .btn-sm.warning:hover {
+            background: #f39c1230;
         }
 
         .ads-heading {
@@ -236,12 +320,16 @@
             border-radius: 40px;
             font-size: 11px;
         }
+        .ad-card .ad-city {
+            font-size: 12px;
+            color: #4f5a4f;
+            margin-top: 2px;
+        }
         .ad-card p {
             font-size: 13px;
             color: #3a4a3a;
         }
 
-        /* ===== КАРТОЧКИ-ЗАМАНУХИ ===== */
         .ad-card.trick-card {
             border: 2px solid #c7a86b;
             background: #f8f4ed;
@@ -320,7 +408,8 @@
         }
         .rules-content h2 {
             font-size: 28px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            color: #1e2b1e;
         }
         .rules-content h3 {
             font-size: 20px;
@@ -373,6 +462,68 @@
             border-radius: 40px;
             font-size: 13px;
             font-weight: 600;
+        }
+
+        .safety-tips {
+            background: #eef2ec;
+            border-radius: 20px;
+            padding: 24px 28px;
+            margin-top: 24px;
+            border-left: 6px solid #c7a86b;
+        }
+        .safety-tips h3 {
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: #1e2b1e;
+        }
+        .safety-tips h3 i {
+            color: #c7a86b;
+        }
+        .safety-tip {
+            background: white;
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border: 1px solid #e3dbd0;
+        }
+        .safety-tip:last-child {
+            margin-bottom: 0;
+        }
+        .safety-tip .tip-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1e3a2f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .safety-tip .tip-title .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            background: #1e3a2f;
+            color: white;
+            border-radius: 50%;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .safety-tip .tip-desc {
+            font-size: 15px;
+            color: #2f3d32;
+            margin-top: 6px;
+            line-height: 1.6;
+            padding-left: 36px;
+        }
+        .safety-tip .tip-desc strong {
+            color: #a93226;
+        }
+        .safety-tip .tip-desc .green {
+            color: #1e8449;
         }
 
         .trainer-wrapper {
@@ -713,7 +864,7 @@
             color: #1e3a2f;
         }
 
-        /* ===== СТРАНИЦА РАЗМЕЩЕНИЯ ===== */
+        /* ===== ФОРМА РАЗМЕЩЕНИЯ ===== */
         .form-page {
             padding: 28px 0 40px;
         }
@@ -936,62 +1087,6 @@
             font-weight: 600;
         }
 
-        .btn-sm {
-            padding: 4px 14px;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: 0.15s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .btn-sm.primary {
-            background: #1e3a2f;
-            color: white;
-        }
-        .btn-sm.primary:hover {
-            background: #2a4f3f;
-        }
-        .btn-sm.outline {
-            background: transparent;
-            border: 1px solid #b9aa8e;
-            color: #1e2b2f;
-        }
-        .btn-sm.outline:hover {
-            background: #ede8df;
-        }
-        .btn-sm.danger {
-            background: #c0392b20;
-            color: #a93226;
-        }
-        .btn-sm.danger:hover {
-            background: #c0392b30;
-        }
-        .btn-sm.success {
-            background: #27ae6020;
-            color: #1e8449;
-        }
-        .btn-sm.success:hover {
-            background: #27ae6030;
-        }
-        .btn-sm.warning {
-            background: #f39c1220;
-            color: #b9770e;
-        }
-        .btn-sm.warning:hover {
-            background: #f39c1230;
-        }
-        .btn-sm.info {
-            background: #2980b920;
-            color: #1a5276;
-        }
-        .btn-sm.info:hover {
-            background: #2980b930;
-        }
-
         .table-wrap {
             overflow-x: auto;
         }
@@ -1059,14 +1154,42 @@
             margin-top: 2px;
         }
 
+        /* ===== ФУТЕР ===== */
         .footer {
             background: transparent;
-            padding: 0;
-            margin-top: 0;
-            min-height: 10px;
+            padding: 24px 0 16px;
+            margin-top: 20px;
+            text-align: center;
+            border-top: 1px solid #e3dbd0;
+        }
+        .footer a {
+            color: #1e3a2f;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.15s;
+        }
+        .footer a:hover {
+            color: #2a4f3f;
+        }
+        .footer .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: #1e3a2f;
+            color: white;
+            border-radius: 40px;
+            font-size: 15px;
+            transition: 0.15s;
+        }
+        .footer .social-link:hover {
+            background: #2a4f3f;
+            color: white;
+        }
+        .footer .social-link i {
+            font-size: 18px;
         }
 
-        /* ===== МОДАЛКА ПРАВИЛ ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1190,6 +1313,19 @@
             .admin-sidebar .menu-item .badge {
                 display: none;
             }
+            .safety-tip .tip-desc {
+                padding-left: 0;
+            }
+            .safety-tips {
+                padding: 16px;
+            }
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filter-bar .btn-sm {
+                margin-left: 0;
+            }
         }
 
         @media (max-width: 700px) {
@@ -1280,6 +1416,12 @@
                 justify-content: center;
                 text-align: center;
             }
+            .safety-tip .tip-title {
+                font-size: 15px;
+            }
+            .safety-tip .tip-desc {
+                font-size: 14px;
+            }
         }
 
         @media (max-width: 420px) {
@@ -1321,6 +1463,12 @@
             .ad-card p {
                 font-size: 11px;
             }
+            .safety-tips {
+                padding: 12px;
+            }
+            .safety-tip {
+                padding: 12px 14px;
+            }
         }
     </style>
 </head>
@@ -1351,8 +1499,7 @@
 
     <div class="container">
 
-        <!-- ============================================================ -->
-        <!-- ГЛАВНАЯ СТРАНИЦА -->
+        <!-- ===== ГЛАВНАЯ ===== -->
         <div class="page active" id="page-main">
             <div class="category-grid">
                 <div class="category-card" data-category="hunting">
@@ -1387,8 +1534,7 @@
             <div class="ads-grid" id="main-ads"></div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА КАТЕГОРИИ -->
+        <!-- ===== СТРАНИЦА КАТЕГОРИИ ===== -->
         <div class="page" id="page-category">
             <div class="category-page-header">
                 <div>
@@ -1397,11 +1543,28 @@
                 </div>
                 <span class="back-link" id="back-to-main"><i class="fas fa-arrow-left"></i> На главную</span>
             </div>
+            <!-- ФИЛЬТРЫ ПО ГОРОДУ -->
+            <div class="filter-bar">
+                <label><i class="fas fa-map-marker-alt"></i> Город:
+                    <select id="city-filter">
+                        <option value="all">Все города</option>
+                        <option value="Москва">Москва</option>
+                        <option value="Санкт-Петербург">Санкт-Петербург</option>
+                        <option value="Тверь">Тверь</option>
+                        <option value="Карелия">Карелия</option>
+                        <option value="Смоленск">Смоленск</option>
+                        <option value="Волгоград">Волгоград</option>
+                        <option value="Тюмень">Тюмень</option>
+                    </select>
+                </label>
+                <button class="btn-sm primary" id="apply-city-filter"><i class="fas fa-filter"></i> Применить</button>
+                <button class="btn-sm outline" id="reset-city-filter"><i class="fas fa-undo"></i> Сбросить</button>
+                <span style="font-size:13px; color:#4f5a4f; margin-left:auto;" id="filter-count">Показано: 6 из 6</span>
+            </div>
             <div class="ads-grid" id="category-ads"></div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА ТРЕНАЖЁР -->
+        <!-- ===== ТРЕНАЖЁР ===== -->
         <div class="page" id="page-trainer">
             <div class="trainer-wrapper">
                 <h2><i class="fas fa-graduation-cap" style="color:#1e3a2f;"></i> Тренажёр для охотников</h2>
@@ -1438,8 +1601,7 @@
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА СООБЩЕСТВО -->
+        <!-- ===== СООБЩЕСТВО ===== -->
         <div class="page" id="page-community">
             <div class="community-layout">
                 <aside class="community-sidebar">
@@ -1463,8 +1625,7 @@
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА УСЛУГИ -->
+        <!-- ===== УСЛУГИ ===== -->
         <div class="page" id="page-services-page">
             <div class="category-page-header">
                 <div>
@@ -1476,12 +1637,12 @@
             <div class="ads-grid" id="services-ads"></div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА ПРАВИЛА -->
+        <!-- ===== ПРАВИЛА ===== -->
         <div class="page" id="page-rules">
             <div class="rules-content">
                 <h2><i class="fas fa-gavel" style="color:#1e3a2f;"></i> Правила размещения объявлений</h2>
                 <p style="font-size: 16px; color: #2f3d32; margin-bottom: 20px;">Соблюдение законодательства РФ — обязательное условие для всех пользователей.</p>
+
                 <h3><span class="badge-danger">⛔ Категорически запрещено</span></h3>
                 <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Согласно законодательству РФ и правилам маркетплейсов, на сайте <strong>нельзя размещать</strong> объявления о продаже:</p>
                 <ul>
@@ -1494,6 +1655,7 @@
                     <li>Устройства для глушения сигнала, средства негласного наблюдения</li>
                     <li>Контрафакт и подделки</li>
                 </ul>
+
                 <h3><span class="badge-warning">⚠️ Ограниченные категории</span></h3>
                 <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Эти товары можно размещать, но <strong>с ручной модерацией</strong> и предупреждениями:</p>
                 <ul>
@@ -1503,6 +1665,7 @@
                     <li>Капканы и ловушки (могут быть запрещены в некоторых регионах)</li>
                     <li>Чучела животных (требуют подтверждения легальности)</li>
                 </ul>
+
                 <h3><span class="badge-success">✅ Разрешённые категории</span></h3>
                 <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Эти товары можно размещать <strong>без особых ограничений</strong>:</p>
                 <ul>
@@ -1514,14 +1677,40 @@
                     <li>Услуги (гиды, инструкторы, ремонт)</li>
                     <li>Собаки (продажа щенков, услуги вязки)</li>
                 </ul>
+
+                <div class="safety-tips">
+                    <h3><i class="fas fa-shield-alt"></i> Как не попасть на мошенников</h3>
+                    <p style="font-size: 15px; color: #2f3d32; margin-bottom: 16px;">5 простых правил, которые защитят вас при покупках на доске объявлений.</p>
+
+                    <div class="safety-tip">
+                        <div class="tip-title"><span class="num">1</span> Не уходите в другие мессенджеры</div>
+                        <div class="tip-desc"><strong>Как работает ловушка:</strong> Вам звонят из «банка» и просят продолжить в Telegram. <span class="green"><strong>Ваше действие:</strong> Кладите трубку. Перезвоните в банк сами.</span></div>
+                    </div>
+                    <div class="safety-tip">
+                        <div class="tip-title"><span class="num">2</span> Не открывайте ссылки и QR-коды</div>
+                        <div class="tip-desc"><strong>Опасность:</strong> Мошенники копируют сайты банков. Не сканируйте коды от незнакомцев.</div>
+                    </div>
+                    <div class="safety-tip">
+                        <div class="tip-title"><span class="num">3</span> Никому не говорите коды из смс</div>
+                        <div class="tip-desc"><span class="green"><strong>Ключевая фраза:</strong> Если в СМС написано «Никому не сообщайте код» — нарушать нельзя.</span></div>
+                    </div>
+                    <div class="safety-tip">
+                        <div class="tip-title"><span class="num">4</span> Оплата только по факту</div>
+                        <div class="tip-desc"><strong>Предоплата:</strong> Если продавец просит предоплату за «бронирование» — это 99% развод. «Безопасный счет» — миф.</div>
+                    </div>
+                    <div class="safety-tip">
+                        <div class="tip-title"><span class="num">5</span> Не указывайте данные карты (кроме номера)</div>
+                        <div class="tip-desc"><strong>Что НЕЛЬЗЯ называть:</strong> Срок действия, CVC/CVV-код — это ключ от всех ваших денег!</div>
+                    </div>
+                </div>
+
                 <div style="margin-top: 24px; padding: 16px 20px; background: #e7e1d6; border-radius: 16px;">
-                    <p style="font-size: 15px; color: #1e2b2f;"><i class="fas fa-info-circle" style="color:#1e3a2f;"></i> <strong>Важно:</strong> Нарушение правил влечёт за собой блокировку аккаунта без возможности восстановления. Если вы сомневаетесь, можно ли разместить товар, — обратитесь в поддержку.</p>
+                    <p style="font-size: 15px; color: #1e2b2f;"><i class="fas fa-info-circle" style="color:#1e3a2f;"></i> <strong>Важно:</strong> Нарушение правил влечёт за собой блокировку аккаунта без возможности восстановления.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА РАЗМЕЩЕНИЯ (по кнопке "Разместить") -->
+        <!-- ===== СТРАНИЦА РАЗМЕЩЕНИЯ ===== -->
         <div class="page" id="page-post">
             <div class="form-page">
                 <h2>📦 Разместить объявление</h2>
@@ -1546,6 +1735,23 @@
                         <div class="form-group">
                             <label for="post-phone">Телефон <span class="required">*</span></label>
                             <input type="tel" id="post-phone" placeholder="+7 (912) 345-67-89" value="+7 (912) 345-67-89" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="post-city">Город <span class="required">*</span></label>
+                            <select id="post-city" required>
+                                <option value="">Выберите город</option>
+                                <option value="Москва">Москва</option>
+                                <option value="Санкт-Петербург">Санкт-Петербург</option>
+                                <option value="Тверь">Тверь</option>
+                                <option value="Карелия">Карелия</option>
+                                <option value="Смоленск">Смоленск</option>
+                                <option value="Волгоград">Волгоград</option>
+                                <option value="Тюмень">Тюмень</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="post-address">Адрес <span class="hint">(улица, дом)</span></label>
+                            <input type="text" id="post-address" placeholder="ул. Лесная, д. 15" />
                         </div>
                         <div class="form-group">
                             <label for="post-title">Название объявления <span class="required">*</span></label>
@@ -1576,8 +1782,7 @@
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- СТРАНИЦА АДМИН-ПАНЕЛИ (по кнопке "Вход") -->
+        <!-- ===== АДМИН-ПАНЕЛЬ ===== -->
         <div class="page" id="page-admin">
             <div class="admin-layout">
                 <aside class="admin-sidebar">
@@ -1590,7 +1795,6 @@
                 </aside>
 
                 <main class="admin-content">
-                    <!-- Админ: Объявления -->
                     <div class="admin-panel active" id="admin-ads">
                         <div class="admin-section-card">
                             <div class="section-header"><h3><i class="fas fa-gun" style="color:#1e3a2f;"></i> Охота</h3>
@@ -1619,8 +1823,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Админ: Тренажёр -->
                     <div class="admin-panel" id="admin-trainer">
                         <div class="admin-section-card">
                             <div class="section-header"><h3><i class="fas fa-graduation-cap" style="color:#1e3a2f;"></i> Вопросы</h3>
@@ -1637,8 +1839,6 @@
                             <div style="margin-top:12px; font-size:14px; color:#4f5a4f;">Всего: 258 вопросов</div>
                         </div>
                     </div>
-
-                    <!-- Админ: Сообщество -->
                     <div class="admin-panel" id="admin-community">
                         <div class="admin-section-card">
                             <div class="section-header"><h3><i class="fas fa-newspaper" style="color:#1e3a2f;"></i> Новости</h3>
@@ -1653,21 +1853,7 @@
                                 </tbody></table>
                             </div>
                         </div>
-                        <div class="admin-section-card">
-                            <div class="section-header"><h3><i class="fas fa-file-alt" style="color:#1e3a2f;"></i> Статьи</h3>
-                                <div><button class="btn-sm primary"><i class="fas fa-plus"></i> Добавить</button>
-                                <button class="btn-sm success"><i class="fas fa-check"></i> Опубликовать</button></div>
-                            </div>
-                            <div class="table-wrap">
-                                <table><thead><tr><th>Заголовок</th><th>Автор</th><th>Дата</th><th>Действия</th></tr></thead>
-                                <tbody>
-                                    <tr><td>Как выбрать лодку ПВХ</td><td>user1@mail.ru</td><td>10.09.2026</td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                </tbody></table>
-                            </div>
-                        </div>
                     </div>
-
-                    <!-- Админ: Правила -->
                     <div class="admin-panel" id="admin-rules">
                         <div class="admin-section-card">
                             <div class="section-header"><h3><i class="fas fa-gavel" style="color:#1e3a2f;"></i> Редактирование</h3>
@@ -1684,8 +1870,6 @@
                             </textarea>
                         </div>
                     </div>
-
-                    <!-- Админ: Пользователи -->
                     <div class="admin-panel" id="admin-users">
                         <div class="admin-section-card">
                             <div class="section-header"><h3><i class="fas fa-users" style="color:#1e3a2f;"></i> Список</h3>
@@ -1696,25 +1880,10 @@
                                 <tbody>
                                     <tr><td>Иван Петров</td><td>ivanov@mail.ru</td><td>+7 912 345 67 89</td><td>01.09.2026</td><td><span class="status-badge active">активен</span></td><td><button class="btn-sm warning"><i class="fas fa-ban"></i> Блок</button></td></tr>
                                     <tr><td>Алексей Смирнов</td><td>alex@mail.ru</td><td>+7 923 456 78 90</td><td>28.08.2026</td><td><span class="status-badge pending">ожидает</span></td><td><button class="btn-sm warning"><i class="fas fa-ban"></i> Блок</button></td></tr>
-                                    <tr><td>Мария Иванова</td><td>mari@mail.ru</td><td>+7 934 567 89 01</td><td>15.08.2026</td><td><span class="status-badge active">активен</span></td><td><button class="btn-sm warning"><i class="fas fa-ban"></i> Блок</button></td></tr>
-                                </tbody></table>
-                            </div>
-                        </div>
-                        <div class="admin-section-card">
-                            <div class="section-header"><h3><i class="fas fa-user-shield" style="color:#1e3a2f;"></i> Администраторы</h3>
-                                <div><button class="btn-sm primary"><i class="fas fa-plus"></i> Добавить</button></div>
-                            </div>
-                            <div class="table-wrap">
-                                <table><thead><tr><th>Имя</th><th>Email</th><th>Статус</th><th>Действия</th></tr></thead>
-                                <tbody>
-                                    <tr><td>Главный Админ</td><td>admin@site.ru</td><td><span class="status-badge active">активен</span></td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                    <tr><td>Модератор</td><td>moder@site.ru</td><td><span class="status-badge active">активен</span></td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
                                 </tbody></table>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Админ: Статистика -->
                     <div class="admin-panel" id="admin-stats">
                         <div class="admin-stats-grid">
                             <div class="admin-stats-card"><div class="number">124</div><div class="label">Всего объявлений</div></div>
@@ -1722,20 +1891,6 @@
                             <div class="admin-stats-card"><div class="number">156</div><div class="label">Тем на форуме</div></div>
                             <div class="admin-stats-card"><div class="number">4 231</div><div class="label">Просмотры сегодня</div></div>
                             <div class="admin-stats-card"><div class="number">47</div><div class="label">Пользователей</div></div>
-                            <div class="admin-stats-card"><div class="number">18</div><div class="label">Новых за неделю</div></div>
-                        </div>
-                        <div class="admin-section-card">
-                            <div class="section-header"><h3><i class="fas fa-chart-pie" style="color:#1e3a2f;"></i> Детальная статистика</h3></div>
-                            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:10px;">
-                                <div><strong>Охота</strong> — 34</div>
-                                <div><strong>Рыбалка</strong> — 28</div>
-                                <div><strong>Транспорт</strong> — 22</div>
-                                <div><strong>Домики</strong> — 18</div>
-                                <div><strong>Услуги</strong> — 22</div>
-                                <div><strong>Тренажёр</strong> — 2 847</div>
-                                <div><strong>Форум</strong> — 156</div>
-                                <div><strong>Новости</strong> — 24</div>
-                            </div>
                         </div>
                     </div>
                 </main>
@@ -1761,110 +1916,112 @@
         </div>
     </div>
 
+    <!-- ===== ФУТЕР ===== -->
     <footer class="footer">
         <div class="container">
-            <p>Охотник & Рыбак — доска объявлений · Соблюдение 152-ФЗ, модерация, защита от спама</p>
+            <a href="https://vk.ru/okhotaclub" target="_blank" class="social-link">
+                <i class="fab fa-vk"></i> Мы в VK
+            </a>
+            <p style="margin-top: 12px; font-size: 13px; color: #4f5a4f;">
+                <a href="https://vk.ru/okhotaclub" target="_blank" style="color: #1e3a2f;">vk.ru/okhotaclub</a>
+            </p>
         </div>
     </footer>
 
     <script>
-        // ================================================================
         // ===== ДАННЫЕ =====
-        // ================================================================
         const adsData = {
             hunting: [
                 { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья', price: '12 000 ₽ / мес',
-                    tag: 'аренда', icon: 'fa-campground' },
+                    tag: 'аренда', icon: 'fa-campground', city: 'Тверь', address: 'ул. Лесная, 15' },
                 { title: 'Патронташ кожаный 12-й кал.', desc: 'Новый, на 24 патрона, регулируемый ремень', price: '2 500 ₽',
-                    tag: 'продажа', icon: 'fa-bullseye' },
+                    tag: 'продажа', icon: 'fa-bullseye', city: 'Москва', address: 'ул. Охотничья, 7' },
                 { title: 'Оптический прицел VOMZ 3-9x40', desc: 'С креплением, отличное состояние', price: '7 200 ₽',
-                    tag: 'продажа', icon: 'fa-binoculars' },
+                    tag: 'продажа', icon: 'fa-binoculars', city: 'Санкт-Петербург', address: 'пр. Лиговский, 22' },
                 { title: 'Охотничий нож «Тайга»', desc: 'Сталь 95X18, рукоять из карельской березы', price: '4 800 ₽',
-                    tag: 'продажа', icon: 'fa-cut' },
+                    tag: 'продажа', icon: 'fa-cut', city: 'Карелия', address: 'п. Сортавала, ул. Лесная' },
                 { title: 'Манок на утку «Джек»', desc: 'Звуковой, профессиональный', price: '1 200 ₽', tag: 'продажа',
-                    icon: 'fa-music' },
+                    icon: 'fa-music', city: 'Смоленск', address: 'ул. Кирова, 12' },
                 { title: 'Щенок лайки (род. 2025)', desc: 'Привит, документы, от рабочих родителей', price: '25 000 ₽',
-                    tag: 'продажа', icon: 'fa-dog' },
+                    tag: 'продажа', icon: 'fa-dog', city: 'Тюмень', address: 'ул. Таёжная, 3' },
             ],
             fishing: [
                 { title: 'Спиннинг Shimano Crucial', desc: '2.4 м, тест 5-25 г, состояние отличное', price: '8 500 ₽',
-                    tag: 'продажа', icon: 'fa-fish' },
+                    tag: 'продажа', icon: 'fa-fish', city: 'Москва', address: 'ул. Рыбацкая, 5' },
                 { title: 'Катушка Daiwa Revros 2500', desc: 'Безынерционная, 5 подшипников', price: '3 900 ₽',
-                    tag: 'продажа', icon: 'fa-cog' },
+                    tag: 'продажа', icon: 'fa-cog', city: 'Санкт-Петербург', address: 'наб. реки Мойки, 10' },
                 { title: 'Набор воблеров (10 шт.)', desc: 'Разные размеры и цвета, оригинал', price: '2 200 ₽',
-                    tag: 'продажа', icon: 'fa-bug' },
+                    tag: 'продажа', icon: 'fa-bug', city: 'Волгоград', address: 'ул. Советская, 45' },
                 { title: 'Эхолот Lowrance Hook 7', desc: 'С картами, GPS, отличный', price: '32 000 ₽', tag: 'продажа',
-                    icon: 'fa-satellite' },
+                    icon: 'fa-satellite', city: 'Тверь', address: 'ул. Речная, 8' },
                 { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽',
-                    tag: 'продажа', icon: 'fa-ship' },
+                    tag: 'продажа', icon: 'fa-ship', city: 'Карелия', address: 'оз. Онежское, причал 3' },
                 { title: 'Костюм рыбацкий зимний', desc: 'Размер L, термо, ветрозащита', price: '6 500 ₽', tag: 'продажа',
-                    icon: 'fa-tshirt' },
+                    icon: 'fa-tshirt', city: 'Тюмень', address: 'ул. Северная, 21' },
             ],
             transport: [
                 { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽',
-                    tag: 'продажа', icon: 'fa-ship' },
+                    tag: 'продажа', icon: 'fa-ship', city: 'Карелия', address: 'п. Кондопога, ул. Прибрежная' },
                 { title: 'Лодочный мотор Yamaha 9.9', desc: '4-такт, 2022 г., мало часов', price: '95 000 ₽',
-                    tag: 'продажа', icon: 'fa-engine' },
+                    tag: 'продажа', icon: 'fa-engine', city: 'Москва', address: 'ул. Водная, 14' },
                 { title: 'Прицеп для лодки МЗСА', desc: 'Одноосный, до 500 кг, документы', price: '28 000 ₽',
-                    tag: 'продажа', icon: 'fa-truck' },
+                    tag: 'продажа', icon: 'fa-truck', city: 'Смоленск', address: 'ул. Заводская, 9' },
                 { title: 'Квадроцикл Stels 650', desc: '2021 г., пробег 800 км, отличное состояние', price: '180 000 ₽',
-                    tag: 'продажа', icon: 'fa-motorcycle' },
+                    tag: 'продажа', icon: 'fa-motorcycle', city: 'Тюмень', address: 'ул. Лесопарковая, 33' },
                 { title: 'Снегоход Yamaha Viking', desc: 'Профессиональный, 2020 г., наработка 1500 км', price: '320 000 ₽',
-                    tag: 'продажа', icon: 'fa-snowmobile' },
+                    tag: 'продажа', icon: 'fa-snowmobile', city: 'Карелия', address: 'п. Медвежьегорск, ул. Зимняя' },
                 { title: 'Внедорожник УАЗ-469', desc: 'Подготовка для охоты, лебёдка, дополнительные фары', price: '250 000 ₽',
-                    tag: 'продажа', icon: 'fa-car' },
+                    tag: 'продажа', icon: 'fa-car', city: 'Тверь', address: 'ул. Дорожная, 6' },
             ],
             houses: [
                 { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья',
-                    price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-home' },
+                    price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-home', city: 'Тверь', address: 'д. Медведица, ул. Центральная' },
                 { title: 'Рыболовная база на Волге', desc: 'Домик у воды, кемпинг, места для рыбалки', price: '8 000 ₽ / сут',
-                    tag: 'аренда', icon: 'fa-water' },
+                    tag: 'аренда', icon: 'fa-water', city: 'Волгоград', address: 'п. Прибрежный, база отдыха' },
                 { title: 'Земельный участок под охотхозяйство', desc: '40 га, лес, река, подъезд круглый год',
-                    price: '1 200 000 ₽', tag: 'продажа', icon: 'fa-tree' },
+                    price: '1 200 000 ₽', tag: 'продажа', icon: 'fa-tree', city: 'Смоленск', address: 'д. Борки, уч. 7' },
                 { title: 'Бытовка мобильная 6x3 м', desc: 'С мебелью, печкой, для выездов', price: '35 000 ₽',
-                    tag: 'продажа', icon: 'fa-warehouse' },
+                    tag: 'продажа', icon: 'fa-warehouse', city: 'Тюмень', address: 'ул. Полевая, 18' },
                 { title: 'Домик в Карелии на берегу озера', desc: 'Гостевой дом, баня, причал, 4 спальных места',
-                    price: '15 000 ₽ / сут', tag: 'аренда', icon: 'fa-cabin' },
+                    price: '15 000 ₽ / сут', tag: 'аренда', icon: 'fa-cabin', city: 'Карелия', address: 'оз. Ладожское, д. Сортавала' },
                 { title: 'Охотничья база в Смоленской обл.', desc: '2 домика, баня, 30 га угодий', price: '2 500 000 ₽',
-                    tag: 'продажа', icon: 'fa-building' },
+                    tag: 'продажа', icon: 'fa-building', city: 'Смоленск', address: 'д. Сосновка, ул. Центральная' },
             ],
             services: [
                 { title: 'Ремонт лодочных моторов', desc: 'Диагностика, ремонт, запчасти в наличии', price: 'от 1 500 ₽',
-                    tag: 'услуга', icon: 'fa-tools' },
+                    tag: 'услуга', icon: 'fa-tools', city: 'Москва', address: 'ул. Корабельная, 12' },
                 { title: 'Гид по охоте в Тверской области', desc: 'Организация выезда, знание угодий, сопровождение',
-                    price: '5 000 ₽ / день', tag: 'услуга', icon: 'fa-compass' },
+                    price: '5 000 ₽ / день', tag: 'услуга', icon: 'fa-compass', city: 'Тверь', address: 'ул. Охотничья, 3' },
                 { title: 'Транспортировка лодки', desc: 'Перевозка до 7 м, по всей России', price: 'от 20 ₽ / км',
-                    tag: 'услуга', icon: 'fa-truck' },
+                    tag: 'услуга', icon: 'fa-truck', city: 'Санкт-Петербург', address: 'ул. Транспортная, 5' },
                 { title: 'Инструктор по рыбалке', desc: 'Обучение, спиннинг, фидер, нахлыст', price: '3 500 ₽ / занятие',
-                    tag: 'услуга', icon: 'fa-chalkboard-teacher' },
+                    tag: 'услуга', icon: 'fa-chalkboard-teacher', city: 'Волгоград', address: 'ул. Волжская, 22' },
                 { title: 'Организация выезда под ключ', desc: 'Проживание, питание, снаряжение, гид',
-                    price: 'от 15 000 ₽', tag: 'услуга', icon: 'fa-umbrella-beach' },
+                    price: 'от 15 000 ₽', tag: 'услуга', icon: 'fa-umbrella-beach', city: 'Карелия', address: 'п. Сортавала, ул. Туристическая' },
                 { title: 'Ремонт оптики и прицелов', desc: 'Чистка, юстировка, замена деталей', price: 'от 2 000 ₽',
-                    tag: 'услуга', icon: 'fa-eye' },
+                    tag: 'услуга', icon: 'fa-eye', city: 'Москва', address: 'ул. Оптическая, 8' },
             ]
         };
 
-        // ===== ОСНОВНЫЕ ОБЪЯВЛЕНИЯ ДЛЯ ГЛАВНОЙ =====
         const mainAdsBase = [
             { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья',
-                price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-campground' },
+                price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-campground', city: 'Тверь', address: 'ул. Лесная, 15' },
             { title: 'Спиннинг Shimano Crucial', desc: '2.4 м, тест 5-25 г, состояние отличное', price: '8 500 ₽',
-                tag: 'продажа', icon: 'fa-fish' },
+                tag: 'продажа', icon: 'fa-fish', city: 'Москва', address: 'ул. Рыбацкая, 5' },
             { title: 'Лодка ПВХ «Нептун 380»', desc: '2023 г., мотор не входит, чехол в подарок', price: '42 000 ₽',
-                tag: 'продажа', icon: 'fa-ship' },
+                tag: 'продажа', icon: 'fa-ship', city: 'Карелия', address: 'оз. Онежское, причал 3' },
             { title: 'Бинокль Nikon Monarch 10x42', desc: 'Ремень и чехол в комплекте', price: '18 900 ₽',
-                tag: 'продажа', icon: 'fa-binoculars' },
+                tag: 'продажа', icon: 'fa-binoculars', city: 'Санкт-Петербург', address: 'пр. Лиговский, 22' },
             { title: 'Квадроцикл Stels 650', desc: '2021 г., пробег 800 км, отличное состояние', price: '180 000 ₽',
-                tag: 'продажа', icon: 'fa-motorcycle' },
+                tag: 'продажа', icon: 'fa-motorcycle', city: 'Тюмень', address: 'ул. Лесопарковая, 33' },
             { title: 'Эхолот Lowrance Hook 7', desc: 'С картами, GPS, отличный', price: '32 000 ₽', tag: 'продажа',
-                icon: 'fa-satellite' },
+                icon: 'fa-satellite', city: 'Тверь', address: 'ул. Речная, 8' },
             { title: 'Рыболовная база на Волге', desc: 'Домик у воды, кемпинг, места для рыбалки', price: '8 000 ₽ / сут',
-                tag: 'аренда', icon: 'fa-water' },
+                tag: 'аренда', icon: 'fa-water', city: 'Волгоград', address: 'п. Прибрежный' },
             { title: 'Гид по охоте в Тверской области', desc: 'Организация выезда, знание угодий', price: '5 000 ₽ / день',
-                tag: 'услуга', icon: 'fa-compass' },
+                tag: 'услуга', icon: 'fa-compass', city: 'Тверь', address: 'ул. Охотничья, 3' },
         ];
 
-        // ===== КАРТОЧКИ-ЗАМАНУХИ =====
         function getTrickCard() {
             const rnd = Math.random();
             if (rnd < 0.5) {
@@ -1915,13 +2072,12 @@
             return shuffleArray(all);
         }
 
-        // ===== НОВОСТИ =====
         const newsData = [{
             id: 1,
             category: 'Новости',
             tag: 'Законодательство',
             title: 'В России утверждены новые сроки весенней охоты 2026',
-            excerpt: 'Минприроды опубликовало приказ с обновлёнными сроками охоты на пернатую дичь. Изменения затронули 15 регионов.',
+            excerpt: 'Минприроды опубликовало приказ с обновлёнными сроками охоты на пернатую дичь.',
             date: '2 часа назад',
             views: '1.2k',
             comments: 18,
@@ -1930,8 +2086,8 @@
             id: 2,
             category: 'Новости',
             tag: 'Снаряжение',
-            title: 'Обзор новых тепловизоров Pulsar на выставке «Охота и Рыбалка»',
-            excerpt: 'На ежегодной выставке представили обновлённую линейку тепловизионных прицелов с улучшенной матрицей и увеличенным временем работы.',
+            title: 'Обзор новых тепловизоров Pulsar на выставке',
+            excerpt: 'На ежегодной выставке представили обновлённую линейку тепловизионных прицелов.',
             date: '5 часов назад',
             views: '856',
             comments: 12,
@@ -1940,8 +2096,8 @@
             id: 3,
             category: 'Статьи',
             tag: 'Советы',
-            title: 'Как выбрать лодку ПВХ для охоты на утку: советы бывалых',
-            excerpt: 'Разбираем критерии выбора: материал, жёсткость днища, вместимость и особенности эксплуатации в холодной воде.',
+            title: 'Как выбрать лодку ПВХ для охоты на утку',
+            excerpt: 'Разбираем критерии выбора: материал, жёсткость днища, вместимость.',
             date: 'вчера',
             views: '2.3k',
             comments: 42,
@@ -1951,7 +2107,7 @@
             category: 'Видео',
             tag: 'Обучение',
             title: 'Видеоурок: правильная установка манка на селезня',
-            excerpt: 'Опытный охотник показывает технику работы с манком и секреты привлечения птицы в сезон весенней охоты.',
+            excerpt: 'Опытный охотник показывает технику работы с манком.',
             date: 'вчера',
             views: '4.7k',
             comments: 27,
@@ -1960,164 +2116,90 @@
             id: 5,
             category: 'Ролики',
             tag: 'Трофеи',
-            title: 'Охота на медведя в Карелии — видеоотчёт с поля',
-            excerpt: 'Короткий ролик с реалами охоты на берлоге. Съёмка с тепловизора и комментарии егеря.',
+            title: 'Охота на медведя в Карелии — видеоотчёт',
+            excerpt: 'Короткий ролик с реалами охоты на берлоге.',
             date: '2 дня назад',
             views: '6.1k',
             comments: 53,
             likes: 204,
-        }, {
-            id: 6,
-            category: 'Новости',
-            tag: 'Правила',
-            title: 'Ужесточена ответственность за браконьерство в заповедных зонах',
-            excerpt: 'Госдума приняла поправки к КоАП, увеличивающие штрафы за незаконную охоту в особо охраняемых территориях.',
-            date: '3 дня назад',
-            views: '980',
-            comments: 31,
-            likes: 41,
-        }, {
-            id: 7,
-            category: 'Статьи',
-            tag: 'Снаряжение',
-            title: 'Тест-драйв: новая модель эхолота Lowrance HDS PRO',
-            excerpt: 'Проверяем в полевых условиях работу новых боковых сканеров и картографию в реальном времени.',
-            date: '3 дня назад',
-            views: '1.5k',
-            comments: 19,
-            likes: 53,
-        }, {
-            id: 8,
-            category: 'Видео',
-            tag: 'Рыбалка',
-            title: 'Ловля щуки на джиг — разбор техники от профи',
-            excerpt: 'Подробное видео с пояснением проводок, выбора приманки и мест стоянки хищника.',
-            date: '4 дня назад',
-            views: '3.2k',
-            comments: 47,
-            likes: 91,
-        }, {
-            id: 9,
-            category: 'Ролики',
-            tag: 'Юмор',
-            title: 'Смешные моменты с охоты — подборка коротких видео',
-            excerpt: 'Курьёзные ситуации, которые случаются даже с опытными охотниками. Заряжаемся хорошим настроением!',
-            date: '5 дней назад',
-            views: '8.4k',
-            comments: 76,
-            likes: 312,
-        }, {
-            id: 10,
-            category: 'Новости',
-            tag: 'Снаряжение',
-            title: 'Новый закон о маркировке охотничьих ножей: что изменится',
-            excerpt: 'С 1 июля 2026 года все ножи для охоты должны иметь сертификацию. Разбираем, как это повлияет на рынок.',
-            date: '6 дней назад',
-            views: '678',
-            comments: 23,
-            likes: 29,
-        }, {
-            id: 11,
-            category: 'Статьи',
-            tag: 'Снаряжение',
-            title: 'Сравнение 5 популярных моделей биноклей для охоты',
-            excerpt: 'Тестируем оптику от Nikon, Zeiss, Bushnell, VOMZ и Olympus в реальных условиях.',
-            date: '6 дней назад',
-            views: '2.1k',
-            comments: 34,
-            likes: 67,
-        }, {
-            id: 12,
-            category: 'Видео',
-            tag: 'Обучение',
-            title: 'Как чистить и обслуживать лодочный мотор после сезона',
-            excerpt: 'Подробная инструкция по консервации мотора на зиму: промывка, замена масла, смазка.',
-            date: 'неделю назад',
-            views: '1.9k',
-            comments: 16,
-            likes: 44,
         }, ];
 
-        // ===== КВИЗ =====
         const quizQuestions = [{
             question: 'Какое наказание предусмотрено за охоту без разрешения в общедоступных охотничьих угодьях?',
             options: ['Административный штраф', 'Уголовная ответственность', 'Предупреждение', 'Лишение охотничьего билета'],
             correct: 0,
-            explanation: 'За охоту без разрешения предусмотрен административный штраф по ст. 8.37 КоАП РФ. Уголовная ответственность наступает только при причинении крупного ущерба.'
+            explanation: 'За охоту без разрешения предусмотрен административный штраф по ст. 8.37 КоАП РФ.'
         }, {
             question: 'Какой минимальный калибр гладкоствольного оружия разрешён для охоты на крупного зверя?',
             options: ['12-й', '16-й', '20-й', '28-й'],
             correct: 1,
-            explanation: 'Для охоты на крупного зверя минимальный калибр — 16-й (по правилам охоты). Однако на практике чаще используют 12-й калибр.'
+            explanation: 'Для охоты на крупного зверя минимальный калибр — 16-й.'
         }, {
             question: 'Что из перечисленного НЕ является объектом охоты в РФ?',
             options: ['Заяц-русак', 'Барсук', 'Косуля', 'Ёж обыкновенный'],
             correct: 3,
-            explanation: 'Ёж обыкновенный не входит в перечень охотничьих ресурсов в РФ, в отличие от зайца, барсука и косули.'
+            explanation: 'Ёж обыкновенный не входит в перечень охотничьих ресурсов в РФ.'
         }, {
             question: 'Какой документ удостоверяет право на хранение и ношение охотничьего оружия?',
             options: ['Охотничий билет', 'Разрешение на хранение и ношение', 'Лицензия на оружие', 'Паспорт оружия'],
             correct: 1,
-            explanation: 'Право на хранение и ношение даёт разрешение, выдаваемое органами лицензионно-разрешительной работы. Охотничий билет подтверждает только право на охоту.'
+            explanation: 'Право на хранение и ношение даёт разрешение, выдаваемое органами ЛРР.'
         }, {
             question: 'Какое расстояние должно быть от строений при стрельбе из гладкоствольного оружия?',
             options: ['50 метров', '100 метров', '200 метров', 'Не менее 300 метров'],
             correct: 2,
-            explanation: 'Стрельба из гладкоствольного оружия разрешена на расстоянии не менее 200 метров от строений (если иное не оговорено специальными правилами).'
-        }, {
-            question: 'Какой вид дичи разрешено добывать в весенний период?',
-            options: ['Глухарь на току', 'Тетерев на току', 'Вальдшнеп на вечерней тяге', 'Все перечисленные'],
-            correct: 3,
-            explanation: 'Весной разрешена охота на глухаря, тетерева и вальдшнепа при соблюдении сроков и лимитов.'
-        }, {
-            question: 'Какой размер штрафа за браконьерство (незаконную добычу лося) установлен в РФ?',
-            options: ['до 10 000 ₽', 'до 50 000 ₽', 'до 200 000 ₽', 'до 500 000 ₽'],
-            correct: 2,
-            explanation: 'За незаконную добычу лося предусмотрен штраф до 200 000 ₽ или в размере дохода за период до 1 года, а также возможна уголовная ответственность.'
-        }, {
-            question: 'Что из перечисленного относится к охотничьим собакам?',
-            options: ['Лайка', 'Овчарка', 'Терьер', 'Дог'],
-            correct: 0,
-            explanation: 'Лайка — традиционная охотничья порода. Овчарки, терьеры и доги не являются специализированными охотничьими породами в РФ.'
+            explanation: 'Стрельба разрешена на расстоянии не менее 200 метров от строений.'
         }, ];
 
-        // ===== РЕНДЕР =====
-        function renderAds(container, ads) {
-            container.innerHTML = ads.map(ad => {
+        function renderAds(container, ads, filterCity) {
+            let filtered = ads;
+            if (filterCity && filterCity !== 'all') {
+                filtered = ads.filter(ad => ad.city === filterCity);
+            }
+            container.innerHTML = filtered.map(ad => {
                 if (ad.isTrick) {
                     return `
-                        <div class="ad-card trick-card" data-trick="${ad.type}" data-target="${ad.targetPage}" data-tab="${ad.targetTab || ''}">
-                            <div class="trick-badge">${ad.badge}</div>
-                            <div class="trick-icon"><i class="fas ${ad.icon}"></i></div>
+                            <div class="ad-card trick-card" data-trick="${ad.type}" data-target="${ad.targetPage}" data-tab="${ad.targetTab || ''}">
+                                <div class="trick-badge">${ad.badge}</div>
+                                <div class="trick-icon"><i class="fas ${ad.icon}"></i></div>
+                                <h4>${ad.title}</h4>
+                                <p>${ad.desc}</p>
+                                <div class="trick-hint"><i class="fas fa-arrow-right"></i> ${ad.hint}</div>
+                                <div class="ad-meta" style="margin-top:6px;">
+                                    <span class="ad-tag" style="background:#c7a86b; color:#1e3a2f;">перейти →</span>
+                                </div>
+                            </div>
+                        `;
+                }
+                return `
+                        <div class="ad-card">
+                            <div class="ad-image" style="background: linear-gradient(135deg, #b9aa8e 0%, #d9d0c0 100%);">
+                                <i class="fas ${ad.icon}" style="font-size: 28px; color: #2f3d32;"></i>
+                            </div>
                             <h4>${ad.title}</h4>
                             <p>${ad.desc}</p>
-                            <div class="trick-hint"><i class="fas fa-arrow-right"></i> ${ad.hint}</div>
-                            <div class="ad-meta" style="margin-top:6px;">
-                                <span class="ad-tag" style="background:#c7a86b; color:#1e3a2f;">перейти →</span>
+                            <div class="ad-city"><i class="fas fa-map-marker-alt"></i> ${ad.city || 'Не указан'}</div>
+                            <div class="ad-meta">
+                                <span class="ad-price">${ad.price}</span>
+                                <span class="ad-tag">${ad.tag}</span>
                             </div>
                         </div>
                     `;
-                }
-                return `
-                    <div class="ad-card">
-                        <div class="ad-image" style="background: linear-gradient(135deg, #b9aa8e 0%, #d9d0c0 100%);">
-                            <i class="fas ${ad.icon}" style="font-size: 28px; color: #2f3d32;"></i>
-                        </div>
-                        <h4>${ad.title}</h4>
-                        <p>${ad.desc}</p>
-                        <div class="ad-meta">
-                            <span class="ad-price">${ad.price}</span>
-                            <span class="ad-tag">${ad.tag}</span>
-                        </div>
-                    </div>
-                `;
             }).join('');
 
+            // Обновляем счётчик
+            const countEl = document.getElementById('filter-count');
+            if (countEl) {
+                const total = container.querySelectorAll('.ad-card:not(.trick-card)').length;
+                const all = container.querySelectorAll('.ad-card').length;
+                countEl.textContent = `Показано: ${total} из ${all}`;
+            }
+
+            // Обработчики для трик-карточек
             container.querySelectorAll('.trick-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const target = this.dataset.target;
                     const tab = this.dataset.tab || 'news';
-
                     if (target === 'trainer') {
                         showPage('trainer');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2162,27 +2244,27 @@
             }
 
             feed.innerHTML = filtered.map(n => `
-                <div class="news-card">
-                    <div class="news-meta">
-                        <span style="font-weight:500;">${n.category}</span>
-                        <span class="tag">${n.tag}</span>
-                        <span>${n.date}</span>
-                    </div>
-                    <h3>${n.title}</h3>
-                    <p>${n.excerpt}</p>
-                    <div class="news-footer">
-                        <div class="views"><i class="fas fa-eye"></i> ${n.views}</div>
-                        <div class="actions">
-                            <span><i class="far fa-comment"></i> ${n.comments}</span>
-                            <span><i class="far fa-heart"></i> ${n.likes}</span>
-                            <span><i class="far fa-bookmark"></i></span>
+                    <div class="news-card">
+                        <div class="news-meta">
+                            <span style="font-weight:500;">${n.category}</span>
+                            <span class="tag">${n.tag}</span>
+                            <span>${n.date}</span>
+                        </div>
+                        <h3>${n.title}</h3>
+                        <p>${n.excerpt}</p>
+                        <div class="news-footer">
+                            <div class="views"><i class="fas fa-eye"></i> ${n.views}</div>
+                            <div class="actions">
+                                <span><i class="far fa-comment"></i> ${n.comments}</span>
+                                <span><i class="far fa-heart"></i> ${n.likes}</span>
+                                <span><i class="far fa-bookmark"></i></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
         }
 
-        // ===== КВИЗ ЛОГИКА =====
+        // ===== КВИЗ =====
         let currentQuiz = 0;
         let quizQuestionsShuffled = [];
 
@@ -2200,11 +2282,11 @@
             document.getElementById('quiz-progress').textContent = `Вопрос ${currentQuiz + 1} из ${quizQuestionsShuffled.length}`;
             const container = document.getElementById('quiz-options');
             container.innerHTML = q.options.map((opt, idx) => `
-                <label>
-                    <input type="radio" name="quiz-option" value="${idx}">
-                    ${opt}
-                </label>
-            `).join('');
+                    <label>
+                        <input type="radio" name="quiz-option" value="${idx}">
+                        ${opt}
+                    </label>
+                `).join('');
             document.getElementById('quiz-result').className = 'quiz-result';
             document.getElementById('quiz-result').textContent = '';
             document.getElementById('quiz-submit').disabled = false;
@@ -2259,7 +2341,7 @@
             } else {
                 document.getElementById('quiz-result').className = 'quiz-result show correct';
                 document.getElementById('quiz-result').innerHTML =
-                    '🎉 <strong>Отлично!</strong> Вы прошли все 5 вопросов. Попробуйте ещё раз или перейдите к полному тренажёру.';
+                    '🎉 <strong>Отлично!</strong> Вы прошли все 5 вопросов.';
                 document.getElementById('quiz-question').textContent = 'Тест завершён!';
                 document.getElementById('quiz-options').innerHTML = '';
                 document.getElementById('quiz-progress').textContent = 'Готово!';
@@ -2288,6 +2370,9 @@
             admin: document.getElementById('page-admin'),
         };
 
+        let currentCategory = 'hunting';
+        let currentFilterCity = 'all';
+
         function showPage(pageId) {
             Object.values(pages).forEach(p => p.classList.remove('active'));
             if (pages[pageId]) pages[pageId].classList.add('active');
@@ -2306,7 +2391,6 @@
             });
         });
 
-        // ===== КНОПКИ "Вход" и "Разместить" =====
         document.getElementById('login-btn').addEventListener('click', function() {
             showPage('admin');
             document.querySelectorAll('.admin-sidebar .menu-item').forEach((el, idx) => {
@@ -2348,12 +2432,30 @@
             card.addEventListener('click', function() {
                 const cat = this.dataset.category;
                 if (!cat) return;
+                currentCategory = cat;
+                currentFilterCity = 'all';
+                document.getElementById('city-filter').value = 'all';
                 const ads = adsData[cat] || [];
                 document.getElementById('category-title').textContent = categoryNames[cat] || cat;
                 document.getElementById('category-stats').textContent = `${ads.length} объявлений`;
-                renderAds(document.getElementById('category-ads'), ads);
+                renderAds(document.getElementById('category-ads'), ads, 'all');
                 showPage('category');
             });
+        });
+
+        // ===== ФИЛЬТРЫ ПО ГОРОДУ =====
+        document.getElementById('apply-city-filter').addEventListener('click', function() {
+            const city = document.getElementById('city-filter').value;
+            currentFilterCity = city;
+            const ads = adsData[currentCategory] || [];
+            renderAds(document.getElementById('category-ads'), ads, city);
+        });
+
+        document.getElementById('reset-city-filter').addEventListener('click', function() {
+            document.getElementById('city-filter').value = 'all';
+            currentFilterCity = 'all';
+            const ads = adsData[currentCategory] || [];
+            renderAds(document.getElementById('category-ads'), ads, 'all');
         });
 
         document.getElementById('back-to-main').addEventListener('click', () => showPage('main'));
@@ -2369,7 +2471,6 @@
             });
         });
 
-        // ===== КНОПКА "Создать публикацию" =====
         document.getElementById('create-post-btn').addEventListener('click', function() {
             alert('📝 Открыть форму создания публикации в разделе "' + document.getElementById('feed-title')
                 .textContent + '"');
@@ -2442,11 +2543,13 @@
             const category = document.getElementById('post-category').value;
             const name = document.getElementById('post-name').value.trim();
             const phone = document.getElementById('post-phone').value.trim();
+            const city = document.getElementById('post-city').value;
+            const address = document.getElementById('post-address').value.trim();
             const title = document.getElementById('post-title').value.trim();
             const desc = document.getElementById('post-description').value.trim();
 
-            if (!category || !name || !phone || !title || !desc) {
-                alert('⚠️ Заполните все обязательные поля.');
+            if (!category || !name || !phone || !city || !title || !desc) {
+                alert('⚠️ Заполните все обязательные поля (отмечены *).');
                 return;
             }
 
@@ -2458,20 +2561,20 @@
                     if (input) params[label] = input.value;
                 });
 
-            alert(`✅ Объявление "${title}" отправлено на модерацию!\n\nРаздел: ${categoryNames[category]||category}\nИмя: ${name}\nТелефон: ${phone}`);
-            console.log('📦 Данные:', { category, name, phone, title, desc, params });
+            alert(
+                `✅ Объявление "${title}" отправлено на модерацию!\n\nРаздел: ${categoryNames[category]||category}\nГород: ${city}\nАдрес: ${address || 'не указан'}\nИмя: ${name}\nТелефон: ${phone}`
+                );
+            console.log('📦 Данные:', { category, name, phone, city, address, title, desc, params });
         });
 
-        // ================================================================
         // ===== ИНИЦИАЛИЗАЦИЯ =====
-        // ================================================================
         const mainAds = buildMainAds();
         renderAds(document.getElementById('main-ads'), mainAds);
         renderAds(document.getElementById('services-ads'), adsData.services);
         renderNews('all');
         initQuiz();
 
-        console.log('✅ Демо-сайт загружен: главная, размещение, админ-панель');
+        console.log('✅ Демо-сайт загружен: главная, размещение с городом, админ-панель, фильтры по городам');
     </script>
 </body>
 </html>
