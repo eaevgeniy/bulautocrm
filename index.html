@@ -829,7 +829,6 @@
             color: #1e3a2f;
         }
 
-        /* ===== ФОРМА РАЗМЕЩЕНИЯ ===== */
         .form-page {
             padding: 28px 0 40px;
         }
@@ -1183,6 +1182,7 @@
             color: #1e2b2f;
         }
 
+        /* ===== МОБИЛЬНАЯ ВЕРСИЯ — 2 ПЛИТКИ ===== */
         @media (max-width: 820px) {
             .community-layout {
                 flex-direction: column;
@@ -1379,13 +1379,14 @@
             }
         }
 
-        @media (max-width: 420px) {
+        /* на очень маленьких экранах всё ещё 2 колонки (не одна) */
+        @media (max-width: 480px) {
             .category-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
             .ads-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
             .category-card {
@@ -1411,6 +1412,47 @@
             }
             .safety-tip {
                 padding: 12px 14px;
+            }
+        }
+
+        /* для самых маленьких телефонов оставляем 2 колонки */
+        @media (max-width: 380px) {
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .ads-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .category-card {
+                padding: 10px 8px;
+            }
+            .category-card .cat-title {
+                font-size: 13px;
+            }
+            .category-card .sub-list a {
+                font-size: 12px;
+                padding: 3px 6px;
+            }
+            .ad-card {
+                padding: 8px;
+            }
+            .ad-card .ad-image {
+                height: 60px;
+            }
+            .ad-card h4 {
+                font-size: 12px;
+            }
+            .ad-card p {
+                font-size: 10px;
+            }
+            .ad-card .ad-meta {
+                font-size: 10px;
+                gap: 6px;
+            }
+            .ad-card .ad-city {
+                font-size: 10px;
             }
         }
     </style>
@@ -1444,7 +1486,6 @@
 
         <!-- ===== ГЛАВНАЯ ===== -->
         <div class="page active" id="page-main">
-            <!-- Категории с подкатегориями -->
             <div class="category-grid">
                 <div class="category-card">
                     <div class="cat-title"><i class="fas fa-gun"></i> Охота</div>
@@ -1483,7 +1524,6 @@
                 </div>
             </div>
 
-            <!-- Фильтры -->
             <div class="filter-bar">
                 <label><i class="fas fa-map-marker-alt"></i> Город:
                     <select id="main-city-filter">
@@ -1510,7 +1550,6 @@
                 <button class="btn-sm outline" id="reset-main-filters"><i class="fas fa-undo"></i> Сброс</button>
             </div>
 
-            <!-- Свежие объявления -->
             <div class="ads-heading">
                 <i class="fas fa-bullhorn" style="color:#1e3a2f;"></i> Свежие объявления
             </div>
@@ -1686,7 +1725,7 @@
             </div>
         </div>
 
-        <!-- ===== РАЗМЕЩЕНИЕ С ПОДКАТЕГОРИЯМИ ===== -->
+        <!-- ===== РАЗМЕЩЕНИЕ ===== -->
         <div class="page" id="page-post">
             <div class="form-page">
                 <h2>📦 Разместить объявление</h2>
@@ -1896,7 +1935,7 @@
             fishing: ['Снасти', 'Катушки', 'Эхолоты', 'Приманки'],
             transport: ['Лодки ПВХ', 'Моторы', 'Квадроциклы', 'Снегоходы'],
             houses: ['Охотничьи домики', 'Рыболовные базы', 'Участки'],
-            services: [] // для услуг нет подкатегорий
+            services: []
         };
 
         const categorySelect = document.getElementById('post-category');
@@ -2572,7 +2611,7 @@
         renderNews('all');
         initQuiz();
 
-        console.log('✅ Демо-сайт загружен: форма размещения с подкатегориями');
+        console.log('✅ Демо-сайт загружен: 2 плитки в мобильной версии');
     </script>
 </body>
 </html>
