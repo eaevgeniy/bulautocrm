@@ -395,7 +395,7 @@
             color: #2f3d32;
         }
 
-        /* ===== ПРАВИЛА — ЕДИНЫЙ СТИЛЬ С КАРТОЧКАМИ ===== */
+        /* ===== ПРАВИЛА ===== */
         .rules-content {
             background: #fcfaf7;
             border-radius: 24px;
@@ -1401,8 +1401,11 @@
             .quiz-block h3 {
                 font-size: 19px;
             }
+            /* ===== ИСПРАВЛЕНИЕ: заголовок по центру ===== */
             .ads-heading {
                 font-size: 18px;
+                justify-content: center;
+                text-align: center;
             }
             .feed-header h2 {
                 font-size: 19px;
@@ -1490,6 +1493,9 @@
             .rule-group .group-title {
                 font-size: 15px;
             }
+            .ads-heading {
+                font-size: 17px;
+            }
         }
 
         @media (max-width: 380px) {
@@ -1529,6 +1535,9 @@
             }
             .ad-card .ad-city {
                 font-size: 10px;
+            }
+            .ads-heading {
+                font-size: 15px;
             }
         }
     </style>
@@ -1659,7 +1668,6 @@
                 <span style="font-size:13px; color:#4f5a4f; margin-left:auto;" id="category-filter-count">Показано: 6 из 6</span>
             </div>
 
-            <!-- Сортировка внутри раздела -->
             <div class="sort-bar">
                 <label><i class="fas fa-sort"></i> Сортировка:
                     <select id="category-sort">
@@ -1753,7 +1761,6 @@
                 <h2><i class="fas fa-gavel" style="color:#1e3a2f;"></i> Правила размещения объявлений</h2>
                 <p style="font-size: 16px; color: #2f3d32; margin-bottom: 20px;">Соблюдение законодательства РФ — обязательное условие для всех пользователей.</p>
 
-                <!-- Запрещено -->
                 <div class="rule-group">
                     <div class="group-title">
                         <span class="badge-danger">⛔ Категорически запрещено</span>
@@ -1771,7 +1778,6 @@
                     </ul>
                 </div>
 
-                <!-- Ограниченные -->
                 <div class="rule-group">
                     <div class="group-title">
                         <span class="badge-warning">⚠️ Ограниченные категории</span>
@@ -1786,7 +1792,6 @@
                     </ul>
                 </div>
 
-                <!-- Разрешённые -->
                 <div class="rule-group">
                     <div class="group-title">
                         <span class="badge-success">✅ Разрешённые категории</span>
@@ -1803,7 +1808,6 @@
                     </ul>
                 </div>
 
-                <!-- Памятка -->
                 <div class="safety-tips">
                     <h3><i class="fas fa-shield-alt"></i> Как не попасть на мошенников</h3>
                     <p style="font-size: 15px; color: #2f3d32; margin-bottom: 16px;">5 простых правил, которые защитят вас при покупках на доске объявлений.</p>
@@ -2338,7 +2342,7 @@
             explanation: 'Стрельба разрешена на расстоянии не менее 200 метров от строений.'
         }, ];
 
-        // ===== РЕНДЕР ОБЪЯВЛЕНИЙ =====
+        // ===== РЕНДЕР =====
         function renderAds(container, ads, filterCity, sortBy) {
             let filtered = ads;
             if (filterCity && filterCity !== 'all') {
@@ -2781,7 +2785,7 @@
         renderNews('all');
         initQuiz();
 
-        console.log('✅ Демо-сайт загружен: сортировка внутри разделов, правила в едином стиле');
+        console.log('✅ Демо-сайт загружен');
     </script>
 </body>
 </html>
