@@ -158,7 +158,6 @@
             color: #1e2b1e;
         }
 
-        /* ===== ФИЛЬТРЫ ===== */
         .filter-bar {
             display: flex;
             flex-wrap: wrap;
@@ -830,6 +829,7 @@
             color: #1e3a2f;
         }
 
+        /* ===== ФОРМА РАЗМЕЩЕНИЯ ===== */
         .form-page {
             padding: 28px 0 40px;
         }
@@ -1118,7 +1118,6 @@
             margin-top: 2px;
         }
 
-        /* ===== ФУТЕР ===== */
         .footer {
             background: transparent;
             padding: 24px 0 16px;
@@ -1625,7 +1624,6 @@
             <div class="rules-content">
                 <h2><i class="fas fa-gavel" style="color:#1e3a2f;"></i> Правила размещения объявлений</h2>
                 <p style="font-size: 16px; color: #2f3d32; margin-bottom: 20px;">Соблюдение законодательства РФ — обязательное условие для всех пользователей.</p>
-
                 <h3><span class="badge-danger">⛔ Категорически запрещено</span></h3>
                 <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Согласно законодательству РФ и правилам маркетплейсов, на сайте <strong>нельзя размещать</strong> объявления о продаже:</p>
                 <ul>
@@ -1638,7 +1636,6 @@
                     <li>Устройства для глушения сигнала, средства негласного наблюдения</li>
                     <li>Контрафакт и подделки</li>
                 </ul>
-
                 <h3><span class="badge-warning">⚠️ Ограниченные категории</span></h3>
                 <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Эти товары можно размещать, но <strong>с ручной модерацией</strong> и предупреждениями:</p>
                 <ul>
@@ -1648,7 +1645,6 @@
                     <li>Капканы и ловушки (могут быть запрещены в некоторых регионах)</li>
                     <li>Чучела животных (требуют подтверждения легальности)</li>
                 </ul>
-
                 <h3><span class="badge-success">✅ Разрешённые категории</span></h3>
                 <p style="font-size: 15px; color: #3a4a3a; margin-bottom: 6px;">Эти товары можно размещать <strong>без особых ограничений</strong>:</p>
                 <ul>
@@ -1660,7 +1656,6 @@
                     <li>Услуги (гиды, инструкторы, ремонт)</li>
                     <li>Собаки (продажа щенков, услуги вязки)</li>
                 </ul>
-
                 <div class="safety-tips">
                     <h3><i class="fas fa-shield-alt"></i> Как не попасть на мошенников</h3>
                     <p style="font-size: 15px; color: #2f3d32; margin-bottom: 16px;">5 простых правил, которые защитят вас при покупках на доске объявлений.</p>
@@ -1685,14 +1680,13 @@
                         <div class="tip-desc"><strong>Что НЕЛЬЗЯ называть:</strong> Срок действия, CVC/CVV-код — это ключ от всех ваших денег!</div>
                     </div>
                 </div>
-
                 <div style="margin-top: 24px; padding: 16px 20px; background: #e7e1d6; border-radius: 16px;">
                     <p style="font-size: 15px; color: #1e2b2f;"><i class="fas fa-info-circle" style="color:#1e3a2f;"></i> <strong>Важно:</strong> Нарушение правил влечёт за собой блокировку аккаунта без возможности восстановления.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ===== РАЗМЕЩЕНИЕ ===== -->
+        <!-- ===== РАЗМЕЩЕНИЕ С ПОДКАТЕГОРИЯМИ ===== -->
         <div class="page" id="page-post">
             <div class="form-page">
                 <h2>📦 Разместить объявление</h2>
@@ -1705,11 +1699,19 @@
                                 <option value="">Выберите раздел</option>
                                 <option value="hunting">Охота</option>
                                 <option value="fishing">Рыбалка</option>
-                                <option value="transport">Транспорт и плавсредства</option>
-                                <option value="houses">Домики и базы</option>
+                                <option value="transport">Техника</option>
+                                <option value="houses">Домики и Базы</option>
                                 <option value="services">Услуги</option>
                             </select>
                         </div>
+
+                        <div class="form-group" id="subcategory-group" style="display:none;">
+                            <label for="post-subcategory">Подраздел <span class="required">*</span></label>
+                            <select id="post-subcategory" required>
+                                <option value="">Выберите подраздел</option>
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label for="post-name">Ваше имя <span class="required">*</span></label>
                             <input type="text" id="post-name" placeholder="Иван Петров" value="Иван Петров" required />
@@ -1888,6 +1890,39 @@
     </footer>
 
     <script>
+        // ===== ПОДКАТЕГОРИИ ДЛЯ ФОРМЫ РАЗМЕЩЕНИЯ =====
+        const subcategoriesMap = {
+            hunting: ['Оружие', 'Снаряжение', 'Оптика', 'Собаки'],
+            fishing: ['Снасти', 'Катушки', 'Эхолоты', 'Приманки'],
+            transport: ['Лодки ПВХ', 'Моторы', 'Квадроциклы', 'Снегоходы'],
+            houses: ['Охотничьи домики', 'Рыболовные базы', 'Участки'],
+            services: [] // для услуг нет подкатегорий
+        };
+
+        const categorySelect = document.getElementById('post-category');
+        const subcategoryGroup = document.getElementById('subcategory-group');
+        const subcategorySelect = document.getElementById('post-subcategory');
+
+        categorySelect.addEventListener('change', function() {
+            const category = this.value;
+            const subs = subcategoriesMap[category] || [];
+
+            if (subs.length === 0) {
+                subcategoryGroup.style.display = 'none';
+                subcategorySelect.value = '';
+                return;
+            }
+
+            subcategoryGroup.style.display = 'block';
+            subcategorySelect.innerHTML = '<option value="">Выберите подраздел</option>';
+            subs.forEach(sub => {
+                const opt = document.createElement('option');
+                opt.value = sub;
+                opt.textContent = sub;
+                subcategorySelect.appendChild(opt);
+            });
+        });
+
         // ===== ДАННЫЕ =====
         const adsData = {
             hunting: [
@@ -2114,11 +2149,6 @@
             let filtered = ads;
             if (filterCity && filterCity !== 'all') {
                 filtered = filtered.filter(ad => ad.city === filterCity);
-            }
-            // Фильтр по категории для главной — упрощённо
-            if (filterCategory && filterCategory !== 'all') {
-                // В реальном проекте здесь была бы логика фильтрации по категории
-                // Для демо оставляем как есть
             }
             container.innerHTML = filtered.map(ad => {
                 if (ad.isTrick) {
@@ -2445,7 +2475,7 @@
         document.getElementById('close-rules-btn').addEventListener('click', () => rulesModal.classList.remove('show'));
         rulesModal.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('show'); });
 
-        // ===== ФОРМА РАЗМЕЩЕНИЯ =====
+        // ===== ПАРАМЕТРЫ ДЛЯ ФОРМЫ =====
         const postParamsMap = {
             hunting: [
                 { label: 'Тип товара', type: 'select', options: ['Снаряжение', 'Одежда', 'Оптика', 'Собаки'], default: 'Снаряжение' },
@@ -2503,6 +2533,7 @@
         document.getElementById('post-submit').addEventListener('click', function(e) {
             e.preventDefault();
             const category = document.getElementById('post-category').value;
+            const subcategory = document.getElementById('post-subcategory').value;
             const name = document.getElementById('post-name').value.trim();
             const phone = document.getElementById('post-phone').value.trim();
             const city = document.getElementById('post-city').value;
@@ -2515,6 +2546,12 @@
                 return;
             }
 
+            const subs = subcategoriesMap[category] || [];
+            if (subs.length > 0 && !subcategory) {
+                alert('⚠️ Выберите подраздел.');
+                return;
+            }
+
             const params = {};
             document.querySelectorAll('#post-params-grid div:has(input), #post-params-grid div:has(select)')
                 .forEach(el => {
@@ -2524,7 +2561,7 @@
                 });
 
             alert(
-                `✅ Объявление "${title}" отправлено на модерацию!\n\nРаздел: ${category}\nГород: ${city}\nАдрес: ${address || 'не указан'}\nИмя: ${name}\nТелефон: ${phone}`
+                `✅ Объявление "${title}" отправлено на модерацию!\n\nРаздел: ${categorySelect.options[categorySelect.selectedIndex]?.text || category}\nПодраздел: ${subcategory || 'не выбран'}\nГород: ${city}\nАдрес: ${address || 'не указан'}\nИмя: ${name}\nТелефон: ${phone}`
                 );
         });
 
@@ -2535,7 +2572,7 @@
         renderNews('all');
         initQuiz();
 
-        console.log('✅ Демо-сайт загружен');
+        console.log('✅ Демо-сайт загружен: форма размещения с подкатегориями');
     </script>
 </body>
 </html>
