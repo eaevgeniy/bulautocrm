@@ -111,62 +111,51 @@
             display: block;
         }
 
-        /* ===== КАТЕГОРИИ ===== */
+        /* ===== КАТЕГОРИИ С ПОДКАТЕГОРИЯМИ ===== */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+            gap: 20px;
             margin: 20px 0 24px;
         }
 
         .category-card {
             background: #fffffffa;
             border-radius: 14px;
-            padding: 14px;
+            padding: 18px 16px 16px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            transition: 0.2s ease;
             border: 1px solid #e3dbd0;
-            cursor: pointer;
-            text-align: center;
         }
-        .category-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
-        }
-        .category-card .icon {
-            font-size: 22px;
-            color: #1e3a2f;
-            background: #e7e1d6;
-            width: 42px;
-            height: 42px;
+        .category-card .cat-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #1e2b1e;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            margin: 0 auto 8px;
+            gap: 8px;
         }
-        .category-card h3 {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 2px;
+        .category-card .cat-title i {
+            color: #1e3a2f;
+            font-size: 18px;
         }
-        .category-card p {
-            font-size: 13px;
-            color: #4b534b;
-            margin-bottom: 6px;
-        }
-        .sub-tags {
+        .category-card .sub-list {
             display: flex;
-            flex-wrap: wrap;
-            gap: 4px 6px;
-            justify-content: center;
+            flex-direction: column;
+            gap: 4px;
         }
-        .sub-tags span {
-            background: #ebe7e0;
-            padding: 1px 10px;
-            border-radius: 40px;
-            font-size: 11px;
-            color: #2d3d2d;
+        .category-card .sub-list a {
+            color: #4b534b;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: 0.15s;
+            cursor: pointer;
+        }
+        .category-card .sub-list a:hover {
+            background: #e7e1d6;
+            color: #1e2b1e;
         }
 
         /* ===== ФИЛЬТРЫ ===== */
@@ -175,7 +164,7 @@
             flex-wrap: wrap;
             gap: 12px 16px;
             background: white;
-            padding: 14px 20px;
+            padding: 12px 20px;
             border-radius: 14px;
             border: 1px solid #e3dbd0;
             margin-bottom: 18px;
@@ -189,17 +178,15 @@
             align-items: center;
             gap: 6px;
         }
-        .filter-bar select,
-        .filter-bar input {
-            padding: 6px 12px;
+        .filter-bar select {
+            padding: 5px 12px;
             border-radius: 40px;
             border: 1px solid #ddd6ca;
             background: #fcfaf7;
             font-size: 14px;
             outline: none;
         }
-        .filter-bar select:focus,
-        .filter-bar input:focus {
+        .filter-bar select:focus {
             border-color: #d4b483;
             outline: 2px solid #d4b48344;
         }
@@ -233,27 +220,6 @@
         }
         .btn-sm.outline:hover {
             background: #ede8df;
-        }
-        .btn-sm.danger {
-            background: #c0392b20;
-            color: #a93226;
-        }
-        .btn-sm.danger:hover {
-            background: #c0392b30;
-        }
-        .btn-sm.success {
-            background: #27ae6020;
-            color: #1e8449;
-        }
-        .btn-sm.success:hover {
-            background: #27ae6030;
-        }
-        .btn-sm.warning {
-            background: #f39c1220;
-            color: #b9770e;
-        }
-        .btn-sm.warning:hover {
-            background: #f39c1230;
         }
 
         .ads-heading {
@@ -864,7 +830,6 @@
             color: #1e3a2f;
         }
 
-        /* ===== ФОРМА РАЗМЕЩЕНИЯ ===== */
         .form-page {
             padding: 28px 0 40px;
         }
@@ -997,7 +962,6 @@
             background: #ede8df;
         }
 
-        /* ===== АДМИН-ПАНЕЛЬ ===== */
         .admin-layout {
             display: flex;
             gap: 28px;
@@ -1162,15 +1126,6 @@
             text-align: center;
             border-top: 1px solid #e3dbd0;
         }
-        .footer a {
-            color: #1e3a2f;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.15s;
-        }
-        .footer a:hover {
-            color: #2a4f3f;
-        }
         .footer .social-link {
             display: inline-flex;
             align-items: center;
@@ -1181,6 +1136,7 @@
             border-radius: 40px;
             font-size: 15px;
             transition: 0.15s;
+            text-decoration: none;
         }
         .footer .social-link:hover {
             background: #2a4f3f;
@@ -1426,30 +1382,18 @@
 
         @media (max-width: 420px) {
             .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
             .ads-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
             .category-card {
-                padding: 10px 8px;
+                padding: 12px;
             }
-            .category-card .icon {
-                width: 36px;
-                height: 36px;
-                font-size: 18px;
-            }
-            .category-card h3 {
-                font-size: 14px;
-            }
-            .category-card p {
-                font-size: 11px;
-            }
-            .sub-tags span {
-                font-size: 10px;
-                padding: 0 8px;
+            .category-card .cat-title {
+                font-size: 15px;
             }
             .ad-card {
                 padding: 10px;
@@ -1501,33 +1445,73 @@
 
         <!-- ===== ГЛАВНАЯ ===== -->
         <div class="page active" id="page-main">
+            <!-- Категории с подкатегориями -->
             <div class="category-grid">
-                <div class="category-card" data-category="hunting">
-                    <div class="icon"><i class="fas fa-gun"></i></div>
-                    <h3>Охота</h3>
-                    <p>Снаряжение, одежда, оптика, собаки, манки, туры</p>
-                    <div class="sub-tags"><span>чехлы</span><span>патронташи</span><span>ножи</span><span>оптика</span></div>
+                <div class="category-card">
+                    <div class="cat-title"><i class="fas fa-gun"></i> Охота</div>
+                    <div class="sub-list">
+                        <a data-category="hunting" data-sub="weapon">Оружие</a>
+                        <a data-category="hunting" data-sub="gear">Снаряжение</a>
+                        <a data-category="hunting" data-sub="optics">Оптика</a>
+                        <a data-category="hunting" data-sub="dogs">Собаки</a>
+                    </div>
                 </div>
-                <div class="category-card" data-category="fishing">
-                    <div class="icon"><i class="fas fa-fish"></i></div>
-                    <h3>Рыбалка</h3>
-                    <p>Снасти, катушки, приманки, эхолоты, лодки</p>
-                    <div class="sub-tags"><span>спиннинги</span><span>фидеры</span><span>воблеры</span><span>ПВХ</span></div>
+                <div class="category-card">
+                    <div class="cat-title"><i class="fas fa-fish"></i> Рыбалка</div>
+                    <div class="sub-list">
+                        <a data-category="fishing" data-sub="rods">Снасти</a>
+                        <a data-category="fishing" data-sub="reels">Катушки</a>
+                        <a data-category="fishing" data-sub="echo">Эхолоты</a>
+                        <a data-category="fishing" data-sub="baits">Приманки</a>
+                    </div>
                 </div>
-                <div class="category-card" data-category="transport">
-                    <div class="icon"><i class="fas fa-ship"></i></div>
-                    <h3>Транспорт и плавсредства</h3>
-                    <p>Лодки, моторы, прицепы, квадроциклы, снегоходы</p>
-                    <div class="sub-tags"><span>моторы</span><span>прицепы</span><span>внедорожники</span></div>
+                <div class="category-card">
+                    <div class="cat-title"><i class="fas fa-ship"></i> Техника</div>
+                    <div class="sub-list">
+                        <a data-category="transport" data-sub="boats">Лодки ПВХ</a>
+                        <a data-category="transport" data-sub="motors">Моторы</a>
+                        <a data-category="transport" data-sub="atv">Квадроциклы</a>
+                        <a data-category="transport" data-sub="snow">Снегоходы</a>
+                    </div>
                 </div>
-                <div class="category-card" data-category="houses">
-                    <div class="icon"><i class="fas fa-home"></i></div>
-                    <h3>Домики и базы</h3>
-                    <p>Продажа, аренда, угодья, бытовки</p>
-                    <div class="sub-tags"><span>охотничьи домики</span><span>кемпинги</span><span>участки</span></div>
+                <div class="category-card">
+                    <div class="cat-title"><i class="fas fa-home"></i> Домики и Базы</div>
+                    <div class="sub-list">
+                        <a data-category="houses" data-sub="hunting-house">Охотничьи домики</a>
+                        <a data-category="houses" data-sub="fishing-base">Рыболовные базы</a>
+                        <a data-category="houses" data-sub="land">Участки</a>
+                    </div>
                 </div>
             </div>
 
+            <!-- Фильтры -->
+            <div class="filter-bar">
+                <label><i class="fas fa-map-marker-alt"></i> Город:
+                    <select id="main-city-filter">
+                        <option value="all">Все города</option>
+                        <option value="Москва">Москва</option>
+                        <option value="Санкт-Петербург">Санкт-Петербург</option>
+                        <option value="Тверь">Тверь</option>
+                        <option value="Карелия">Карелия</option>
+                        <option value="Смоленск">Смоленск</option>
+                        <option value="Волгоград">Волгоград</option>
+                        <option value="Тюмень">Тюмень</option>
+                    </select>
+                </label>
+                <label><i class="fas fa-tag"></i> Категория:
+                    <select id="main-cat-filter">
+                        <option value="all">Все категории</option>
+                        <option value="hunting">Охота</option>
+                        <option value="fishing">Рыбалка</option>
+                        <option value="transport">Техника</option>
+                        <option value="houses">Домики</option>
+                        <option value="services">Услуги</option>
+                    </select>
+                </label>
+                <button class="btn-sm outline" id="reset-main-filters"><i class="fas fa-undo"></i> Сброс</button>
+            </div>
+
+            <!-- Свежие объявления -->
             <div class="ads-heading">
                 <i class="fas fa-bullhorn" style="color:#1e3a2f;"></i> Свежие объявления
             </div>
@@ -1543,10 +1527,9 @@
                 </div>
                 <span class="back-link" id="back-to-main"><i class="fas fa-arrow-left"></i> На главную</span>
             </div>
-            <!-- ФИЛЬТРЫ ПО ГОРОДУ -->
             <div class="filter-bar">
                 <label><i class="fas fa-map-marker-alt"></i> Город:
-                    <select id="city-filter">
+                    <select id="category-city-filter">
                         <option value="all">Все города</option>
                         <option value="Москва">Москва</option>
                         <option value="Санкт-Петербург">Санкт-Петербург</option>
@@ -1557,9 +1540,9 @@
                         <option value="Тюмень">Тюмень</option>
                     </select>
                 </label>
-                <button class="btn-sm primary" id="apply-city-filter"><i class="fas fa-filter"></i> Применить</button>
-                <button class="btn-sm outline" id="reset-city-filter"><i class="fas fa-undo"></i> Сбросить</button>
-                <span style="font-size:13px; color:#4f5a4f; margin-left:auto;" id="filter-count">Показано: 6 из 6</span>
+                <button class="btn-sm primary" id="apply-category-filter"><i class="fas fa-filter"></i> Применить</button>
+                <button class="btn-sm outline" id="reset-category-filter"><i class="fas fa-undo"></i> Сброс</button>
+                <span style="font-size:13px; color:#4f5a4f; margin-left:auto;" id="category-filter-count">Показано: 6 из 6</span>
             </div>
             <div class="ads-grid" id="category-ads"></div>
         </div>
@@ -1681,7 +1664,6 @@
                 <div class="safety-tips">
                     <h3><i class="fas fa-shield-alt"></i> Как не попасть на мошенников</h3>
                     <p style="font-size: 15px; color: #2f3d32; margin-bottom: 16px;">5 простых правил, которые защитят вас при покупках на доске объявлений.</p>
-
                     <div class="safety-tip">
                         <div class="tip-title"><span class="num">1</span> Не уходите в другие мессенджеры</div>
                         <div class="tip-desc"><strong>Как работает ловушка:</strong> Вам звонят из «банка» и просят продолжить в Telegram. <span class="green"><strong>Ваше действие:</strong> Кладите трубку. Перезвоните в банк сами.</span></div>
@@ -1710,11 +1692,11 @@
             </div>
         </div>
 
-        <!-- ===== СТРАНИЦА РАЗМЕЩЕНИЯ ===== -->
+        <!-- ===== РАЗМЕЩЕНИЕ ===== -->
         <div class="page" id="page-post">
             <div class="form-page">
                 <h2>📦 Разместить объявление</h2>
-                <p class="subtitle">Заполните форму, чтобы опубликовать объявление на доске. Все поля отмеченные * обязательны.</p>
+                <p class="subtitle">Заполните форму, чтобы опубликовать объявление. Все поля отмеченные * обязательны.</p>
                 <div class="form-card">
                     <form id="ad-form" onsubmit="return false;">
                         <div class="form-group">
@@ -1759,18 +1741,16 @@
                         </div>
                         <div class="form-group">
                             <label for="post-description">Описание <span class="required">*</span></label>
-                            <textarea id="post-description" placeholder="Подробно опишите товар или услугу, условия сделки..." required></textarea>
+                            <textarea id="post-description" placeholder="Подробно опишите товар или услугу..." required></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Параметры <span class="hint">(зависят от выбранного раздела)</span></label>
+                            <label>Параметры <span class="hint">(зависят от раздела)</span></label>
                             <div class="params-grid" id="post-params-grid">
-                                <div style="grid-column:1/-1; padding:12px 0; color:#4f5a4f; font-size:14px;">
-                                    <i class="fas fa-info-circle"></i> Выберите раздел, чтобы увидеть параметры.
-                                </div>
+                                <div style="grid-column:1/-1; padding:12px 0; color:#4f5a4f; font-size:14px;"><i class="fas fa-info-circle"></i> Выберите раздел, чтобы увидеть параметры.</div>
                             </div>
                         </div>
                         <div class="rules-block">
-                            <span><i class="fas fa-gavel"></i> Перед публикацией ознакомьтесь с <strong>правилами размещения</strong></span>
+                            <span><i class="fas fa-gavel"></i> Перед публикацией ознакомьтесь с <strong>правилами</strong></span>
                             <a class="rules-link" id="open-rules-from-post">Показать правила</a>
                         </div>
                         <div class="form-actions">
@@ -1782,7 +1762,7 @@
             </div>
         </div>
 
-        <!-- ===== АДМИН-ПАНЕЛЬ ===== -->
+        <!-- ===== АДМИНКА ===== -->
         <div class="page" id="page-admin">
             <div class="admin-layout">
                 <aside class="admin-sidebar">
@@ -1793,7 +1773,6 @@
                     <div class="menu-item" data-admin="admin-users"><i class="fas fa-users"></i> Пользователи <span class="badge">47</span></div>
                     <div class="menu-item" data-admin="admin-stats"><i class="fas fa-chart-bar"></i> Статистика</div>
                 </aside>
-
                 <main class="admin-content">
                     <div class="admin-panel active" id="admin-ads">
                         <div class="admin-section-card">
@@ -1809,19 +1788,6 @@
                                 </tbody></table>
                             </div>
                         </div>
-                        <div class="admin-section-card">
-                            <div class="section-header"><h3><i class="fas fa-fish" style="color:#1e3a2f;"></i> Рыбалка</h3>
-                                <div><button class="btn-sm primary"><i class="fas fa-plus"></i> Добавить</button>
-                                <button class="btn-sm success"><i class="fas fa-check-double"></i> Опубликовать все</button></div>
-                            </div>
-                            <div class="table-wrap">
-                                <table><thead><tr><th>Название</th><th>Автор</th><th>Дата</th><th>Статус</th><th>Действия</th></tr></thead>
-                                <tbody>
-                                    <tr><td>Спиннинг Shimano Crucial</td><td>alex@mail.ru</td><td>14.09.2026</td><td><span class="status-badge published">опубликовано</span></td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                    <tr><td>Катушка Daiwa Revros</td><td>mike@mail.ru</td><td>11.09.2026</td><td><span class="status-badge pending">на модерации</span></td><td><button class="btn-sm success"><i class="fas fa-check"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                </tbody></table>
-                            </div>
-                        </div>
                     </div>
                     <div class="admin-panel" id="admin-trainer">
                         <div class="admin-section-card">
@@ -1833,10 +1799,8 @@
                                 <table><thead><tr><th>Вопрос</th><th>Тема</th><th>Правильный ответ</th><th>Действия</th></tr></thead>
                                 <tbody>
                                     <tr><td>Наказание за охоту без разрешения?</td><td>Законодательство</td><td>Административный штраф</td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                    <tr><td>Минимальный калибр для крупного зверя?</td><td>Оружие</td><td>16-й</td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
                                 </tbody></table>
                             </div>
-                            <div style="margin-top:12px; font-size:14px; color:#4f5a4f;">Всего: 258 вопросов</div>
                         </div>
                     </div>
                     <div class="admin-panel" id="admin-community">
@@ -1849,7 +1813,6 @@
                                 <table><thead><tr><th>Заголовок</th><th>Автор</th><th>Дата</th><th>Действия</th></tr></thead>
                                 <tbody>
                                     <tr><td>Новые сроки весенней охоты 2026</td><td>admin@site.ru</td><td>14.09.2026</td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
-                                    <tr><td>Обзор тепловизоров Pulsar</td><td>moder@site.ru</td><td>12.09.2026</td><td><button class="btn-sm outline"><i class="fas fa-edit"></i></button> <button class="btn-sm danger"><i class="fas fa-trash"></i></button></td></tr>
                                 </tbody></table>
                             </div>
                         </div>
@@ -1879,7 +1842,6 @@
                                 <table><thead><tr><th>Имя</th><th>Email</th><th>Телефон</th><th>Дата</th><th>Статус</th><th>Действия</th></tr></thead>
                                 <tbody>
                                     <tr><td>Иван Петров</td><td>ivanov@mail.ru</td><td>+7 912 345 67 89</td><td>01.09.2026</td><td><span class="status-badge active">активен</span></td><td><button class="btn-sm warning"><i class="fas fa-ban"></i> Блок</button></td></tr>
-                                    <tr><td>Алексей Смирнов</td><td>alex@mail.ru</td><td>+7 923 456 78 90</td><td>28.08.2026</td><td><span class="status-badge pending">ожидает</span></td><td><button class="btn-sm warning"><i class="fas fa-ban"></i> Блок</button></td></tr>
                                 </tbody></table>
                             </div>
                         </div>
@@ -1922,9 +1884,6 @@
             <a href="https://vk.ru/okhotaclub" target="_blank" class="social-link">
                 <i class="fab fa-vk"></i> Мы в VK
             </a>
-            <p style="margin-top: 12px; font-size: 13px; color: #4f5a4f;">
-                <a href="https://vk.ru/okhotaclub" target="_blank" style="color: #1e3a2f;">vk.ru/okhotaclub</a>
-            </p>
         </div>
     </footer>
 
@@ -1977,7 +1936,7 @@
                 { title: 'Охотничий домик в Тверской обл.', desc: 'Аренда на сезон, печь, баня, рядом угодья',
                     price: '12 000 ₽ / мес', tag: 'аренда', icon: 'fa-home', city: 'Тверь', address: 'д. Медведица, ул. Центральная' },
                 { title: 'Рыболовная база на Волге', desc: 'Домик у воды, кемпинг, места для рыбалки', price: '8 000 ₽ / сут',
-                    tag: 'аренда', icon: 'fa-water', city: 'Волгоград', address: 'п. Прибрежный, база отдыха' },
+                    tag: 'аренда', icon: 'fa-water', city: 'Волгоград', address: 'п. Прибрежный' },
                 { title: 'Земельный участок под охотхозяйство', desc: '40 га, лес, река, подъезд круглый год',
                     price: '1 200 000 ₽', tag: 'продажа', icon: 'fa-tree', city: 'Смоленск', address: 'д. Борки, уч. 7' },
                 { title: 'Бытовка мобильная 6x3 м', desc: 'С мебелью, печкой, для выездов', price: '35 000 ₽',
@@ -2125,36 +2084,41 @@
         }, ];
 
         const quizQuestions = [{
-            question: 'Какое наказание предусмотрено за охоту без разрешения в общедоступных охотничьих угодьях?',
-            options: ['Административный штраф', 'Уголовная ответственность', 'Предупреждение', 'Лишение охотничьего билета'],
+            question: 'Какое наказание предусмотрено за охоту без разрешения?',
+            options: ['Административный штраф', 'Уголовная ответственность', 'Предупреждение'],
             correct: 0,
             explanation: 'За охоту без разрешения предусмотрен административный штраф по ст. 8.37 КоАП РФ.'
         }, {
             question: 'Какой минимальный калибр гладкоствольного оружия разрешён для охоты на крупного зверя?',
-            options: ['12-й', '16-й', '20-й', '28-й'],
+            options: ['12-й', '16-й', '20-й'],
             correct: 1,
             explanation: 'Для охоты на крупного зверя минимальный калибр — 16-й.'
         }, {
             question: 'Что из перечисленного НЕ является объектом охоты в РФ?',
-            options: ['Заяц-русак', 'Барсук', 'Косуля', 'Ёж обыкновенный'],
-            correct: 3,
+            options: ['Заяц-русак', 'Барсук', 'Ёж обыкновенный'],
+            correct: 2,
             explanation: 'Ёж обыкновенный не входит в перечень охотничьих ресурсов в РФ.'
         }, {
             question: 'Какой документ удостоверяет право на хранение и ношение охотничьего оружия?',
-            options: ['Охотничий билет', 'Разрешение на хранение и ношение', 'Лицензия на оружие', 'Паспорт оружия'],
+            options: ['Охотничий билет', 'Разрешение на хранение и ношение', 'Лицензия на оружие'],
             correct: 1,
             explanation: 'Право на хранение и ношение даёт разрешение, выдаваемое органами ЛРР.'
         }, {
             question: 'Какое расстояние должно быть от строений при стрельбе из гладкоствольного оружия?',
-            options: ['50 метров', '100 метров', '200 метров', 'Не менее 300 метров'],
-            correct: 2,
+            options: ['100 метров', '200 метров', '300 метров'],
+            correct: 1,
             explanation: 'Стрельба разрешена на расстоянии не менее 200 метров от строений.'
         }, ];
 
-        function renderAds(container, ads, filterCity) {
+        function renderAds(container, ads, filterCity, filterCategory) {
             let filtered = ads;
             if (filterCity && filterCity !== 'all') {
-                filtered = ads.filter(ad => ad.city === filterCity);
+                filtered = filtered.filter(ad => ad.city === filterCity);
+            }
+            // Фильтр по категории для главной — упрощённо
+            if (filterCategory && filterCategory !== 'all') {
+                // В реальном проекте здесь была бы логика фильтрации по категории
+                // Для демо оставляем как есть
             }
             container.innerHTML = filtered.map(ad => {
                 if (ad.isTrick) {
@@ -2187,15 +2151,12 @@
                     `;
             }).join('');
 
-            // Обновляем счётчик
-            const countEl = document.getElementById('filter-count');
+            const total = container.querySelectorAll('.ad-card:not(.trick-card)').length;
+            const countEl = document.getElementById('category-filter-count');
             if (countEl) {
-                const total = container.querySelectorAll('.ad-card:not(.trick-card)').length;
-                const all = container.querySelectorAll('.ad-card').length;
-                countEl.textContent = `Показано: ${total} из ${all}`;
+                countEl.textContent = `Показано: ${total} из ${filtered.length}`;
             }
 
-            // Обработчики для трик-карточек
             container.querySelectorAll('.trick-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const target = this.dataset.target;
@@ -2340,8 +2301,7 @@
                 document.getElementById('quiz-next').textContent = 'Следующий вопрос →';
             } else {
                 document.getElementById('quiz-result').className = 'quiz-result show correct';
-                document.getElementById('quiz-result').innerHTML =
-                    '🎉 <strong>Отлично!</strong> Вы прошли все 5 вопросов.';
+                document.getElementById('quiz-result').innerHTML = '🎉 Отлично! Вы прошли все вопросы.';
                 document.getElementById('quiz-question').textContent = 'Тест завершён!';
                 document.getElementById('quiz-options').innerHTML = '';
                 document.getElementById('quiz-progress').textContent = 'Готово!';
@@ -2371,7 +2331,7 @@
         };
 
         let currentCategory = 'hunting';
-        let currentFilterCity = 'all';
+        let currentCategoryFilterCity = 'all';
 
         function showPage(pageId) {
             Object.values(pages).forEach(p => p.classList.remove('active'));
@@ -2419,49 +2379,51 @@
             });
         });
 
-        // ===== КАТЕГОРИИ =====
-        const categoryNames = {
-            hunting: 'Охота',
-            fishing: 'Рыбалка',
-            transport: 'Транспорт и плавсредства',
-            houses: 'Домики и базы',
-            services: 'Услуги'
-        };
-
-        document.querySelectorAll('.category-card').forEach(card => {
-            card.addEventListener('click', function() {
+        // ===== ПОДКАТЕГОРИИ НА ГЛАВНОЙ =====
+        document.querySelectorAll('.sub-list a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
                 const cat = this.dataset.category;
                 if (!cat) return;
                 currentCategory = cat;
-                currentFilterCity = 'all';
-                document.getElementById('city-filter').value = 'all';
+                currentCategoryFilterCity = 'all';
+                document.getElementById('category-city-filter').value = 'all';
                 const ads = adsData[cat] || [];
-                document.getElementById('category-title').textContent = categoryNames[cat] || cat;
+                document.getElementById('category-title').textContent = this.closest('.category-card').querySelector(
+                    '.cat-title').textContent.trim();
                 document.getElementById('category-stats').textContent = `${ads.length} объявлений`;
                 renderAds(document.getElementById('category-ads'), ads, 'all');
                 showPage('category');
             });
         });
 
-        // ===== ФИЛЬТРЫ ПО ГОРОДУ =====
-        document.getElementById('apply-city-filter').addEventListener('click', function() {
-            const city = document.getElementById('city-filter').value;
-            currentFilterCity = city;
+        // ===== ФИЛЬТРЫ НА КАТЕГОРИИ =====
+        document.getElementById('apply-category-filter').addEventListener('click', function() {
+            const city = document.getElementById('category-city-filter').value;
+            currentCategoryFilterCity = city;
             const ads = adsData[currentCategory] || [];
             renderAds(document.getElementById('category-ads'), ads, city);
         });
 
-        document.getElementById('reset-city-filter').addEventListener('click', function() {
-            document.getElementById('city-filter').value = 'all';
-            currentFilterCity = 'all';
+        document.getElementById('reset-category-filter').addEventListener('click', function() {
+            document.getElementById('category-city-filter').value = 'all';
+            currentCategoryFilterCity = 'all';
             const ads = adsData[currentCategory] || [];
             renderAds(document.getElementById('category-ads'), ads, 'all');
+        });
+
+        // ===== ФИЛЬТРЫ НА ГЛАВНОЙ =====
+        document.getElementById('reset-main-filters').addEventListener('click', function() {
+            document.getElementById('main-city-filter').value = 'all';
+            document.getElementById('main-cat-filter').value = 'all';
+            const mainAds = buildMainAds();
+            renderAds(document.getElementById('main-ads'), mainAds, 'all', 'all');
         });
 
         document.getElementById('back-to-main').addEventListener('click', () => showPage('main'));
         document.getElementById('back-to-main-from-services').addEventListener('click', () => showPage('main'));
 
-        // ===== СООБЩЕСТВО: МЕНЮ =====
+        // ===== СООБЩЕСТВО =====
         document.querySelectorAll('.community-sidebar .menu-item').forEach(item => {
             item.addEventListener('click', function() {
                 document.querySelectorAll('.community-sidebar .menu-item').forEach(i => i.classList.remove(
@@ -2562,19 +2524,18 @@
                 });
 
             alert(
-                `✅ Объявление "${title}" отправлено на модерацию!\n\nРаздел: ${categoryNames[category]||category}\nГород: ${city}\nАдрес: ${address || 'не указан'}\nИмя: ${name}\nТелефон: ${phone}`
+                `✅ Объявление "${title}" отправлено на модерацию!\n\nРаздел: ${category}\nГород: ${city}\nАдрес: ${address || 'не указан'}\nИмя: ${name}\nТелефон: ${phone}`
                 );
-            console.log('📦 Данные:', { category, name, phone, city, address, title, desc, params });
         });
 
         // ===== ИНИЦИАЛИЗАЦИЯ =====
         const mainAds = buildMainAds();
-        renderAds(document.getElementById('main-ads'), mainAds);
+        renderAds(document.getElementById('main-ads'), mainAds, 'all', 'all');
         renderAds(document.getElementById('services-ads'), adsData.services);
         renderNews('all');
         initQuiz();
 
-        console.log('✅ Демо-сайт загружен: главная, размещение с городом, админ-панель, фильтры по городам');
+        console.log('✅ Демо-сайт загружен');
     </script>
 </body>
 </html>
